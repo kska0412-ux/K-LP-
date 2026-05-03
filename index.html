@@ -218,11 +218,62 @@
   .sec-head h2 em{font-style:normal;color:var(--gold)}
   .sec-head .sub{margin-top:18px;color:var(--ink-2);font-size:clamp(12px,1.8vw,14px);line-height:2}
 
+  /* ---------- visual story blocks ---------- */
+  .visual-panel{
+    margin:clamp(44px,7vw,76px) auto 0;
+    position:relative;overflow:hidden;
+    border:1px solid rgba(212,175,122,.22);
+    background:#090706;
+    isolation:isolate;
+  }
+  .visual-panel::before,.visual-panel::after{
+    content:"";position:absolute;width:24px;height:24px;border:1px solid var(--gold);z-index:3;pointer-events:none;
+  }
+  .visual-panel::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+  .visual-panel::after{right:-1px;bottom:-1px;border-left:none;border-top:none}
+  .visual-panel img{
+    width:100%;height:clamp(240px,38vw,430px);object-fit:cover;
+    filter:saturate(.92) contrast(1.03);opacity:.88;
+  }
+  .visual-panel .shade{
+    position:absolute;inset:0;z-index:1;
+    background:
+      linear-gradient(90deg,rgba(10,8,7,.86) 0%,rgba(10,8,7,.34) 44%,rgba(10,8,7,.72) 100%),
+      linear-gradient(180deg,rgba(10,8,7,.18) 0%,rgba(10,8,7,.55) 100%);
+    pointer-events:none;
+  }
+  .visual-panel figcaption{
+    position:absolute;left:clamp(20px,5vw,54px);bottom:clamp(22px,4vw,42px);z-index:2;
+    max-width:min(440px,78vw);
+    font-family:"Shippori Mincho",serif;color:var(--ink);
+    font-size:clamp(18px,3vw,28px);line-height:1.7;font-weight:600;letter-spacing:.06em;
+  }
+  .visual-panel figcaption small{
+    display:block;margin-bottom:8px;
+    font-family:"Cinzel",serif;font-size:10px;letter-spacing:.36em;color:var(--gold);
+  }
+  .visual-panel figcaption em{font-style:normal;color:var(--gold)}
+  .visual-panel--right figcaption{left:auto;right:clamp(20px,5vw,54px);text-align:right}
+  .visual-panel--future img{object-position:center center}
+  .visual-panel--woman img{object-position:34% center}
+  .visual-panel--woman .shade{
+    background:
+      linear-gradient(90deg,rgba(10,8,7,.18) 0%,rgba(10,8,7,.26) 38%,rgba(10,8,7,.9) 100%),
+      linear-gradient(180deg,rgba(10,8,7,.1) 0%,rgba(10,8,7,.6) 100%);
+  }
+  @media (max-width:560px){
+    .visual-panel{margin-top:42px}
+    .visual-panel img{height:250px}
+    .visual-panel figcaption{max-width:72vw;font-size:18px}
+    .visual-panel--right figcaption{left:20px;right:auto;text-align:left}
+    .visual-panel--woman figcaption{left:auto;right:20px;text-align:right;max-width:62vw}
+  }
+
   /* ---------- product intro ---------- */
   .product{position:relative;background:#0a0807;isolation:isolate}
   .product::before{
     content:"";position:absolute;inset:0;z-index:-2;
-    background-image:url('consult.png');
+    background-image:url('consult-visual.jpg');
     background-size:cover;background-position:center;
     opacity:.28;
   }
@@ -465,7 +516,7 @@
   .offer{position:relative;overflow:hidden;background:#0a0807;isolation:isolate}
   .offer::before{
     content:"";position:absolute;inset:0;z-index:-2;
-    background-image:url('line-letter.png');
+    background-image:url('line-letter-visual.jpg');
     background-size:cover;background-position:center;
     opacity:.32;
   }
@@ -779,6 +830,25 @@
   .product .arrow-down{
     display:none !important;
   }
+  html.force-mobile .visual-panel{
+    margin-top:42px !important;
+  }
+  html.force-mobile .visual-panel img{
+    height:250px !important;
+  }
+  html.force-mobile .visual-panel figcaption{
+    left:20px !important;
+    right:auto !important;
+    text-align:left !important;
+    max-width:72vw !important;
+    font-size:18px !important;
+  }
+  html.force-mobile .visual-panel--woman figcaption{
+    left:auto !important;
+    right:20px !important;
+    text-align:right !important;
+    max-width:62vw !important;
+  }
 </style>
 <script>
   // ?mobile or ?mobile=1 で強制モバイル表示
@@ -877,11 +947,22 @@
         それでも「自分はこんなもんじゃない」と、心のどこかで思い続けている。
       </p>
       <p class="copy">
-        この個別相談会は、そんなあなたが<br><strong style="color:var(--gold)">『金』と『女』を攻略するために<br>「何から手をつけるべきか」</strong>を、<br>私と<strong style="color:var(--gold)">一対一</strong>で言語化する場です。<br>
+        この個別相談会は、そんなあなたが<br>
+        <strong style="color:var(--gold)">『金』と『女』を攻略するために<br>「何から手をつけるべきか」</strong>を、<br>
+        私と<strong style="color:var(--gold)">一対一</strong>で言語化する場です。<br>
         3ヶ月後・半年後・1年後に見たい景色を<br>叶えるために<br>具体的な行動レベルまで落とし込みます。
       </p>
 
     </div>
+
+    <figure class="visual-panel visual-panel--future reveal">
+      <img src="luxury-villa-pool.jpg" alt="3ヶ月後・半年後・1年後に見たい高級ヴィラとプール夜景のイメージ" loading="lazy" decoding="async">
+      <span class="shade"></span>
+      <figcaption>
+        <small>FUTURE IMAGE</small>
+        3ヶ月後・半年後・1年後に、<br><em>見たい景色</em>を先に決める。
+      </figcaption>
+    </figure>
 
     <div class="arrow-down reveal">
       <span class="label">3&nbsp;PILLARS</span>
@@ -899,9 +980,9 @@
       <div class="cd-clock">
         <div class="cd-unit"><div class="cd-num" data-h="">00</div><div class="cd-lbl">HOURS</div></div>
         <div class="cd-colon">:</div>
-        <div class="cd-unit"><div class="cd-num" data-m="">50</div><div class="cd-lbl">MINUTES</div></div>
+        <div class="cd-unit"><div class="cd-num" data-m="">51</div><div class="cd-lbl">MINUTES</div></div>
         <div class="cd-colon">:</div>
-        <div class="cd-unit"><div class="cd-num" data-s="">06</div><div class="cd-lbl">SECONDS</div></div>
+        <div class="cd-unit"><div class="cd-num" data-s="">33</div><div class="cd-lbl">SECONDS</div></div>
       </div>
       <p class="cd-foot">※すぐに埋まってしまうため、<br class="sp-br">申し込みに制限時間がございます。</p>
     </div>
@@ -959,6 +1040,7 @@
 </p>
       </article>
     </div>
+
   </div>
 </section>
 
@@ -1071,6 +1153,15 @@ Kさんの元で学んで、本当に
 </span>
       </article>
     </div>
+
+    <figure class="visual-panel visual-panel--right visual-panel--woman reveal">
+      <img src="luxury-woman-pool.jpg" alt="女性に選ばれる男になった後の理想の世界観" loading="lazy" decoding="async">
+      <span class="shade"></span>
+      <figcaption>
+        <small>AFTER IMAGE</small>
+        追う側ではなく、<br><em>追われる側</em>へ。
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -1083,9 +1174,9 @@ Kさんの元で学んで、本当に
       <div class="cd-clock">
         <div class="cd-unit"><div class="cd-num" data-h="">00</div><div class="cd-lbl">HOURS</div></div>
         <div class="cd-colon">:</div>
-        <div class="cd-unit"><div class="cd-num" data-m="">50</div><div class="cd-lbl">MINUTES</div></div>
+        <div class="cd-unit"><div class="cd-num" data-m="">51</div><div class="cd-lbl">MINUTES</div></div>
         <div class="cd-colon">:</div>
-        <div class="cd-unit"><div class="cd-num" data-s="">06</div><div class="cd-lbl">SECONDS</div></div>
+        <div class="cd-unit"><div class="cd-num" data-s="">33</div><div class="cd-lbl">SECONDS</div></div>
       </div>
       <p class="cd-foot">※すぐに埋まってしまうため、<br class="sp-br">申し込みに制限時間がございます。</p>
     </div>
@@ -1157,9 +1248,9 @@ Kさんの元で学んで、本当に
       <div class="cd-clock">
         <div class="cd-unit"><div class="cd-num" data-h="">00</div><div class="cd-lbl">HOURS</div></div>
         <div class="cd-colon">:</div>
-        <div class="cd-unit"><div class="cd-num" data-m="">50</div><div class="cd-lbl">MINUTES</div></div>
+        <div class="cd-unit"><div class="cd-num" data-m="">51</div><div class="cd-lbl">MINUTES</div></div>
         <div class="cd-colon">:</div>
-        <div class="cd-unit"><div class="cd-num" data-s="">06</div><div class="cd-lbl">SECONDS</div></div>
+        <div class="cd-unit"><div class="cd-num" data-s="">33</div><div class="cd-lbl">SECONDS</div></div>
       </div>
       <p class="cd-foot">※受付終了後は、<br>予告なく送信を閉じさせていただきます。</p>
     </div>
@@ -1353,7 +1444,6 @@ Kさんの元で学んで、本当に
 <style id="__om-edit-overrides">
   /* エディットで変更した内容はここに自動保存されます。私はこのブロックには触りません。 */
 </style>
-
 
 
 </body></html>
