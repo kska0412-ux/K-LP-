@@ -22,7 +22,11 @@
     --ink-2:#c9bfae;
     --ink-3:#8a8074;
     --danger:#c04a3a;
+    --urgent:#e35a4f;
+    --urgent-2:#a72f28;
+    --urgent-soft:rgba(227,90,79,.38);
     --grad-gold:linear-gradient(135deg,#e8c98a 0%,#d4af7a 35%,#a07a44 70%,#d4af7a 100%);
+    --grad-urgent:linear-gradient(135deg,#ff8a7d 0%,#e35a4f 36%,#a72f28 72%,#f0a08f 100%);
     --grad-gold-line:linear-gradient(90deg,transparent 0%,#d4af7a 30%,#e8c98a 50%,#d4af7a 70%,transparent 100%);
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -370,7 +374,7 @@
     font-size:clamp(15px,2vw,18px);line-height:1.85;letter-spacing:.06em;
     color:var(--ink-1);margin-bottom:26px;font-weight:500;
   }
-  .countdown .cd-headline em{color:var(--gold);font-style:normal}
+  .countdown .cd-headline em{color:var(--urgent);font-style:normal;text-shadow:0 0 16px rgba(227,90,79,.28)}
   .countdown .cd-clock{
     display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
   }
@@ -381,20 +385,23 @@
   .countdown .cd-num{
     font-family:"Cormorant Garamond",serif;font-weight:600;
     font-size:clamp(40px,6vw,64px);line-height:1;
-    background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;color:transparent;
+    background:var(--grad-urgent);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
     padding:14px 18px;
-    border:1px solid rgba(212,175,122,.4);
+    border:1px solid rgba(227,90,79,.58);
     min-width:88px;text-align:center;
     letter-spacing:.02em;
     font-variant-numeric:tabular-nums;
+    box-shadow:
+      0 0 0 1px rgba(212,175,122,.08) inset,
+      0 0 24px rgba(227,90,79,.12);
   }
   .countdown .cd-lbl{
     font-family:"Cinzel",serif;font-size:10px;letter-spacing:.3em;
-    color:var(--ink-3);
+    color:#d26a5d;
   }
   .countdown .cd-colon{
     font-family:"Cormorant Garamond",serif;
-    font-size:clamp(28px,4vw,40px);color:var(--gold);
+    font-size:clamp(28px,4vw,40px);color:var(--urgent);
     align-self:flex-start;margin-top:18px;opacity:.6;
   }
   .countdown .cd-foot{
@@ -402,11 +409,22 @@
     font-size:clamp(12px,1.6vw,14px);letter-spacing:.08em;color:var(--ink-2);line-height:1.8;
   }
   @media (max-width:720px){
-    .countdown{padding:28px 16px}
+    section{padding:64px 0}
+    .sec-head{margin-bottom:42px}
+    .product{padding:64px 0 52px}
+    .product .intro{padding:32px 18px 34px}
+    .product .pain-list--top{margin:30px auto 28px}
+    .product .copy + .copy{margin-top:1.1em}
+    .visual-panel{margin-top:36px}
+    .product .visual-panel--future{margin-top:36px}
+    .countdown-section{padding:52px 0 !important}
+    .countdown{padding:30px 16px 32px}
     .countdown .cd-clock{gap:6px}
     .countdown .cd-unit{min-width:0;flex:1}
     .countdown .cd-num{padding:10px 6px;min-width:0;width:100%;font-size:clamp(32px,9vw,44px)}
     .countdown .cd-colon{display:none}
+    .voice-list{margin-top:48px}
+    .voice .visual-panel--woman{margin-top:36px}
   }
 
   /* ---------- faq ---------- */
@@ -683,11 +701,20 @@
   html.force-mobile .product h3.title{font-size:18px !important;line-height:1.7 !important}
   html.force-mobile .product .copy,
   html.force-mobile .product .pain-list li{font-size:13px !important}
+  html.force-mobile section{padding:64px 0 !important}
+  html.force-mobile .sec-head{margin-bottom:42px !important}
+  html.force-mobile .product{padding:64px 0 52px !important}
+  html.force-mobile .product .intro{padding:32px 18px 34px !important}
+  html.force-mobile .product .pain-list--top{margin:30px auto 28px !important}
+  html.force-mobile .product .copy + .copy{margin-top:1.1em !important}
+  html.force-mobile .product .visual-panel--future{margin-top:36px !important}
 
   /* feat */
   html.force-mobile .feat h3{font-size:16px !important}
 
   /* countdown */
+  html.force-mobile .countdown-section{padding:52px 0 !important}
+  html.force-mobile .countdown{padding:30px 16px 32px !important}
   html.force-mobile .countdown .cd-headline{font-size:14px !important}
   html.force-mobile .countdown .cd-num{font-size:32px !important;padding:10px 4px !important;min-width:0 !important;width:100% !important}
   html.force-mobile .countdown .cd-colon{display:none !important}
@@ -831,7 +858,7 @@
     display:none !important;
   }
   html.force-mobile .visual-panel{
-    margin-top:42px !important;
+    margin-top:36px !important;
   }
   html.force-mobile .visual-panel img{
     height:250px !important;
