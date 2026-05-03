@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LP 改行編集モード</title>
+<style>
+  :root{
+    --bg:#11100f;
+    --panel:#f7f3ec;
+    --panel-2:#ebe4d7;
+    --ink:#171412;
+    --muted:#746a5d;
+    --gold:#b8945a;
+    --accent:#7c3aed;
+    --line:#ded4c5;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP","Hiragino Sans",sans-serif;color:var(--ink)}
+  body{display:flex;flex-direction:column}
+  .topbar{
+    position:sticky;top:0;z-index:20;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:12px 18px;background:rgba(247,243,236,.96);
+    border-bottom:1px solid var(--line);backdrop-filter:blur(14px);
+  }
+  .brand{display:flex;flex-direction:column;gap:2px;min-width:220px}
+  .brand b{font-size:14px;letter-spacing:.04em}
+  .brand span{font-size:11px;color:var(--muted)}
+  .controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  button,.select{
+    appearance:none;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);
+    font:inherit;font-size:13px;height:38px;padding:0 12px;cursor:pointer;
+    box-shadow:0 1px 0 rgba(0,0,0,.03);
+  }
+  button:hover{border-color:#c8b89f}
+  button.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+  button.accent{background:var(--accent);color:#fff;border-color:var(--accent)}
+  button.ghost{background:transparent}
+  .status{font-size:12px;color:var(--muted);min-width:180px;text-align:right}
+  .workspace{display:grid;grid-template-columns:minmax(420px,1fr) 360px;min-height:calc(100vh - 63px)}
+  .preview-area{
+    display:flex;justify-content:center;align-items:flex-start;
+    padding:26px 24px 56px;overflow:auto;
+    background:
+      radial-gradient(ellipse at top,rgba(184,148,90,.22),transparent 38%),
+      linear-gradient(180deg,#1d1712 0%,#090807 100%);
+  }
+  .device-shell{
+    width:424px;max-width:100%;
+    padding:14px;background:#050505;border-radius:46px;
+    box-shadow:0 34px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.08);
+    transition:width .2s ease;
+  }
+  .device-shell[data-width="430"]{width:464px}
+  .device-shell[data-width="390"]{width:424px}
+  .device-screen{
+    height:844px;max-height:calc(100vh - 120px);min-height:620px;
+    border-radius:34px;overflow:hidden;background:#0a0807;
+  }
+  iframe{display:block;width:100%;height:100%;border:0;background:#0a0807}
+  .side{
+    background:var(--panel);border-left:1px solid var(--line);
+    padding:22px;overflow:auto;
+  }
+  .side h1{margin:0 0 10px;font-size:18px;line-height:1.45;letter-spacing:.02em}
+  .side p{margin:0 0 14px;font-size:13px;line-height:1.8;color:var(--muted)}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:14px;margin-top:14px;
+  }
+  .card h2{margin:0 0 8px;font-size:13px;letter-spacing:.08em;color:#8c7656}
+  .steps{margin:0;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.85}
+  .kbd{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:24px;height:22px;padding:0 6px;border:1px solid var(--line);
+    border-bottom-width:2px;border-radius:5px;background:#faf8f4;color:var(--ink);
+    font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .selected-box{font-size:12px;color:var(--muted);word-break:break-all;line-height:1.7}
+  .toggle-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px}
+  .toggle-row label{font-size:13px;color:var(--muted)}
+  .switch{display:flex;align-items:center;gap:8px}
+  .switch input{width:18px;height:18px;accent-color:var(--accent)}
+  .mini-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .mini-actions button{height:34px;font-size:12px}
+  .hint-note{font-size:12px;color:var(--muted);line-height:1.7;margin-top:10px}
+  @media (max-width:900px){
+    .topbar{align-items:flex-start;flex-direction:column}
+    .controls{justify-content:flex-start}
+    .status{text-align:left}
+    .workspace{grid-template-columns:1fr}
+    .side{border-left:0;border-top:1px solid var(--line)}
+  }
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <b>LP 改行編集モード</b>
+      <span>スマホ幅の表示を見ながら、テキストを直接クリックして編集</span>
+    </div>
+    <div class="controls">
+      <button type="button" data-width="390">390px</button>
+      <button type="button" data-width="430">430px</button>
+      <button type="button" class="ghost" id="toggleGuides">編集枠 OFF</button>
+      <button type="button" class="ghost" id="toggleSpacing">間隔モード OFF</button>
+      <button type="button" class="ghost" id="reloadPreview">リセット</button>
+      <button type="button" class="accent" id="copyHtml">HTMLをコピー</button>
+      <button type="button" class="primary" id="downloadHtml">保存HTMLをダウンロード</button>
+      <div class="status" id="status">読み込み中...</div>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="preview-area">
+      <div class="device-shell" id="deviceShell" data-width="390">
+        <div class="device-screen">
+          <iframe id="preview" src="index.html?mobile=1" title="LPスマホ編集プレビュー"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <aside class="side">
+      <h1>画面上の文字をそのまま編集できます</h1>
+      <p>紫の点線が編集できるテキストです。改行したい位置をクリックして、Enterを押してください。</p>
+
+      <div class="card">
+        <h2>使い方</h2>
+        <ol class="steps">
+          <li>左のスマホ画面でテキストをクリック</li>
+          <li>改行したい位置で <span class="kbd">Enter</span></li>
+          <li>必要なら文字も直接修正</li>
+          <li>最後に保存HTMLをダウンロード</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h2>ブロック間隔調整</h2>
+        <p>上の「間隔モード」をONにすると、画像・セクション・カードなどのブロックを選択できます。</p>
+        <ol class="steps">
+          <li><span class="kbd">Enter</span> で余白を広げる</li>
+          <li><span class="kbd">Delete</span> / <span class="kbd">⌫</span> で余白を詰める</li>
+        </ol>
+        <div class="mini-actions">
+          <button type="button" id="spacingTighten">詰める</button>
+          <button type="button" id="spacingLoosen">広げる</button>
+        </div>
+        <div class="hint-note">文字編集とぶつからないように、間隔モード中はテキスト入力を一時停止します。</div>
+      </div>
+
+      <div class="card">
+        <h2>現在選択中</h2>
+        <div class="selected-box" id="selectedBox">まだ選択されていません。</div>
+      </div>
+
+      <div class="card">
+        <h2>メモ</h2>
+        <p>この編集ページは元の <code>index.html</code> を自動上書きしません。保存ボタンで編集済みHTMLを書き出します。</p>
+        <p>貼り付け時は装飾を外して、プレーンテキストと改行だけを入れます。</p>
+        <div class="toggle-row">
+          <label for="plainBreak">Enterは通常の &lt;br&gt; を挿入</label>
+          <span class="switch"><input type="checkbox" id="plainBreak" checked disabled></span>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+<script>
+(function(){
+  var iframe = document.getElementById("preview");
+  var statusEl = document.getElementById("status");
+  var selectedBox = document.getElementById("selectedBox");
+  var deviceShell = document.getElementById("deviceShell");
+  var guidesVisible = true;
+  var spacingMode = false;
+  var activeEl = null;
+  var activeBlock = null;
+  var changeCount = 0;
+  var spacingStep = 12;
+
+  var editableSelectors = [
+    ".hero h1",
+    ".hero .crest",
+    ".hero .lead",
+    ".hero .stats .l",
+    ".results-label-text",
+    ".sec-head h2",
+    ".sec-head .sub",
+    ".product .intro .title",
+    ".product .pain-list li",
+    ".product .copy",
+    ".countdown .cd-headline",
+    ".countdown .cd-foot",
+    ".feat h3",
+    ".feat p",
+    ".result-card .period",
+    ".result-card .achievement",
+    ".voice-card .meta .name",
+    ".voice-card .body",
+    ".voice-card .tag",
+    ".faq .q-text",
+    ".faq-body p",
+    ".offer .price-h",
+    ".offer .free-note",
+    ".scarcity .text",
+    ".offer .guarantee",
+    ".founder .role",
+    ".founder .name",
+    ".founder p",
+    "footer .brand",
+    ".btn-cta span:first-child",
+    ".btn-line-mark"
+  ];
+
+  var spacingBlockSelector = [
+    "section",
+    ".hero",
+    ".product .intro",
+    ".visual-panel",
+    ".feat",
+    ".voice .results",
+    ".voice-list",
+    ".voice-card",
+    ".faq .faq-item",
+    ".offer .card",
+    ".scarcity",
+    ".founder"
+  ].join(",");
+
+  function setStatus(text){
+    statusEl.textContent = text;
+  }
+
+  function cssPath(el){
+    if (!el || !el.tagName) return "";
+    var parts = [];
+    while (el && el.nodeType === 1 && el.tagName.toLowerCase() !== "html") {
+      var part = el.tagName.toLowerCase();
+      if (el.id) {
+        part += "#" + el.id;
+        parts.unshift(part);
+        break;
+      }
+      if (el.className && typeof el.className === "string") {
+        var classes = el.className.split(/\s+/).filter(function(name){
+          return name && name.indexOf("lp-") !== 0 && name !== "in" && name !== "show";
+        }).slice(0, 3);
+        if (classes.length) part += "." + classes.join(".");
+      }
+      var parent = el.parentElement;
+      if (parent) {
+        var same = Array.prototype.filter.call(parent.children, function(child){
+          return child.tagName === el.tagName;
+        });
+        if (same.length > 1) part += ":nth-of-type(" + (same.indexOf(el) + 1) + ")";
+      }
+      parts.unshift(part);
+      el = parent;
+    }
+    return parts.join(" > ");
+  }
+
+  function escapeHtml(text){
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function insertHtml(doc, html){
+    var selection = doc.getSelection();
+    if (!selection || selection.rangeCount === 0) return;
+    var range = selection.getRangeAt(0);
+    range.deleteContents();
+    var template = doc.createElement("template");
+    template.innerHTML = html;
+    var fragment = template.content;
+    var lastNode = fragment.lastChild;
+    range.insertNode(fragment);
+    if (lastNode) {
+      range.setStartAfter(lastNode);
+      range.collapse(true);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+  }
+
+  function markChanged(){
+    changeCount += 1;
+    setStatus("変更 " + changeCount + " 件");
+  }
+
+  function describeSpacingTarget(el){
+    if (!el) return "";
+    if (el.classList.contains("hero")) return "ヒーローブロック";
+    if (el.classList.contains("countdown-section")) return "カウントダウン周辺";
+    if (el.classList.contains("visual-panel")) return "画像ブロック";
+    if (el.classList.contains("intro")) return "本文ブロック";
+    if (el.classList.contains("feat")) return "3つの柱カード";
+    if (el.classList.contains("voice-list")) return "実績カード一覧";
+    if (el.classList.contains("voice-card")) return "実績カード";
+    if (el.classList.contains("offer")) return "申込ブロック";
+    if (el.classList.contains("card")) return "申込カード";
+    if (el.tagName && el.tagName.toLowerCase() === "section") return "セクション";
+    return "ブロック";
+  }
+
+  function getSpacingBlock(target){
+    if (!target || !target.closest) return null;
+    var specific = target.closest(".product .intro,.visual-panel,.feat,.voice .results,.voice-list,.voice-card,.faq .faq-item,.offer .card,.scarcity,.founder");
+    if (specific) return specific;
+    return target.closest("section,.hero");
+  }
+
+  function clearActiveBlock(){
+    if (activeBlock) activeBlock.classList.remove("lp-spacing-selected");
+    activeBlock = null;
+  }
+
+  function selectBlock(block){
+    if (!block) return;
+    if (activeEl) activeEl.classList.remove("lp-editing");
+    activeEl = null;
+    clearActiveBlock();
+    activeBlock = block;
+    activeBlock.classList.add("lp-spacing-selected");
+    selectedBox.textContent = describeSpacingTarget(activeBlock) + " / " + cssPath(activeBlock);
+    setStatus("間隔調整中");
+    if (activeBlock.focus) activeBlock.focus({preventScroll:true});
+  }
+
+  function isSectionLike(el){
+    return el && (el.tagName && el.tagName.toLowerCase() === "section" || el.classList.contains("hero"));
+  }
+
+  function adjustSpacing(delta){
+    if (!activeBlock) {
+      setStatus("先にブロックを選択してください");
+      return;
+    }
+    var win = iframe.contentWindow;
+    var style = win.getComputedStyle(activeBlock);
+    if (isSectionLike(activeBlock)) {
+      var top = Math.max(24, Math.round(parseFloat(style.paddingTop) || 0) + delta);
+      var bottom = Math.max(24, Math.round(parseFloat(style.paddingBottom) || 0) + delta);
+      activeBlock.style.paddingTop = top + "px";
+      activeBlock.style.paddingBottom = bottom + "px";
+      selectedBox.textContent = describeSpacingTarget(activeBlock) + " / 上下余白 " + top + "px / " + cssPath(activeBlock);
+    } else {
+      var marginTop = Math.max(0, Math.round(parseFloat(style.marginTop) || 0) + delta);
+      activeBlock.style.marginTop = marginTop + "px";
+      selectedBox.textContent = describeSpacingTarget(activeBlock) + " / 上余白 " + marginTop + "px / " + cssPath(activeBlock);
+    }
+    markChanged();
+  }
+
+  function applyEditorMode(){
+    var doc = iframe.contentDocument;
+    if (!doc || !doc.body) return;
+    doc.documentElement.classList.toggle("lp-spacing-mode", spacingMode);
+    Array.prototype.forEach.call(doc.querySelectorAll(".lp-editable"), function(el){
+      if (spacingMode) {
+        el.setAttribute("contenteditable", "false");
+      } else {
+        el.setAttribute("contenteditable", "true");
+      }
+    });
+    if (!spacingMode) clearActiveBlock();
+  }
+
+  function setSpacingMode(enabled){
+    spacingMode = enabled;
+    var button = document.getElementById("toggleSpacing");
+    button.textContent = spacingMode ? "間隔モード ON" : "間隔モード OFF";
+    button.classList.toggle("accent", spacingMode);
+    applyEditorMode();
+    selectedBox.textContent = spacingMode ? "ブロックをクリックしてください。" : "まだ選択されていません。";
+    setStatus(spacingMode ? "間隔モード" : "編集できます");
+  }
+
+  function selectElement(el){
+    if (spacingMode) return;
+    var doc = iframe.contentDocument;
+    if (activeEl) activeEl.classList.remove("lp-editing");
+    activeEl = el;
+    activeEl.classList.add("lp-editing");
+    selectedBox.textContent = cssPath(activeEl);
+    setStatus("編集中");
+    if (doc && doc.defaultView) doc.defaultView.focus();
+  }
+
+  function setupEditor(){
+    var doc;
+    try {
+      doc = iframe.contentDocument;
+    } catch (e) {
+      setStatus("同一オリジンで開いてください");
+      return;
+    }
+    if (!doc || !doc.body) return;
+    activeEl = null;
+    activeBlock = null;
+
+    var style = doc.createElement("style");
+    style.id = "lp-editor-style";
+    style.textContent = [
+      ".reveal{opacity:1!important;transform:none!important;transition:none!important}",
+      ".lp-editable{outline:1px dashed rgba(124,58,237,.75)!important;outline-offset:4px;cursor:text!important}",
+      ".lp-editable:hover{outline:2px solid rgba(124,58,237,.9)!important;background:rgba(124,58,237,.08)!important}",
+      ".lp-editing{outline:3px solid rgba(124,58,237,1)!important;background:rgba(124,58,237,.14)!important}",
+      ".lp-hide-guides .lp-editable{outline:none!important}",
+      ".lp-spacing-block{outline:1px solid rgba(184,148,90,.28)!important;outline-offset:-3px}",
+      ".lp-spacing-mode .lp-editable{outline:1px dashed rgba(124,58,237,.18)!important;cursor:default!important}",
+      ".lp-spacing-mode .lp-spacing-block{outline:2px dashed rgba(227,90,79,.72)!important;cursor:ns-resize!important}",
+      ".lp-spacing-mode .lp-spacing-block:hover{outline:3px solid rgba(227,90,79,.88)!important;background:rgba(227,90,79,.06)!important}",
+      ".lp-spacing-selected{outline:4px solid rgba(227,90,79,1)!important;background:rgba(227,90,79,.1)!important}",
+      "[contenteditable=true]{-webkit-user-select:text;user-select:text}"
+    ].join("\n");
+    doc.head.appendChild(style);
+
+    doc.documentElement.classList.toggle("lp-hide-guides", !guidesVisible);
+    Array.prototype.forEach.call(doc.querySelectorAll("a"), function(link){
+      link.addEventListener("click", function(event){
+        if (link.dataset.lpEditable === "true") return;
+        event.preventDefault();
+      });
+    });
+
+    Array.prototype.forEach.call(doc.querySelectorAll(spacingBlockSelector), function(el){
+      if (el.closest("script,style")) return;
+      el.dataset.lpSpacingTarget = "true";
+      el.classList.add("lp-spacing-block");
+      el.setAttribute("tabindex", "0");
+    });
+
+    doc.addEventListener("click", function(event){
+      if (!spacingMode) return;
+      var block = getSpacingBlock(event.target);
+      if (!block) return;
+      event.preventDefault();
+      event.stopPropagation();
+      selectBlock(block);
+    }, true);
+
+    doc.addEventListener("keydown", function(event){
+      if (!spacingMode) return;
+      if (event.key === "Enter") {
+        event.preventDefault();
+        adjustSpacing(spacingStep);
+      } else if (event.key === "Delete" || event.key === "Backspace") {
+        event.preventDefault();
+        adjustSpacing(-spacingStep);
+      } else if (event.key === "Escape") {
+        clearActiveBlock();
+        selectedBox.textContent = "ブロックをクリックしてください。";
+        setStatus("間隔モード");
+      }
+    }, true);
+
+    var seen = [];
+    editableSelectors.forEach(function(selector){
+      Array.prototype.forEach.call(doc.querySelectorAll(selector), function(el){
+        if (seen.indexOf(el) !== -1) return;
+        if (!el.textContent || !el.textContent.trim()) return;
+        if (el.closest("script,style")) return;
+        seen.push(el);
+        el.dataset.lpEditable = "true";
+        el.classList.add("lp-editable");
+        el.setAttribute("contenteditable", "true");
+        el.setAttribute("spellcheck", "false");
+        el.addEventListener("focus", function(){ selectElement(el); });
+        el.addEventListener("click", function(event){
+          if (el.closest("a")) event.preventDefault();
+          event.stopPropagation();
+          selectElement(el);
+        });
+        el.addEventListener("keydown", function(event){
+          if (spacingMode) return;
+          if (event.key === "Enter") {
+            event.preventDefault();
+            insertHtml(doc, "<br>");
+            markChanged();
+          }
+        });
+        el.addEventListener("paste", function(event){
+          event.preventDefault();
+          var text = (event.clipboardData || doc.defaultView.clipboardData).getData("text/plain");
+          insertHtml(doc, escapeHtml(text).replace(/\r\n|\r|\n/g, "<br>"));
+          markChanged();
+        });
+        el.addEventListener("input", markChanged);
+      });
+    });
+
+    doc.addEventListener("click", function(){
+      if (spacingMode) return;
+      if (activeEl) activeEl.classList.remove("lp-editing");
+      activeEl = null;
+      selectedBox.textContent = "まだ選択されていません。";
+    });
+
+    applyEditorMode();
+    setStatus("編集できます");
+  }
+
+  function cleanExportHtml(){
+    var doc = iframe.contentDocument;
+    var clone = doc.documentElement.cloneNode(true);
+    clone.classList.remove("force-mobile", "lp-hide-guides", "lp-spacing-mode");
+    var editorStyle = clone.querySelector("#lp-editor-style");
+    if (editorStyle) editorStyle.remove();
+
+    Array.prototype.forEach.call(clone.querySelectorAll("*"), function(el){
+      var hadSpacingTarget = el.hasAttribute("data-lp-spacing-target");
+      el.classList.remove("lp-editable", "lp-editing", "lp-spacing-block", "lp-spacing-selected");
+      el.removeAttribute("contenteditable");
+      el.removeAttribute("spellcheck");
+      el.removeAttribute("data-lp-editable");
+      el.removeAttribute("data-lp-spacing-target");
+      if (hadSpacingTarget && el.getAttribute("tabindex") === "0") el.removeAttribute("tabindex");
+      if (el.classList.contains("in")) el.classList.remove("in");
+      if ((el.id === "topnav" || el.classList.contains("sticky-cta")) && el.classList.contains("show")) {
+        el.classList.remove("show");
+      }
+      if (el.getAttribute("class") === "") el.removeAttribute("class");
+    });
+
+    return "<!doctype html>\n" + clone.outerHTML;
+  }
+
+  function downloadHtml(){
+    var html = cleanExportHtml();
+    var blob = new Blob([html], {type:"text/html;charset=utf-8"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "index-edited.html";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    setStatus("HTMLを書き出しました");
+  }
+
+  function copyHtml(){
+    var html = cleanExportHtml();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(html).then(function(){
+        setStatus("HTMLをコピーしました");
+      }).catch(function(){
+        fallbackCopy(html);
+      });
+    } else {
+      fallbackCopy(html);
+    }
+  }
+
+  function fallbackCopy(text){
+    var textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    textarea.remove();
+    setStatus("HTMLをコピーしました");
+  }
+
+  iframe.addEventListener("load", setupEditor);
+
+  document.getElementById("downloadHtml").addEventListener("click", downloadHtml);
+  document.getElementById("copyHtml").addEventListener("click", copyHtml);
+  document.getElementById("reloadPreview").addEventListener("click", function(){
+    changeCount = 0;
+    activeEl = null;
+    activeBlock = null;
+    selectedBox.textContent = "まだ選択されていません。";
+    setStatus("再読み込み中...");
+    iframe.src = "index.html?mobile=1&ts=" + Date.now();
+  });
+  document.getElementById("toggleGuides").addEventListener("click", function(event){
+    guidesVisible = !guidesVisible;
+    event.currentTarget.textContent = guidesVisible ? "編集枠 OFF" : "編集枠 ON";
+    var doc = iframe.contentDocument;
+    if (doc && doc.documentElement) doc.documentElement.classList.toggle("lp-hide-guides", !guidesVisible);
+  });
+  document.getElementById("toggleSpacing").addEventListener("click", function(){
+    setSpacingMode(!spacingMode);
+  });
+  document.getElementById("spacingTighten").addEventListener("click", function(){
+    if (!spacingMode) setSpacingMode(true);
+    adjustSpacing(-spacingStep);
+  });
+  document.getElementById("spacingLoosen").addEventListener("click", function(){
+    if (!spacingMode) setSpacingMode(true);
+    adjustSpacing(spacingStep);
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-width]"), function(button){
+    button.addEventListener("click", function(){
+      deviceShell.dataset.width = button.dataset.width;
+    });
+  });
+})();
+</script>
+</body>
+</html>
