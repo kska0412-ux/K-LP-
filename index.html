@@ -281,15 +281,15 @@
     filter:none;opacity:1;
   }
   .proof-panel .proof-copy{
-    position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
-    padding:clamp(24px,5vw,52px);text-align:center;
+    position:absolute;left:0;right:0;top:50%;z-index:2;transform:translateY(-50%);
+    padding:0 clamp(24px,5vw,52px);text-align:center;
     font-family:"Shippori Mincho",serif;font-size:clamp(22px,3.6vw,38px);line-height:1.55;font-weight:600;letter-spacing:.06em;
     color:#090706;text-shadow:0 1px 18px rgba(255,255,255,.48);
   }
   .proof-panel .proof-copy em{font-style:normal;color:var(--gold-2)}
   .proof-panel--about .proof-copy{
-    align-items:flex-start;
-    padding-top:clamp(20px,5.2vw,58px);
+    top:clamp(18px,4.8vw,54px);
+    transform:none;
     color:#070604;
     text-shadow:
       0 1px 0 rgba(255,255,255,.55),
@@ -307,8 +307,8 @@
     .visual-panel--woman figcaption{left:auto;right:20px;text-align:right;max-width:62vw}
     .proof-panel{margin-bottom:46px}
     .proof-panel img{height:auto}
-    .proof-panel .proof-copy{font-size:20px;line-height:1.7;padding:24px;letter-spacing:.04em}
-    .proof-panel--about .proof-copy{padding-top:18px}
+    .proof-panel .proof-copy{font-size:clamp(15px,4.15vw,17px);line-height:1.5;padding:0 18px;letter-spacing:.02em}
+    .proof-panel--about .proof-copy{top:18px}
     .proof-panel--offer img{height:auto}
   }
 
@@ -828,7 +828,7 @@
   @media (max-width:560px){
     .hero .bg-side.left{
       width:96vw;
-      background-position:right center;
+      background-position:92% center;
     }
     .hero .bg-side.right{
       width:34vw;
@@ -840,7 +840,7 @@
   }
   html.force-mobile .hero .bg-side.left{
     width:96% !important;
-    background-position:right center !important;
+    background-position:92% center !important;
   }
   html.force-mobile .hero .bg-side.right{
     width:34% !important;
@@ -930,10 +930,14 @@
     height:auto !important;
   }
   html.force-mobile .proof-panel .proof-copy{
-    font-size:20px !important;
-    line-height:1.7 !important;
-    padding:24px !important;
-    letter-spacing:.04em !important;
+    font-size:16px !important;
+    line-height:1.5 !important;
+    padding:0 18px !important;
+    letter-spacing:.02em !important;
+  }
+  html.force-mobile .proof-panel--about .proof-copy{
+    top:18px !important;
+    transform:none !important;
   }
   html.force-mobile .proof-panel--offer img{
     height:auto !important;
