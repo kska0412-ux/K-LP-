@@ -788,16 +788,24 @@
   /* hero portrait visibility fix */
   @media (max-width:560px){
     .hero .bg-side.left{
-      width:84vw;
+      width:96vw;
       background-position:right center;
+    }
+    .hero .bg-side.right{
+      width:34vw;
+      background-position:left center;
     }
     .hero .bg-side.left::after{
       background:linear-gradient(90deg,rgba(10,8,7,.05) 0%,rgba(10,8,7,.58) 62%,rgba(10,8,7,.96) 100%);
     }
   }
   html.force-mobile .hero .bg-side.left{
-    width:84% !important;
+    width:96% !important;
     background-position:right center !important;
+  }
+  html.force-mobile .hero .bg-side.right{
+    width:34% !important;
+    background-position:left center !important;
   }
   html.force-mobile .hero .bg-side.left::after{
     background:linear-gradient(90deg,rgba(10,8,7,.05) 0%,rgba(10,8,7,.58) 62%,rgba(10,8,7,.96) 100%) !important;
