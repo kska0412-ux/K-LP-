@@ -3,7 +3,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>『モテ』と『金』完全コンプリート個別相談会</title>
-<link rel="preload" as="image" href="hero-couple.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="hero-woman-mobile.jpg" media="(max-width:560px)" fetchpriority="high">
+<link rel="preload" as="image" href="hero-couple.jpg" media="(min-width:561px)" fetchpriority="high">
 <link rel="preload" as="image" href="hero-night2.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -827,8 +828,10 @@
   /* hero portrait visibility fix */
   @media (max-width:560px){
     .hero .bg-side.left{
-      width:40vw;
-      background-position:right center;
+      width:48vw;
+      background-image:url('hero-woman-mobile.jpg');
+      background-size:auto 100%;
+      background-position:center center;
     }
     .hero .bg-side.right{
       width:34vw;
@@ -839,8 +842,10 @@
     }
   }
   html.force-mobile .hero .bg-side.left{
-    width:40% !important;
-    background-position:right center !important;
+    width:48% !important;
+    background-image:url('hero-woman-mobile.jpg') !important;
+    background-size:auto 100% !important;
+    background-position:center center !important;
   }
   html.force-mobile .hero .bg-side.right{
     width:34% !important;
@@ -848,6 +853,18 @@
   }
   html.force-mobile .hero .bg-side.left::after{
     background:linear-gradient(90deg,rgba(10,8,7,.05) 0%,rgba(10,8,7,.58) 62%,rgba(10,8,7,.96) 100%) !important;
+  }
+  @media (max-width:560px){
+    .hero .reveal{
+      opacity:1;
+      transform:none;
+      transition:none;
+    }
+  }
+  html.force-mobile .hero .reveal{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
   }
 
   /* mobile results alignment + CTA arrow cleanup */
