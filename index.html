@@ -281,30 +281,28 @@
     width:100%;height:auto;object-fit:contain;object-position:center center;
     filter:none;opacity:1;
   }
-  .proof-panel .proof-copy{
-    position:absolute;left:0;right:0;top:50%;z-index:2;transform:translateY(-50%);
-    padding:0 clamp(24px,5vw,52px);text-align:center;
-    font-family:"Shippori Mincho",serif;font-size:clamp(22px,3.6vw,38px);line-height:1.55;font-weight:600;letter-spacing:.06em;
-    color:#090706;text-shadow:0 1px 18px rgba(255,255,255,.48);
+  .proof-headline{
+    position:relative;z-index:2;
+    margin:0 auto clamp(14px,2.4vw,24px);
+    text-align:center;
+    font-family:"Shippori Mincho",serif;
+    font-size:clamp(22px,3.6vw,38px);
+    line-height:1.55;
+    font-weight:600;
+    letter-spacing:.06em;
+    color:var(--ink);
+    text-shadow:0 2px 12px rgba(0,0,0,.85),0 0 1px rgba(255,255,255,.45);
   }
-  .proof-panel .proof-copy-inner{
+  .proof-headline-inner{
     display:inline-block;
     padding:clamp(12px,1.8vw,22px) clamp(18px,3.4vw,42px);
     background:linear-gradient(90deg,rgba(5,4,3,.74) 0%,rgba(5,4,3,.62) 50%,rgba(5,4,3,.74) 100%);
+    border:1px solid rgba(212,175,122,.16);
     box-shadow:0 14px 42px rgba(0,0,0,.34);
     -webkit-backdrop-filter:blur(3px);
     backdrop-filter:blur(3px);
   }
-  .proof-panel .proof-copy em{font-style:normal;color:var(--gold-2)}
-  .proof-panel--about .proof-copy{
-    top:clamp(18px,4.8vw,54px);
-    transform:none;
-    color:var(--ink);
-    text-shadow:
-      0 2px 12px rgba(0,0,0,.85),
-      0 0 1px rgba(255,255,255,.45);
-  }
-  .proof-panel--about .proof-copy em{color:var(--gold-3)}
+  .proof-headline em{font-style:normal;color:var(--gold-3)}
   .proof-panel--offer{margin-bottom:clamp(54px,7vw,88px)}
   .proof-panel--offer img{height:auto;filter:none;opacity:1}
   @media (max-width:560px){
@@ -313,11 +311,10 @@
     .visual-panel figcaption{max-width:72vw;font-size:18px}
     .visual-panel--right figcaption{left:20px;right:auto;text-align:left}
     .visual-panel--woman figcaption{left:auto;right:20px;text-align:right;max-width:62vw}
+    .proof-headline{font-size:clamp(15px,4.15vw,17px);line-height:1.5;letter-spacing:.02em;margin-bottom:14px}
+    .proof-headline-inner{padding:10px 14px}
     .proof-panel{margin-bottom:46px}
     .proof-panel img{height:auto}
-    .proof-panel .proof-copy{font-size:clamp(15px,4.15vw,17px);line-height:1.5;padding:0 18px;letter-spacing:.02em}
-    .proof-panel .proof-copy-inner{padding:10px 14px}
-    .proof-panel--about .proof-copy{top:18px}
     .proof-panel--offer img{height:auto}
   }
 
@@ -1005,15 +1002,14 @@
   html.force-mobile .proof-panel img{
     height:auto !important;
   }
-  html.force-mobile .proof-panel .proof-copy{
+  html.force-mobile .proof-headline{
     font-size:16px !important;
     line-height:1.5 !important;
-    padding:0 18px !important;
     letter-spacing:.02em !important;
+    margin-bottom:14px !important;
   }
-  html.force-mobile .proof-panel--about .proof-copy{
-    top:18px !important;
-    transform:none !important;
+  html.force-mobile .proof-headline-inner{
+    padding:10px 14px !important;
   }
   html.force-mobile .proof-panel--offer img{
     height:auto !important;
@@ -1089,9 +1085,9 @@
 <!-- ============ PRODUCT ============ -->
 <section class="product" id="about" data-screen-label="02 About">
   <div class="wrap">
+    <div class="proof-headline"><span class="proof-headline-inner">1000名以上の指導で得た、<br><em>全ての知識</em>をあなたへ</span></div>
     <figure class="proof-panel proof-panel--about">
       <img src="about-program-proof.jpg" alt="1000名以上の指導実績を象徴する集合写真" loading="lazy" decoding="async">
-      <figcaption class="proof-copy"><span class="proof-copy-inner">1000名以上の指導で得た、<br><em>全ての知識</em>をあなたへ</span></figcaption>
     </figure>
 
     <div class="sec-head reveal">
