@@ -196,6 +196,8 @@
     ".feat p",
     ".result-card .period",
     ".result-card .achievement",
+    ".featured-result-title",
+    ".featured-result-desc li",
     ".voice-card .meta .name",
     ".voice-card .body",
     ".voice-card .tag",
@@ -220,6 +222,9 @@
     ".visual-panel",
     ".feat",
     ".voice .results",
+    ".featured-result",
+    ".featured-video",
+    ".featured-result-desc",
     ".voice-list",
     ".voice-card",
     ".faq .faq-item",
@@ -299,6 +304,9 @@
     if (el.classList.contains("visual-panel")) return "画像ブロック";
     if (el.classList.contains("intro")) return "本文ブロック";
     if (el.classList.contains("feat")) return "3つの柱カード";
+    if (el.classList.contains("featured-result")) return "動画実績ブロック";
+    if (el.classList.contains("featured-video")) return "実績動画";
+    if (el.classList.contains("featured-result-desc")) return "動画説明文";
     if (el.classList.contains("voice-list")) return "実績カード一覧";
     if (el.classList.contains("voice-card")) return "実績カード";
     if (el.classList.contains("offer")) return "申込ブロック";
@@ -309,7 +317,7 @@
 
   function getSpacingBlock(target){
     if (!target || !target.closest) return null;
-    var specific = target.closest(".product .intro,.visual-panel,.feat,.voice .results,.voice-list,.voice-card,.faq .faq-item,.offer .card,.scarcity,.founder");
+    var specific = target.closest(".product .intro,.visual-panel,.feat,.voice .results,.featured-video,.featured-result-desc,.featured-result,.voice-list,.voice-card,.faq .faq-item,.offer .card,.scarcity,.founder");
     if (specific) return specific;
     return target.closest("section,.hero");
   }
