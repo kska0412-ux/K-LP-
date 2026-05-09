@@ -553,6 +553,52 @@
   }
   .result-card .big-num{font-family:"Cormorant Garamond",serif;font-size:clamp(28px,4vw,40px);color:var(--gold);font-weight:600;display:block;line-height:1;margin-bottom:6px}
   .result-card .small-label{font-size:11px;color:var(--ink-3);letter-spacing:.15em;display:block;margin-top:6px}
+  .featured-result{
+    max-width:780px;
+    margin:clamp(30px,5vw,52px) auto 0;
+    text-align:left;
+  }
+  .featured-result-title{
+    font-family:"Shippori Mincho",serif;
+    text-align:center;
+    color:var(--ink);
+    font-size:clamp(18px,2.8vw,28px);
+    line-height:1.65;
+    letter-spacing:.04em;
+    font-weight:600;
+    margin-bottom:clamp(20px,3.4vw,30px);
+  }
+  .featured-result-title em{font-style:normal;color:var(--gold)}
+  .featured-video{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(212,175,122,.24);
+    background:#050403;
+    box-shadow:0 24px 70px -34px rgba(212,175,122,.55);
+  }
+  .featured-video::before,.featured-video::after{
+    content:"";position:absolute;width:24px;height:24px;border:1px solid var(--gold);z-index:2;pointer-events:none;
+  }
+  .featured-video::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+  .featured-video::after{right:-1px;bottom:-1px;border-left:none;border-top:none}
+  .featured-video video{
+    width:100%;
+    display:block;
+    background:#050403;
+  }
+  .featured-result-desc{
+    margin:clamp(20px,3.4vw,30px) auto 0;
+    padding:clamp(20px,3vw,28px);
+    border:1px solid rgba(212,175,122,.16);
+    background:linear-gradient(180deg,rgba(26,20,16,.52) 0%,rgba(10,8,7,.48) 100%);
+    color:var(--ink-2);
+    font-size:clamp(13px,1.75vw,15px);
+    line-height:2;
+  }
+  .featured-result-desc li{margin-left:1.2em}
+  .featured-result-desc li + li{margin-top:.65em}
+  .featured-result-desc li::marker{color:var(--gold)}
+  .featured-result-desc strong{color:var(--ink);font-weight:700}
 
   .voice-list{margin-top:80px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
   @media (max-width:880px){.voice-list{grid-template-columns:1fr;gap:20px}}
@@ -577,6 +623,11 @@
   .voice-card .meta .age{color:var(--ink-3);font-size:11px;letter-spacing:.15em;margin-top:4px;font-family:"Cinzel",serif}
   .voice-card .body{font-size:13px;line-height:2;color:var(--ink-2)}
   .voice-card .tag{display:inline-block;margin-top:18px;font-size:10px;letter-spacing:.2em;color:var(--gold);border:1px solid var(--gold-soft);padding:4px 10px;font-family:"Cinzel",serif}
+  @media (max-width:560px){
+    .featured-result{margin-top:28px}
+    .featured-result-title{font-size:17px;line-height:1.75;margin-bottom:18px}
+    .featured-result-desc{padding:18px 16px;font-size:13px;line-height:1.9}
+  }
 
   /* ---------- price / offer ---------- */
   .offer{position:relative;overflow:hidden;background:#0a0807;isolation:isolate}
@@ -1172,6 +1223,18 @@
       <span class="eyebrow">— Real&nbsp;Results —</span>
       <h2>『講習生実績』&nbsp; <br>金と女を&nbsp;&nbsp;<br>全獲りした男たち
 </h2>
+      <div class="featured-result">
+        <h3 class="featured-result-title">【経験人数0から300人超＋月収270万円を叩き出すまで成長。<br><em>『金』と『モテ』の全獲りをした講習生</em>】</h3>
+        <div class="featured-video">
+          <video controls playsinline preload="metadata" poster="student-result-270man-poster.jpg" src="student-result-270man.mp4"></video>
+        </div>
+        <ul class="featured-result-desc">
+          <li>かつては女性経験0。そこからマッチングアプリとナンパを極め、経験人数300人を突破。</li>
+          <li>恋愛だけでなく<strong>「会社経営」まで同時並行で伝授。</strong>その結果、月収270万円という驚異的な成果を達成。</li>
+          <li>「他社の恋愛コンサルとは物が違う」——小手先のテクニックではなく、身なりから向き合い方まで「本質」を変えた。</li>
+          <li>周囲から<strong>「めちゃくちゃカッコよくなった」</strong>と絶賛される、圧倒的なセルフプロデュース力を手に入れる。</li>
+        </ul>
+      </div>
       <p class="sub">数字は嘘をつかない。<br>下記はすべて、私の元で学んだ受講生の実話です。</p>
     </div>
 
