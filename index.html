@@ -180,20 +180,24 @@
     padding:18px clamp(18px,3vw,34px);
     overflow:hidden;
     isolation:isolate;
-    border:1px solid rgba(212,175,122,.28);
+    border:1px solid rgba(255,238,190,.72);
+    border-left:3px solid var(--gold);
+    border-right:3px solid var(--gold);
     background:
-      linear-gradient(180deg,rgba(212,175,122,.12),rgba(212,175,122,.025)),
-      radial-gradient(ellipse 70% 130% at 50% 0%,rgba(232,201,138,.16),transparent 62%);
+      radial-gradient(ellipse 90% 130% at 50% 0%,rgba(255,255,255,.58) 0%,rgba(255,255,255,0) 58%),
+      linear-gradient(180deg,rgba(255,251,238,.94) 0%,rgba(235,204,143,.9) 100%);
     box-shadow:
-      0 20px 52px -32px rgba(212,175,122,.78),
-      inset 0 1px 0 rgba(255,255,255,.16);
+      0 24px 58px -28px rgba(212,175,122,.95),
+      0 0 0 1px rgba(10,8,7,.18),
+      inset 0 2px 0 rgba(255,255,255,.78),
+      inset 0 -10px 18px rgba(112,75,24,.16);
   }
   .hero .desire-lines::before{
     content:"";
     position:absolute;
     inset:-40% -18%;
-    z-index:-1;
-    background:linear-gradient(110deg,transparent 38%,rgba(255,246,217,.22) 48%,rgba(212,175,122,.16) 52%,transparent 62%);
+    z-index:0;
+    background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.62) 48%,rgba(255,246,217,.4) 52%,transparent 62%);
     transform:translateX(-70%) rotate(4deg);
     animation:desire-sheen 5.8s ease-in-out infinite;
   }
@@ -213,8 +217,8 @@
     font-weight:700;
     line-height:1.48;
     letter-spacing:.05em;
-    color:var(--ink);
-    text-shadow:0 0 22px rgba(232,201,138,.22);
+    color:#090706;
+    text-shadow:0 1px 0 rgba(255,255,255,.42);
     white-space:normal;
   }
   .hero .desire-line::before{
@@ -223,14 +227,14 @@
     width:.48em;
     height:.48em;
     margin-right:.55em;
-    border:1px solid var(--gold);
-    background:rgba(212,175,122,.18);
-    box-shadow:0 0 14px rgba(212,175,122,.5);
+    border:1px solid #8f601b;
+    background:rgba(143,96,27,.12);
+    box-shadow:0 0 10px rgba(143,96,27,.28);
     transform:rotate(45deg) translateY(-.08em);
     vertical-align:middle;
   }
   .hero .desire-line .gold-pop{
-    background:var(--grad-gold);
+    background:linear-gradient(135deg,#7a4f14 0%,#b77f29 48%,#6e4510 100%);
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
@@ -1335,7 +1339,7 @@
         <strong style="color:var(--gold)">『金』と『女』を手に入れるための順番</strong>と、<br>今のあなたに必要な行動が<br>整理されていないだけです。
       </p>
       <p class="copy">
-        この個別相談会では、あなたの現状と理想を聞いたうえで、<br>どこで詰まっているのか、<br>何を変えれば前に進むのかを<br>私と<strong style="color:var(--gold)">一対一</strong>で言語化します。<br>
+        この個別相談会では、<br>あなたの現状と理想を聞いたうえで<br>
         <strong style="color:var(--gold)">『金』と『女』を攻略するために<br>「何から手をつけるべきか」</strong>を明確にします。
       </p>
       <p class="copy">
