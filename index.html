@@ -544,12 +544,18 @@
   .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
   @media (max-width:880px){.feat-grid{grid-template-columns:1fr;gap:20px}}
   .feat{
-    border:1px solid rgba(212,175,122,.18);
-    background:linear-gradient(180deg,rgba(26,20,16,.6) 0%,rgba(10,8,7,.6) 100%);
+    border:1px solid rgba(212,175,122,.42);
+    background:linear-gradient(180deg,#fffdf7 0%,#f4ead8 100%);
     padding:48px 32px 40px;text-align:center;position:relative;
-    transition:transform .5s ease,border-color .5s ease,background .5s ease;
+    box-shadow:0 24px 54px -34px rgba(212,175,122,.75),inset 0 1px 0 rgba(255,255,255,.9);
+    transition:transform .5s ease,border-color .5s ease,background .5s ease,box-shadow .5s ease;
   }
-  .feat:hover{transform:translateY(-6px);border-color:var(--gold);background:linear-gradient(180deg,rgba(34,26,20,.7) 0%,rgba(14,11,9,.7) 100%)}
+  .feat:hover{
+    transform:translateY(-6px);
+    border-color:var(--gold);
+    background:linear-gradient(180deg,#ffffff 0%,#f7edd9 100%);
+    box-shadow:0 30px 66px -34px rgba(212,175,122,.9),inset 0 1px 0 rgba(255,255,255,1);
+  }
   .feat .num{
     font-family:"Cormorant Garamond",serif;font-weight:300;
     font-size:96px;line-height:1;color:transparent;
@@ -559,10 +565,10 @@
   .feat .num small{font-family:"Cinzel",serif;font-size:11px;letter-spacing:.3em;display:block;color:var(--gold);background:none;-webkit-background-clip:initial;background-clip:initial;margin-top:4px}
   .feat .icon{margin:8px auto 24px;width:56px;height:56px;display:flex;align-items:center;justify-content:center;border:1px solid var(--gold);transform:rotate(45deg)}
   .feat .icon svg{transform:rotate(-45deg);stroke:var(--gold);width:24px;height:24px;fill:none;stroke-width:1.4}
-  .feat h3{font-family:"Shippori Mincho",serif;font-size:clamp(18px,2.4vw,22px);font-weight:600;letter-spacing:.05em;line-height:1.6;margin-bottom:18px;color:var(--ink)}
-  .feat h3 em{font-style:normal;color:var(--gold)}
-  .feat p{font-size:13px;line-height:2;color:var(--ink-2);text-align:center}
-  .feat .div{width:30px;height:1px;background:var(--gold);margin:18px auto}
+  .feat h3{font-family:"Shippori Mincho",serif;font-size:clamp(18px,2.4vw,22px);font-weight:600;letter-spacing:.05em;line-height:1.6;margin-bottom:18px;color:#090706}
+  .feat h3 em{font-style:normal;color:#a06f22}
+  .feat p{font-size:13px;line-height:2;color:#221a14;text-align:center}
+  .feat .div{width:30px;height:1px;background:#b98533;margin:18px auto}
 
   /* ---------- countdown ---------- */
   .countdown{
