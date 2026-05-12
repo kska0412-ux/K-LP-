@@ -860,6 +860,33 @@
 
   .offer .bottom{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:14px}
   .offer .guarantee{margin-top:24px;font-size:11px;color:var(--ink-3);letter-spacing:.1em}
+  .inline-offer{
+    margin:clamp(44px,6vw,68px) auto 0;
+    background:transparent;
+    overflow:visible;
+    isolation:auto;
+  }
+  .inline-offer::before,
+  .inline-offer::after{
+    display:none;
+  }
+  .inline-offer .sec-head{
+    margin-bottom:28px;
+  }
+  .inline-offer .card{
+    background:linear-gradient(180deg,rgba(26,20,16,.82) 0%,rgba(10,8,7,.82) 100%);
+  }
+  @media (max-width:560px){
+    .inline-offer{
+      margin-top:38px;
+    }
+    .inline-offer .sec-head{
+      margin-bottom:22px !important;
+    }
+    .inline-offer .card{
+      padding:32px 18px 34px;
+    }
+  }
 
   /* ---------- company ---------- */
   .company{background:#06050494;border-top:1px solid rgba(212,175,122,.14)}
@@ -1309,6 +1336,54 @@
         3ヶ月後・半年後・1年後に<br>見たい景色を叶えるために、<br>
         思考、習慣、選ぶ環境、毎日の行動まで、<br>今日から動けるレベルに落とし込みます。
       </p>
+
+      <div class="offer inline-offer">
+        <div class="sec-head">
+          <span class="eyebrow">— Special&nbsp;Offer —</span>
+          <h2>今、一歩踏み出すあなたへ。</h2>
+        </div>
+
+        <div class="card">
+          <span class="c1"></span><span class="c2"></span>
+          <div class="badge">LIMITED&nbsp;OFFER</div>
+
+          <div class="price-h">
+            個別相談会、<br>
+            <em>初回限定&nbsp;完全無料</em>でご招待。
+          </div>
+
+          <div class="price-row">
+            <span class="was">通常&nbsp;¥30,000</span>
+            <span class="arrow">→</span>
+            <span class="now">
+              <span class="val" data-count="0" data-target="0">0</span>
+              <span class="yen">円</span>
+              <span class="label" style="margin-left:14px">(税込)</span>
+            </span>
+          </div>
+
+          <div class="free-note">— 60分・オンライン —</div>
+
+          <div class="scarcity">
+            <div class="label"><span class="blink"></span>STRICTLY&nbsp;LIMITED</div>
+            <div class="text">
+              毎月<em>5</em>名様&nbsp;限定<br>
+              <span style="font-size:.85em;color:var(--ink-2);font-weight:400">今月の残り枠&nbsp;<em>2</em>&nbsp;名</span>
+            </div>
+            <div class="meter"><i style="width: 60%;"></i></div>
+            <div class="meter-row"><span>SLOT&nbsp;1</span><span>SLOT&nbsp;5</span></div>
+          </div>
+
+          <div class="bottom">
+            <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1763125167" class="btn-cta">
+              <span>今スグ『モテ』と『金』<br>完全コンプリート相談会に<br>参加する</span>
+              <span class="arrow">→</span>
+            </a>
+            <span class="btn-line-mark"><span class="dot"></span>LINE登録&nbsp;→&nbsp;30秒で申込完了</span>
+            <div class="guarantee">※ 強引な勧誘・販売は一切ございません。<br>安心してご参加ください。</div>
+          </div>
+        </div>
+      </div>
 
     </div>
 
