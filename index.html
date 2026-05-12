@@ -171,6 +171,105 @@
     margin:30px auto 0;
     max-width:680px;
   }
+  .hero .desire-lines{
+    position:relative;
+    display:grid;
+    gap:10px;
+    width:min(760px,100%);
+    margin:0 auto 18px;
+    padding:18px clamp(18px,3vw,34px);
+    overflow:hidden;
+    isolation:isolate;
+    border:1px solid rgba(212,175,122,.28);
+    background:
+      linear-gradient(180deg,rgba(212,175,122,.12),rgba(212,175,122,.025)),
+      radial-gradient(ellipse 70% 130% at 50% 0%,rgba(232,201,138,.16),transparent 62%);
+    box-shadow:
+      0 20px 52px -32px rgba(212,175,122,.78),
+      inset 0 1px 0 rgba(255,255,255,.16);
+  }
+  .hero .desire-lines::before{
+    content:"";
+    position:absolute;
+    inset:-40% -18%;
+    z-index:-1;
+    background:linear-gradient(110deg,transparent 38%,rgba(255,246,217,.22) 48%,rgba(212,175,122,.16) 52%,transparent 62%);
+    transform:translateX(-70%) rotate(4deg);
+    animation:desire-sheen 5.8s ease-in-out infinite;
+  }
+  .hero .desire-lines::after{
+    content:"";
+    position:absolute;
+    inset:7px;
+    border:1px solid rgba(212,175,122,.14);
+    pointer-events:none;
+  }
+  .hero .desire-line{
+    display:block;
+    position:relative;
+    z-index:1;
+    font-family:"Shippori Mincho",serif;
+    font-size:clamp(18px,2.8vw,30px);
+    font-weight:700;
+    line-height:1.48;
+    letter-spacing:.05em;
+    color:var(--ink);
+    text-shadow:0 0 22px rgba(232,201,138,.22);
+    white-space:normal;
+  }
+  .hero .desire-line::before{
+    content:"";
+    display:inline-block;
+    width:.48em;
+    height:.48em;
+    margin-right:.55em;
+    border:1px solid var(--gold);
+    background:rgba(212,175,122,.18);
+    box-shadow:0 0 14px rgba(212,175,122,.5);
+    transform:rotate(45deg) translateY(-.08em);
+    vertical-align:middle;
+  }
+  .hero .desire-line .gold-pop{
+    background:var(--grad-gold);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:none;
+  }
+  .hero .lead-tail{
+    display:block;
+    white-space:normal;
+  }
+  @keyframes desire-sheen{
+    0%,28%{transform:translateX(-74%) rotate(4deg);opacity:0}
+    38%{opacity:1}
+    56%,100%{transform:translateX(74%) rotate(4deg);opacity:0}
+  }
+  @media (max-width:560px){
+    .hero .desire-lines{
+      gap:8px;
+      margin-bottom:16px;
+      padding:14px 12px;
+    }
+    .hero .desire-line{
+      font-size:clamp(14px,3.9vw,16px);
+      line-height:1.55;
+      letter-spacing:0;
+      white-space:nowrap;
+    }
+    .hero .desire-line::before{
+      width:.42em;
+      height:.42em;
+      margin-right:.36em;
+    }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .hero .desire-lines::before{
+      animation:none;
+      opacity:.4;
+      transform:translateX(0) rotate(4deg);
+    }
+  }
   .hero .stats{
     display:grid;grid-template-columns:repeat(3,1fr);gap:0;
     margin:18px auto 0;max-width:680px;
@@ -1047,8 +1146,11 @@
     <div class="ornament reveal reveal-d2"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
 
     <p class="lead reveal reveal-d3">
-      芸能人レベルの美女からモテたい。<br>お金を稼いで自由になりたい。<br>
-      そんな願望を、最短最速で叶えるための<br>「思考」「習慣」「マインド」を、<br>一対一で、あなただけに。
+      <span class="desire-lines">
+        <span class="desire-line"><span class="gold-pop">芸能人レベルの美女</span>からモテたい。</span>
+        <span class="desire-line"><span class="gold-pop">お金を稼いで自由</span>になりたい。</span>
+      </span>
+      <span class="lead-tail">そんな願望を、最短最速で叶えるための<br>「思考」「習慣」「マインド」を、<br>一対一で、あなただけに。</span>
     </p>
 
     <div class="results-label reveal reveal-d4">
