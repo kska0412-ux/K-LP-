@@ -422,6 +422,15 @@
     width:100%;height:auto;object-fit:contain;object-position:center center;
     filter:none;opacity:1;
   }
+  .proof-panel .proof-shade{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    background:
+      linear-gradient(180deg,rgba(10,8,7,.62) 0%,rgba(10,8,7,.34) 42%,rgba(10,8,7,.54) 100%),
+      radial-gradient(ellipse 70% 55% at 50% 20%,rgba(10,8,7,.18),rgba(10,8,7,.66) 100%);
+  }
   .proof-headline{
     position:relative;z-index:2;
     margin:0 auto clamp(14px,2.4vw,24px);
@@ -438,6 +447,19 @@
     display:inline;
   }
   .proof-headline em{font-style:normal;color:var(--gold-3)}
+  .proof-headline--overlay{
+    position:absolute;
+    left:50%;
+    top:clamp(28px,5vw,66px);
+    z-index:2;
+    width:min(860px,90%);
+    margin:0;
+    transform:translateX(-50%);
+    pointer-events:none;
+  }
+  .proof-panel--about img{
+    filter:brightness(.72) saturate(.9) contrast(.96);
+  }
   .proof-panel--offer{margin-bottom:clamp(54px,7vw,88px)}
   .proof-panel--offer img{height:auto;filter:none;opacity:1}
   @media (max-width:560px){
@@ -447,6 +469,15 @@
     .visual-panel--right figcaption{left:20px;right:auto;text-align:left}
     .visual-panel--woman figcaption{left:auto;right:20px;text-align:right;max-width:62vw}
     .proof-headline{font-size:clamp(15px,4.15vw,17px);line-height:1.5;letter-spacing:.02em;margin-bottom:14px}
+    .proof-headline--overlay{
+      top:50%;
+      width:88%;
+      margin:0;
+      transform:translate(-50%,-50%);
+      font-size:clamp(17px,5.2vw,22px);
+      line-height:1.55;
+      letter-spacing:.03em;
+    }
     .proof-panel{margin-bottom:46px}
     .proof-panel img{height:auto}
     .proof-panel--offer img{height:auto}
@@ -1145,6 +1176,15 @@
     letter-spacing:.02em !important;
     margin-bottom:14px !important;
   }
+  html.force-mobile .proof-headline--overlay{
+    top:50% !important;
+    width:88% !important;
+    margin:0 !important;
+    transform:translate(-50%,-50%) !important;
+    font-size:20px !important;
+    line-height:1.55 !important;
+    letter-spacing:.03em !important;
+  }
   html.force-mobile .proof-panel--offer img{
     height:auto !important;
   }
@@ -1222,9 +1262,10 @@
 <!-- ============ PRODUCT ============ -->
 <section class="product" id="about" data-screen-label="02 About">
   <div class="wrap">
-    <div class="proof-headline"><span class="proof-headline-inner">1000名以上の指導で得た、<br><em>全ての知識</em>をあなたへ</span></div>
     <figure class="proof-panel proof-panel--about">
       <img src="about-program-proof.jpg" alt="1000名以上の指導実績を象徴する集合写真" loading="lazy" decoding="async">
+      <span class="proof-shade"></span>
+      <figcaption class="proof-headline proof-headline--overlay"><span class="proof-headline-inner">1000名以上の指導で得た、<br><em>全ての知識</em>をあなたへ</span></figcaption>
     </figure>
 
     <div class="sec-head reveal">
