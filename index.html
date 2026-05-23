@@ -1020,7 +1020,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hero-poster-card{
     position:relative;
     z-index:2;
-    width:min(100%,520px);
+    width:min(880px,92vw);
     margin:0 auto;
     border:1px solid rgba(255,223,133,.42);
     border-radius:8px;
@@ -1034,8 +1034,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hero-poster-card img{
     width:100%;
     height:auto;
-    max-height:calc(100svh - 58px);
-    object-fit:contain;
+    object-fit:cover;
     object-position:center top;
     background:#000;
   }
@@ -1056,14 +1055,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   @media (max-width:560px){
     .hero.hero-poster{padding:0 0 28px}
     .hero-poster-card{
-      width:min(100%,430px);
+      width:100%;
       border-left:none;
       border-right:none;
       border-top:none;
       border-radius:0 0 8px 8px;
       box-shadow:0 18px 42px rgba(0,0,0,.64),0 0 30px rgba(216,173,92,.16);
     }
-    .hero-poster-card img{max-height:calc(100svh - 54px)}
   }
 
   .btn-cta{
