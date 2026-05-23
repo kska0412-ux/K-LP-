@@ -10,9 +10,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>『モテ』と『金』完全コンプリート個別相談会</title>
-<link rel="preload" as="image" href="hero-woman-mobile.jpg" media="(max-width:560px)" fetchpriority="high">
-<link rel="preload" as="image" href="hero-couple.jpg" media="(min-width:561px)" fetchpriority="high">
-<link rel="preload" as="image" href="hero-night2.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="fv-consulting.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=Shippori+Mincho:wght@400;500;600;700;800&amp;family=Noto+Sans+JP:wght@300;400;500;600;700&amp;family=Cinzel:wght@400;500;600&amp;display=swap" rel="stylesheet">
@@ -955,6 +953,286 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .reveal.in{opacity:1;transform:none}
   .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.22s}.reveal-d3{transition-delay:.34s}.reveal-d4{transition-delay:.46s}
 
+  /* ---------- conversion redesign overrides ---------- */
+  :root{
+    --bg:#020302;
+    --bg-2:#060706;
+    --bg-3:#0e0d0b;
+    --line:#4a3822;
+    --gold:#d8ad5c;
+    --gold-2:#9d7031;
+    --gold-3:#ffdf85;
+    --ink:#fffaf0;
+    --ink-2:#d6cbb8;
+    --ink-3:#9f927d;
+    --line-green:#06c755;
+    --line-green-2:#009d2f;
+    --grad-gold:linear-gradient(135deg,#fff0a8 0%,#d8ad5c 42%,#8d5f22 76%,#f3d17a 100%);
+  }
+  .sr-only{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+    clip:rect(0,0,0,0);white-space:nowrap;border:0;
+  }
+  body{
+    background:
+      linear-gradient(180deg,#020302 0%,#080806 48%,#020302 100%);
+  }
+  nav.top{
+    background:rgba(2,3,2,.8);
+    border-bottom:1px solid rgba(216,173,92,.28);
+  }
+  nav.top .brand{color:var(--gold-3);text-shadow:0 0 18px rgba(216,173,92,.22)}
+  nav.top .brand small{color:var(--gold)}
+  nav.top .cta{
+    border-color:rgba(6,199,85,.8);
+    color:#fff;
+    background:linear-gradient(180deg,var(--line-green) 0%,var(--line-green-2) 100%);
+    border-radius:8px;
+    box-shadow:0 0 18px rgba(6,199,85,.22),0 0 0 1px rgba(255,223,133,.22) inset;
+  }
+  nav.top .cta:hover{background:linear-gradient(180deg,#24df68 0%,#00a932 100%);color:#fff}
+
+  .hero.hero-poster{
+    min-height:auto;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:clamp(12px,3vw,34px) 0 32px;
+    background:
+      linear-gradient(90deg,rgba(216,173,92,.12) 0%,transparent 18%,transparent 82%,rgba(216,173,92,.1) 100%),
+      linear-gradient(180deg,#010201 0%,#070806 58%,#020302 100%);
+  }
+  .hero.hero-poster::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:
+      linear-gradient(180deg,rgba(255,223,133,.08) 0%,transparent 16%,transparent 78%,rgba(216,173,92,.06) 100%),
+      linear-gradient(90deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,0) 32%,rgba(0,0,0,0) 68%,rgba(0,0,0,.72) 100%);
+  }
+  .hero.hero-poster::after{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(rgba(216,173,92,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(216,173,92,.035) 1px,transparent 1px);
+    background-size:54px 54px;
+    mask:none;-webkit-mask:none;
+  }
+  .hero.hero-poster .frame,
+  .hero.hero-poster .bg-side,
+  .hero.hero-poster .scroll-hint{display:none}
+  .hero-poster-card{
+    position:relative;
+    z-index:2;
+    width:min(100%,520px);
+    margin:0 auto;
+    border:1px solid rgba(255,223,133,.42);
+    border-radius:8px;
+    overflow:hidden;
+    background:#000;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,.85),
+      0 24px 70px rgba(0,0,0,.72),
+      0 0 42px rgba(216,173,92,.18);
+  }
+  .hero-poster-card img{
+    width:100%;
+    height:auto;
+    max-height:calc(100svh - 58px);
+    object-fit:contain;
+    object-position:center top;
+    background:#000;
+  }
+  .hero-hotspot{
+    position:absolute;
+    left:3.1%;
+    top:85.15%;
+    width:93.8%;
+    height:9.7%;
+    border-radius:8px;
+    z-index:3;
+  }
+  .hero-hotspot:focus-visible{
+    outline:3px solid #fff;
+    outline-offset:-8px;
+    box-shadow:0 0 0 4px rgba(6,199,85,.75);
+  }
+  @media (max-width:560px){
+    .hero.hero-poster{padding:0 0 28px}
+    .hero-poster-card{
+      width:min(100%,430px);
+      border-left:none;
+      border-right:none;
+      border-top:none;
+      border-radius:0 0 8px 8px;
+      box-shadow:0 18px 42px rgba(0,0,0,.64),0 0 30px rgba(216,173,92,.16);
+    }
+    .hero-poster-card img{max-height:calc(100svh - 54px)}
+  }
+
+  .btn-cta{
+    min-width:min(520px,92vw);
+    color:#fff;
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 38%),
+      linear-gradient(180deg,var(--line-green) 0%,var(--line-green-2) 100%);
+    border:1px solid rgba(255,223,133,.84);
+    border-radius:18px;
+    text-shadow:0 2px 0 rgba(0,0,0,.22);
+    box-shadow:
+      0 18px 42px rgba(6,199,85,.28),
+      0 0 28px rgba(216,173,92,.38),
+      inset 0 2px 0 rgba(255,255,255,.38),
+      inset 0 -10px 20px rgba(0,79,28,.28);
+  }
+  .btn-cta::after{
+    background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,0));
+  }
+  .btn-cta:hover{
+    filter:saturate(1.08) brightness(1.04);
+    box-shadow:
+      0 22px 54px rgba(6,199,85,.36),
+      0 0 36px rgba(216,173,92,.5),
+      inset 0 2px 0 rgba(255,255,255,.44),
+      inset 0 -10px 20px rgba(0,79,28,.26);
+  }
+  .btn-line-mark{
+    color:var(--gold-3);
+    text-shadow:0 0 16px rgba(216,173,92,.18);
+  }
+  .sticky-cta{
+    background:linear-gradient(180deg,rgba(2,3,2,0) 0%,rgba(2,3,2,.96) 34%);
+  }
+
+  section{
+    background:
+      linear-gradient(180deg,rgba(255,223,133,.03) 0%,transparent 22%,transparent 78%,rgba(255,223,133,.025) 100%),
+      #020302;
+  }
+  .product,
+  .features,
+  .voice,
+  .faq,
+  .offer{
+    background-color:#020302;
+  }
+  .product::before,
+  .offer::before{opacity:.16;filter:saturate(.75) contrast(1.06) brightness(.72)}
+  .product::after,
+  .offer::after{
+    background:linear-gradient(180deg,rgba(2,3,2,.94) 0%,rgba(2,3,2,.82) 50%,rgba(2,3,2,.96) 100%);
+  }
+  .sec-head{
+    margin-bottom:clamp(42px,7vw,72px);
+  }
+  .sec-head .eyebrow{
+    color:var(--gold-3);
+    text-shadow:0 0 16px rgba(216,173,92,.18);
+  }
+  .sec-head h2{
+    text-shadow:0 2px 18px rgba(0,0,0,.82);
+  }
+  .sec-head h2 em,
+  .product h3.title .accent,
+  .featured-result-title em,
+  .proof-headline em{
+    color:var(--gold-3);
+  }
+  .product .intro,
+  .offer .card,
+  .faq .faq-item,
+  .voice-card,
+  .featured-result-desc,
+  .countdown,
+  .scarcity,
+  .founder{
+    border:1px solid rgba(216,173,92,.36);
+    border-radius:8px;
+    background:
+      linear-gradient(180deg,rgba(17,18,16,.9) 0%,rgba(5,6,5,.9) 100%);
+    box-shadow:0 18px 54px rgba(0,0,0,.48),0 0 0 1px rgba(255,223,133,.05) inset;
+  }
+  .proof-panel,
+  .visual-panel,
+  .featured-video{
+    border-color:rgba(216,173,92,.42);
+    border-radius:8px;
+    box-shadow:0 18px 58px rgba(0,0,0,.58),0 0 34px rgba(216,173,92,.12);
+  }
+  .product .pain-list li{
+    color:var(--ink);
+    text-align:left;
+    padding:16px 18px 16px 42px;
+    border:1px solid rgba(216,173,92,.32);
+    border-radius:8px;
+    background:linear-gradient(180deg,rgba(12,13,11,.96) 0%,rgba(4,5,4,.96) 100%);
+    box-shadow:0 14px 34px rgba(0,0,0,.34),0 0 0 1px rgba(255,223,133,.04) inset;
+  }
+  .product .pain-list li::before{
+    content:"•";
+    left:20px;
+    top:14px;
+    transform:none;
+    color:var(--gold-3);
+    font-size:22px;
+    line-height:1;
+    background:none;
+    border:0;
+    box-shadow:none;
+  }
+  .feat{
+    color:var(--ink);
+    border-color:rgba(216,173,92,.42);
+    border-radius:8px;
+    background:linear-gradient(180deg,rgba(13,14,12,.96) 0%,rgba(4,5,4,.98) 100%);
+    box-shadow:0 18px 48px rgba(0,0,0,.45),0 0 0 1px rgba(255,223,133,.05) inset;
+  }
+  .feat:hover{
+    background:linear-gradient(180deg,rgba(18,19,16,.98) 0%,rgba(5,6,5,.98) 100%);
+    box-shadow:0 22px 58px rgba(0,0,0,.54),0 0 28px rgba(216,173,92,.16);
+  }
+  .feat h3{color:var(--ink)}
+  .feat h3 em{color:var(--gold-3)}
+  .feat p{color:var(--ink-2)}
+  .feat .icon{
+    border-color:rgba(216,173,92,.72);
+    border-radius:8px;
+    transform:none;
+    background:rgba(216,173,92,.06);
+  }
+  .feat .icon svg{transform:none}
+  .countdown .cd-label{
+    border-color:rgba(216,173,92,.64);
+    color:var(--gold-3);
+    border-radius:8px;
+  }
+  .countdown .cd-headline em{
+    color:var(--gold-3);
+  }
+  .countdown .cd-num{
+    border-color:rgba(216,173,92,.52);
+    background:var(--grad-gold);
+    -webkit-background-clip:text;
+    background-clip:text;
+  }
+  .results-grid{gap:12px}
+  .voice .results{border:0;padding:0}
+  .result-card{
+    border:1px solid rgba(216,173,92,.32);
+    border-radius:8px;
+    background:linear-gradient(180deg,rgba(12,13,11,.92) 0%,rgba(4,5,4,.94) 100%);
+  }
+  .result-card:last-child{border-right:1px solid rgba(216,173,92,.32)}
+  .result-card .big-num{
+    color:var(--gold-3);
+    text-shadow:0 0 18px rgba(216,173,92,.2);
+  }
+  .scarcity{
+    border-style:solid;
+    background:linear-gradient(180deg,rgba(255,223,133,.06),rgba(255,223,133,.02));
+  }
+  .scarcity .label{color:var(--gold-3)}
+  .scarcity .label .blink{
+    background:var(--gold-3);
+    box-shadow:0 0 10px rgba(255,223,133,.75);
+  }
+
 </style>
 
 <style id="mobile-force-mode">
@@ -1258,55 +1536,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="top" id="topnav">
   <div class="wrap">
     <div class="brand">K&nbsp;CONSULTING<small>個別相談会</small></div>
-    <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="cta">参加申込</a>
+    <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="cta">LINE相談</a>
   </div>
 </nav>
 
 <!-- ============ HERO ============ -->
-<header class="hero" data-screen-label="01 Hero">
-  <div class="bg-side left"></div>
-  <div class="bg-side right"></div>
-  <div class="frame"><i></i><i></i></div>
-  <div class="inner">
-    <div class="crest reveal">— PRIVATE&nbsp;CONSULting —</div>
-    <div class="ornament reveal reveal-d1"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
-
-    <h1 class="reveal reveal-d2">
-      <span class="quote">『</span><span class="big">モテ</span><span class="quote">』</span>と<span class="quote">『</span><span class="big">金</span><span class="quote">』</span><span class="pc-br"><br></span>
-      <span class="sp-br"><br></span>完全コンプリート<span class="pc-br"><br></span><span class="sp-br"><br></span>個別相談会
-    </h1>
-
-    <div class="ornament reveal reveal-d2"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
-
-    <p class="lead reveal reveal-d3">
-      <span class="desire-lines">
-        <span class="desire-line"><span class="gold-pop">芸能人レベルの美女</span>からモテたい。</span>
-        <span class="desire-line"><span class="gold-pop">お金を稼いで自由</span>になりたい。</span>
-      </span>
-      <span class="lead-tail">そんな願望を、最短最速で叶えるための<br>「思考」「習慣」「マインド」を、<br>一対一で、あなただけに。</span>
-    </p>
-
-    <div class="results-label reveal reveal-d4">
-      <span class="results-label-line"></span>
-      <span class="results-label-text">『講習生実績』</span>
-      <span class="results-label-line"></span>
-    </div>
-
-    <div class="stats reveal reveal-d4">
-      <div><div class="n" data-count="320">320</div><div class="l">万円達成<br>(受講2ヶ月)</div></div>
-      <div><div class="n">No.<span data-count="1">1</span></div><div class="l">マッチングアプリ<br>いいね数 県内1位</div></div>
-      <div><div class="n" data-count="4">4</div><div class="l">ヶ月で<br>芸能スカウト</div></div>
-    </div>
-
-    <div class="cta-row reveal reveal-d4">
-      <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="btn-cta">
-        <span>今スグ『モテ』と『金』<br>完全コンプリート相談会に参加する</span>
-        <span class="arrow">→</span>
-      </a>
-      <span class="btn-line-mark"><span class="dot"></span>LINEから30秒で申込完了</span>
-    </div>
-
-    <div class="scroll-hint">SCROLL</div>
+<header class="hero hero-poster" data-screen-label="01 Hero">
+  <div class="hero-poster-card reveal">
+    <img src="fv-consulting.jpg" alt="なぜ、頑張っても『モテ』も『収入』も伸びないのか。女性に選ばれない理由も、稼げない理由も、実は同じ。LINEで無料相談の詳細を見る。" fetchpriority="high" decoding="async">
+    <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="hero-hotspot" aria-label="LINEで無料相談の詳細を見る"></a>
+  </div>
+  <div class="sr-only">
+    <h1>なぜ、頑張っても『モテ』も『収入』も伸びないのか？</h1>
+    <p>女性に選ばれない理由も、稼げない理由も、実は同じ。自己流のまま遠回りする前に、あなたのズレを1対1で言語化します。</p>
   </div>
 </header>
 
@@ -1328,16 +1570,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="narrow">
     <div class="intro reveal">
-      <h3 class="title">モテたい、稼ぎたい<br> &nbsp;&nbsp;
-でも 何から始めればいいのか<br>分からない
+      <h3 class="title">なぜ、頑張っても<br>
+『モテ』も『収入』も<br>伸びないのか？
 
 </h3>
 
       <ul class="pain-list pain-list--top">
-        <li>女性の前で自信が持てず、<br>結局いつも一歩引いてしまう</li>
-        <li>給料が上がらない。<br>でも何を学べばいいか、分からない</li>
-        <li>本を読んでも動画を見ても、<br>結局なにも変わらなかった</li>
-        <li>「このまま終わる人生」が、<br>薄っすら見え始めている</li>
+        <li>女性の前で自信が持てない</li>
+        <li>頑張っても収入が伸びない</li>
+        <li>何から変えればいいか分からない</li>
+        <li>自己流のまま遠回りしている</li>
       </ul>
 
       <p class="copy">
@@ -1397,7 +1639,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
           <div class="bottom">
             <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="btn-cta">
-              <span>今スグ『モテ』と『金』<br>完全コンプリート相談会に<br>参加する</span>
+              <span>LINEで無料相談の<br>詳細を見る</span>
               <span class="arrow">→</span>
             </a>
             <span class="btn-line-mark"><span class="dot"></span>LINE登録&nbsp;→&nbsp;30秒で申込完了</span>
@@ -1787,7 +2029,7 @@ Kさんの元で学んで、本当に
 
       <div class="bottom">
         <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="btn-cta" id="mainCta">
-          <span>今スグ『モテ』と『金』<br>完全コンプリート相談会に<br>参加する</span>
+          <span>LINEで無料相談の<br>詳細を見る</span>
           <span class="arrow">→</span>
         </a>
         <span class="btn-line-mark"><span class="dot"></span>LINE登録&nbsp;→&nbsp;30秒で申込完了</span>
@@ -1823,7 +2065,7 @@ Kさんの元で学んで、本当に
 <!-- sticky cta (mobile) -->
 <div class="sticky-cta" id="stickyCta">
   <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="btn-cta">
-    <span>無料で相談会に参加する</span>
+    <span>LINEで無料相談の詳細を見る</span>
     <span class="arrow">→</span>
   </a>
 </div>
