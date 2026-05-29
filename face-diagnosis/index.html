@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;800;900&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -405,6 +405,480 @@
       .trust-line svg {
         width: 32px;
         height: 32px;
+      }
+
+      .student-results {
+        --result-bg: #0a0807;
+        --result-panel: #1a1410;
+        --result-gold: #d4af7a;
+        --result-gold-2: #e8c98a;
+        --result-gold-soft: #7a6244;
+        --result-ink: #f5f1e8;
+        --result-ink-2: #c9bfae;
+        --result-ink-3: #8a8074;
+        --result-grad-gold: linear-gradient(135deg, #e8c98a 0%, #d4af7a 35%, #a07a44 70%, #d4af7a 100%);
+        position: relative;
+        overflow: hidden;
+        padding: 100px 0;
+        background: linear-gradient(180deg, #0a0807 0%, #0d0a08 50%, #0a0807 100%);
+      }
+
+      .student-results::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          radial-gradient(circle at 10% 20%, rgba(212, 175, 122, 0.06), transparent 30%),
+          radial-gradient(circle at 90% 80%, rgba(212, 175, 122, 0.06), transparent 30%);
+      }
+
+      .student-results .wrap {
+        position: relative;
+        width: min(1140px, 92vw);
+        margin-inline: auto;
+      }
+
+      .student-results .sec-head {
+        margin-bottom: clamp(42px, 7vw, 72px);
+        text-align: center;
+      }
+
+      .student-results .eyebrow {
+        display: block;
+        margin-bottom: 16px;
+        color: var(--result-gold-2);
+        font-family: "Cinzel", serif;
+        font-size: 11px;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        text-shadow: 0 0 16px rgba(216, 173, 92, 0.18);
+      }
+
+      .student-results .sec-head h2 {
+        margin: 0;
+        color: var(--result-ink);
+        font-family: "Shippori Mincho", serif;
+        font-size: clamp(24px, 4.2vw, 42px);
+        font-weight: 600;
+        line-height: 1.5;
+        letter-spacing: 0.06em;
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.82);
+      }
+
+      .student-results .sec-head .sub {
+        margin: 18px 0 0;
+        color: var(--result-ink-2);
+        font-size: clamp(12px, 1.8vw, 14px);
+        line-height: 2;
+        white-space: pre-line;
+      }
+
+      .student-results .results {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 8px 0;
+        border-top: 1px solid rgba(212, 175, 122, 0.2);
+        border-bottom: 1px solid rgba(212, 175, 122, 0.2);
+      }
+
+      .student-results .results-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+      }
+
+      .student-results .result-card {
+        position: relative;
+        padding: 36px 24px;
+        text-align: center;
+        border-right: 1px solid rgba(212, 175, 122, 0.14);
+      }
+
+      .student-results .result-card:last-child {
+        border-right: none;
+      }
+
+      .student-results .result-card .period {
+        margin-bottom: 14px;
+        color: var(--result-gold);
+        font-family: "Cinzel", serif;
+        font-size: 11px;
+        letter-spacing: 0.3em;
+      }
+
+      .student-results .result-card .achievement {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 3em;
+        color: var(--result-ink);
+        font-family: "Shippori Mincho", serif;
+        font-size: clamp(15px, 2vw, 17px);
+        font-weight: 600;
+        line-height: 1.7;
+      }
+
+      .student-results .result-card .big-num {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--result-gold);
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(28px, 4vw, 40px);
+        font-weight: 600;
+        line-height: 1;
+      }
+
+      .student-results .featured-result {
+        max-width: 780px;
+        margin: clamp(30px, 5vw, 52px) auto 0;
+        text-align: left;
+      }
+
+      .student-results .featured-result-title {
+        margin: 0 0 clamp(20px, 3.4vw, 30px);
+        color: var(--result-ink);
+        font-family: "Shippori Mincho", serif;
+        font-size: clamp(18px, 2.8vw, 28px);
+        font-weight: 600;
+        line-height: 1.65;
+        letter-spacing: 0.04em;
+        text-align: center;
+      }
+
+      .student-results .featured-result-title em {
+        color: var(--result-gold-2);
+        font-style: normal;
+      }
+
+      .student-results .featured-video {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(216, 173, 92, 0.42);
+        border-radius: 8px;
+        background: #050403;
+        box-shadow: 0 24px 70px -34px rgba(212, 175, 122, 0.55);
+      }
+
+      .student-results .featured-video::before,
+      .student-results .featured-video::after {
+        content: "";
+        position: absolute;
+        z-index: 2;
+        width: 24px;
+        height: 24px;
+        border: 1px solid var(--result-gold);
+        pointer-events: none;
+      }
+
+      .student-results .featured-video::before {
+        top: -1px;
+        left: -1px;
+        border-right: none;
+        border-bottom: none;
+      }
+
+      .student-results .featured-video::after {
+        right: -1px;
+        bottom: -1px;
+        border-left: none;
+        border-top: none;
+      }
+
+      .student-results .featured-video video {
+        display: block;
+        width: 100%;
+        background: #050403;
+      }
+
+      .student-results .featured-result-desc {
+        margin: clamp(20px, 3.4vw, 30px) auto 0;
+        padding: clamp(20px, 3vw, 28px);
+        color: var(--result-ink-2);
+        font-size: clamp(13px, 1.75vw, 15px);
+        line-height: 2;
+        border: 1px solid rgba(216, 173, 92, 0.36);
+        border-radius: 8px;
+        background: linear-gradient(180deg, rgba(17, 18, 16, 0.9) 0%, rgba(5, 6, 5, 0.9) 100%);
+        box-shadow: 0 18px 54px rgba(0, 0, 0, 0.48), 0 0 0 1px rgba(255, 223, 133, 0.05) inset;
+      }
+
+      .student-results .featured-result-desc li {
+        margin-left: 1.2em;
+      }
+
+      .student-results .featured-result-desc li + li {
+        margin-top: 0.65em;
+      }
+
+      .student-results .featured-result-desc li::marker {
+        color: var(--result-gold);
+      }
+
+      .student-results .featured-result-desc strong {
+        color: var(--result-ink);
+        font-weight: 700;
+      }
+
+      .student-results .featured-result-desc + .featured-result-title {
+        margin-top: clamp(34px, 5vw, 54px);
+      }
+
+      .student-results .voice-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 80px;
+      }
+
+      .student-results .voice-card {
+        position: relative;
+        padding: 32px 28px;
+        border: 1px solid rgba(216, 173, 92, 0.36);
+        border-radius: 8px;
+        background: linear-gradient(180deg, rgba(17, 18, 16, 0.9) 0%, rgba(5, 6, 5, 0.9) 100%);
+        box-shadow: 0 18px 54px rgba(0, 0, 0, 0.48), 0 0 0 1px rgba(255, 223, 133, 0.05) inset;
+      }
+
+      .student-results .voice-card .quote-mark {
+        position: absolute;
+        top: 14px;
+        left: 18px;
+        color: var(--result-gold);
+        font-family: "Cormorant Garamond", serif;
+        font-size: 64px;
+        font-weight: 300;
+        line-height: 1;
+        opacity: 0.35;
+      }
+
+      .student-results .voice-card .head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 20px;
+        padding-top: 28px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid rgba(212, 175, 122, 0.12);
+      }
+
+      .student-results .voice-card .ph {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        color: var(--result-gold);
+        font-family: "Cormorant Garamond", serif;
+        font-size: 18px;
+        border: 1px solid var(--result-gold);
+        border-radius: 50%;
+        background: repeating-linear-gradient(45deg, #1a1410 0 6px, #221a14 6px 12px);
+      }
+
+      .student-results .voice-card .meta .name {
+        color: var(--result-ink);
+        font-family: "Shippori Mincho", serif;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+      }
+
+      .student-results .voice-card .meta .age {
+        margin-top: 4px;
+        color: var(--result-ink-3);
+        font-family: "Cinzel", serif;
+        font-size: 11px;
+        letter-spacing: 0.15em;
+      }
+
+      .student-results .voice-card .body {
+        color: var(--result-ink-2);
+        font-size: 13px;
+        line-height: 2;
+        white-space: pre-line;
+      }
+
+      .student-results .voice-card .tag {
+        display: inline-block;
+        margin-top: 18px;
+        padding: 4px 10px;
+        color: var(--result-gold);
+        font-family: "Cinzel", serif;
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        border: 1px solid var(--result-gold-soft);
+      }
+
+      .student-results .visual-panel {
+        position: relative;
+        overflow: hidden;
+        margin-top: 36px;
+        border: 1px solid rgba(216, 173, 92, 0.42);
+        border-radius: 8px;
+        box-shadow: 0 28px 70px -36px rgba(212, 175, 122, 0.55);
+      }
+
+      .student-results .visual-panel::before,
+      .student-results .visual-panel::after {
+        content: "";
+        position: absolute;
+        z-index: 2;
+        width: 24px;
+        height: 24px;
+        border: 1px solid var(--result-gold);
+        pointer-events: none;
+      }
+
+      .student-results .visual-panel::before {
+        top: -1px;
+        left: -1px;
+        border-right: none;
+        border-bottom: none;
+      }
+
+      .student-results .visual-panel::after {
+        right: -1px;
+        bottom: -1px;
+        border-left: none;
+        border-top: none;
+      }
+
+      .student-results .visual-panel img {
+        width: 100%;
+        height: clamp(320px, 44vw, 520px);
+        object-fit: cover;
+        object-position: 34% center;
+      }
+
+      .student-results .visual-panel .shade {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(10, 8, 7, 0.15), rgba(10, 8, 7, 0.76));
+      }
+
+      .student-results .visual-panel figcaption {
+        position: absolute;
+        right: clamp(20px, 5vw, 54px);
+        bottom: clamp(22px, 5vw, 60px);
+        max-width: min(420px, 70vw);
+        color: var(--result-ink);
+        font-family: "Shippori Mincho", serif;
+        font-size: clamp(22px, 3vw, 38px);
+        font-weight: 600;
+        line-height: 1.6;
+        letter-spacing: 0.06em;
+        text-align: right;
+        text-shadow: 0 4px 22px rgba(0, 0, 0, 0.84);
+      }
+
+      .student-results .visual-panel figcaption small {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--result-gold);
+        font-family: "Cinzel", serif;
+        font-size: 11px;
+        letter-spacing: 0.35em;
+      }
+
+      .student-results .visual-panel figcaption em {
+        color: var(--result-gold);
+        font-style: normal;
+      }
+
+      @media (max-width: 880px) {
+        .student-results .results-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .student-results .result-card:nth-child(2) {
+          border-right: none;
+        }
+
+        .student-results .result-card:nth-child(1),
+        .student-results .result-card:nth-child(2) {
+          border-bottom: 1px solid rgba(212, 175, 122, 0.14);
+        }
+
+        .student-results .voice-list {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .student-results {
+          padding: 74px 0;
+        }
+
+        .student-results .wrap {
+          width: calc(100% - 32px);
+        }
+
+        .student-results .sec-head {
+          margin-bottom: 42px;
+        }
+
+        .student-results .sec-head h2 {
+          font-size: 22px;
+          line-height: 1.55;
+        }
+
+        .student-results .results {
+          width: 100%;
+          max-width: 100%;
+          overflow: hidden;
+        }
+
+        .student-results .results-grid {
+          width: 100%;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        }
+
+        .student-results .result-card {
+          min-width: 0;
+          padding: 34px 10px;
+          overflow: hidden;
+        }
+
+        .student-results .result-card .period {
+          font-size: 10px;
+          line-height: 1.6;
+          letter-spacing: 0.2em;
+          white-space: normal;
+          overflow-wrap: anywhere;
+        }
+
+        .student-results .featured-result {
+          margin-top: 28px;
+        }
+
+        .student-results .featured-result-title {
+          margin-bottom: 18px;
+          font-size: 17px;
+          line-height: 1.75;
+        }
+
+        .student-results .featured-result-desc {
+          padding: 18px 16px;
+          font-size: 13px;
+          line-height: 1.9;
+        }
+
+        .student-results .voice-card {
+          padding: 28px 24px;
+        }
+
+        .student-results .visual-panel img {
+          height: 250px;
+        }
+
+        .student-results .visual-panel figcaption {
+          right: 20px;
+          max-width: 62vw;
+          font-size: 18px;
+        }
       }
 
       .section {
@@ -1069,36 +1543,150 @@
         </div>
       </section>
 
-      <section class="section achievements" id="results">
-        <div class="container">
-          <div class="section-head">
-            <div class="section-label">実績</div>
-            <h2><span class="gold-text">顔立ちに合う外見戦略</span>で、第一印象の迷いを減らす。</h2>
-            <p class="section-copy">
-              服装や髪型を感覚で選ぶのではなく、顔の印象・輪郭・雰囲気をもとに判断軸を作ります。
-              恋愛、仕事、紹介の場で「なんとなく損している」を減らすための無料診断です。
-            </p>
+      <section class="student-results" id="results" data-screen-label="04 Voice">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="eyebrow">— Real&nbsp;Results —</span>
+            <h2>『講習生実績』&nbsp; <br />金と女を&nbsp;&nbsp;<br />全獲りした男たち</h2>
+            <div class="featured-result">
+              <h3 class="featured-result-title">経験人数0から300人超<br />＋<br />月収270万円を叩き出すまで成長。<br /><em>『金』と『モテ』の全獲りをした講習生</em></h3>
+              <div class="featured-video">
+                <video controls playsinline preload="metadata" poster="student-result-270man-poster.jpg" src="student-result-270man.mp4"></video>
+              </div>
+              <ul class="featured-result-desc">
+                <li>かつては女性経験0。そこから<br />マッチングアプリとナンパを極め、<br />経験人数300人を突破。</li>
+                <li>恋愛だけでなく<br /><strong>「会社経営」まで同時並行で伝授。<br /></strong>その結果、月収270万円という<br />驚異的な成果を達成。</li>
+                <li>「他社の恋愛コンサルとは物が違う」<br />——小手先のテクニックではなく、<br />身なりから向き合い方まで「本質」を変えた。</li>
+                <li>周囲から<strong>「めちゃくちゃカッコよくなった」</strong>と<br />絶賛される、圧倒的なセルフプロデュース力を<br />手に入れる。</li>
+              </ul>
+              <h3 class="featured-result-title">「非モテの芋男」が<br />元モデル美女を魅了し結婚</h3>
+              <div class="featured-video">
+                <video controls playsinline preload="metadata" poster="student-result-marriage-poster.jpg" src="student-result-marriage.mp4"></video>
+              </div>
+              <ul class="featured-result-desc">
+                <li>彼女いない歴＝年齢の状態から、<br />わずか数ヶ月でモデルと交際。後に結婚</li>
+                <li>「女性経験ゼロ」だった受講生が、<br />今では街中で逆ナンされる回数が急増。</li>
+                <li><strong>「恋愛の8割は見た目で決まる」</strong>という<br />本質を突き詰め、圧倒的な外見の変え方を伝授。</li>
+                <li>トーク術やマインド論といった<br />「綺麗事」を一切排除し、<br />結果にコミットした究極の自分磨き。</li>
+              </ul>
+              <h3 class="featured-result-title">「ブスいじり」に泣いた過去から半年。<br />本質の外見改善で手に入れた<br /><em>「圧倒的清潔感」と「自分への自信」<br /></em></h3>
+              <div class="featured-video">
+                <video controls playsinline preload="metadata" poster="student-result-clean-confidence-poster.jpg" src="student-result-clean-confidence.mp4"></video>
+              </div>
+              <ul class="featured-result-desc">
+                <li>学生時代、周囲からの「ブスいじり」に<br />自信を失っていた受講生が、<br />勇気を出して踏み出した一歩。</li>
+                <li>徹底的な外見改善プランを実施。<br />わずか半年で、親や友人が驚くほどの<br />劇的変化を遂げる。</li>
+                <li>スキンケア、食事、睡眠の質、そして姿勢まで。表面的な着飾りではない「本質的な美」の追求。</li>
+                <li>ネットに溢れる正解不明な情報に<br />迷うのは終わり。<br />「1対1の正解」を知ることで、<br />肌も人生もここまで綺麗になる。</li>
+              </ul>
+            </div>
+            <p class="sub">数字は嘘をつかない。<br />下記はすべて、私の元で学んだ受講生の実話です。</p>
           </div>
-          <div class="achievement-grid">
-            <div class="metrics">
-              <div class="metric">
-                <strong>12k</strong>
-                <span><small>累計診断</small>30〜40代男性を中心に、顔タイプ別の印象設計を提案。</span>
+
+          <div class="results">
+            <div class="results-grid">
+              <div class="result-card">
+                <div class="period">CASE&nbsp;01&nbsp;/&nbsp;3&nbsp;MONTHS</div>
+                <div class="achievement">
+                  <div>
+                    <span class="big-num">3<span style="font-size: 0.5em">ヶ月</span></span>
+                    でモデルを<br />彼女にした
+                  </div>
+                </div>
               </div>
-              <div class="metric">
-                <strong>96%</strong>
-                <span><small>納得度</small>「自分に似合う方向性が言語化できた」と回答。</span>
+              <div class="result-card">
+                <div class="period">CASE&nbsp;02&nbsp;/&nbsp;2&nbsp;MONTHS</div>
+                <div class="achievement">
+                  <div>
+                    <span class="big-num">¥320<span style="font-size: 0.5em">万</span></span>
+                    学生が<br />2ヶ月で達成
+                  </div>
+                </div>
               </div>
-              <div class="metric">
-                <strong>30秒</strong>
-                <span><small>診断時間</small>スマホだけで完了。回答後すぐに方向性がわかります。</span>
+              <div class="result-card">
+                <div class="period">CASE&nbsp;03&nbsp;/&nbsp;DATING</div>
+                <div class="achievement">
+                  <div>
+                    <span class="big-num">No.1</span>
+                    マッチングアプリ<br />いいね数&nbsp;県内1位獲得
+                  </div>
+                </div>
+              </div>
+              <div class="result-card">
+                <div class="period">CASE&nbsp;04&nbsp;/&nbsp;4&nbsp;MONTHS</div>
+                <div class="achievement">
+                  <div>
+                    <span class="big-num">4<span style="font-size: 0.5em">ヶ月</span></span>
+                    で芸能事務所<br />からスカウト
+                  </div>
+                </div>
               </div>
             </div>
-            <figure class="image-frame">
-              <img src="assets/transformation.png" alt="印象が洗練される男性のビフォーアフターイメージ" />
-              <figcaption>自分の顔立ちに合う服・髪型を知るだけで、清潔感と余裕の見え方は変わります。</figcaption>
-            </figure>
           </div>
+
+          <div class="voice-list">
+            <article class="voice-card">
+              <div class="quote-mark">“</div>
+              <div class="head">
+                <div class="ph">T.K</div>
+                <div class="meta">
+                  <div class="name">T.K&nbsp;様</div>
+                  <div class="age">30代 /&nbsp;会社員</div>
+                </div>
+              </div>
+              <p class="body">「正直、最初は半信半疑でした。
+でも初回の相談で、<br />自分の何がズレていたのかが<br />30分で言語化された瞬間に震えました。<br />3ヶ月後、
+本当に憧れだった元モデルの彼女と
+付き合えています。」</p>
+              <span class="tag">非モテ会社員→モデルを彼女に</span>
+            </article>
+
+            <article class="voice-card">
+              <div class="quote-mark">“</div>
+              <div class="head">
+                <div class="ph">R.S</div>
+                <div class="meta">
+                  <div class="name">R.S&nbsp;様</div>
+                  <div class="age">20代 / 学生</div>
+                </div>
+              </div>
+              <p class="body">「やってきたことが全部
+間違ってました。
+お客様への向き合い方を
+根本から変えて、
+月収が2ヶ月で320万に。
+自分の人生を自分で<br />コントロールしてる感覚が手に入りました。」</p>
+              <span class="tag">学生→¥3,200,000</span>
+            </article>
+
+            <article class="voice-card">
+              <div class="quote-mark">“</div>
+              <div class="head">
+                <div class="ph">Y.M</div>
+                <div class="meta">
+                  <div class="name">Y.M&nbsp;様</div>
+                  <div class="age">40代 /&nbsp;個人事業主</div>
+                </div>
+              </div>
+              <p class="body">「40過ぎて何かを変えるなんて
+遅いと思ってました。でも違った。
+半年後、女性にも仕事相手にも
+『かっこいいね』と言われる
+男になっていた。
+Kさんの元で学んで、本当に
+良かった。」</p>
+              <span class="tag">会社員→起業し月収100万&amp;理想の彼女</span>
+            </article>
+          </div>
+
+          <figure class="visual-panel visual-panel--woman">
+            <img src="luxury-woman-pool.jpg" alt="女性に選ばれる男になった後の理想の世界観" loading="lazy" decoding="async" />
+            <span class="shade"></span>
+            <figcaption>
+              <small>AFTER IMAGE</small>
+              追う側ではなく、<br /><em>追われる側</em>へ。
+            </figcaption>
+          </figure>
         </div>
       </section>
 
