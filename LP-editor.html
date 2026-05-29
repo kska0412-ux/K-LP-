@@ -590,8 +590,20 @@
     var doc = iframe.contentDocument;
     var clone = doc.documentElement.cloneNode(true);
     clone.classList.remove("force-mobile", "lp-hide-guides", "lp-spacing-mode");
+    if (clone.getAttribute("class") === "") clone.removeAttribute("class");
     var editorStyle = clone.querySelector("#lp-editor-style");
     if (editorStyle) editorStyle.remove();
+
+    Array.prototype.forEach.call(clone.querySelectorAll("script[src]"), function(script){
+      var src = script.getAttribute("src") || "";
+      if (
+        src.indexOf("googletagmanager.com/gtm.js") !== -1 ||
+        src.indexOf("clarity.ms/") !== -1 ||
+        src.indexOf("scripts.clarity.ms/") !== -1
+      ) {
+        script.remove();
+      }
+    });
 
     Array.prototype.forEach.call(clone.querySelectorAll("*"), function(el){
       var hadSpacingTarget = el.hasAttribute("data-lp-spacing-target");
