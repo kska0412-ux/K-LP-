@@ -1,1277 +1,2202 @@
 <!doctype html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>無料 顔タイプ診断 | 男の印象は変わる</title>
-    <meta
-      name="description"
-      content="30〜40代男性向け。顔立ちをもとに、似合う服・髪型・印象設計を無料で診断します。"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --ink: #020913;
-        --navy: #061526;
-        --navy-2: #0a1b30;
-        --navy-3: #10263f;
-        --white: #fffaf0;
-        --muted: #d6dceb;
-        --gold: #e7bd5e;
-        --gold-bright: #f7dda0;
-        --gold-deep: #a97521;
-        --line: rgba(231, 189, 94, 0.56);
-        --panel: rgba(4, 15, 28, 0.76);
-        --shadow: rgba(0, 0, 0, 0.45);
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        color: var(--white);
-        font-family: "Noto Sans JP", system-ui, sans-serif;
-        background:
-          radial-gradient(circle at 70% 0%, rgba(36, 64, 103, 0.5), transparent 36rem),
-          linear-gradient(180deg, #020913 0%, #07182a 45%, #020913 100%);
-        letter-spacing: 0;
-      }
-
-      img,
-      svg {
-        display: block;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      button {
-        font: inherit;
-      }
-
-      .page {
-        overflow: hidden;
-        background:
-          linear-gradient(90deg, rgba(247, 221, 160, 0.08) 0 1px, transparent 1px 100%),
-          radial-gradient(circle at 12% 25%, rgba(231, 189, 94, 0.14), transparent 18rem),
-          radial-gradient(circle at 92% 80%, rgba(54, 95, 143, 0.24), transparent 22rem);
-        background-size: 7.5rem 100%, auto, auto;
-      }
-
-      .container {
-        width: min(1120px, calc(100% - 40px));
-        margin: 0 auto;
-      }
-
-      .gold-text {
-        color: transparent;
-        background: linear-gradient(135deg, #fff2be 0%, #e7bd5e 46%, #b5812d 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        text-shadow: 0 0 24px rgba(231, 189, 94, 0.18);
-      }
-
-      .hero {
-        position: relative;
-        isolation: isolate;
-        min-height: calc(100svh - 44px);
-        padding: 36px 0 30px;
-        background:
-          linear-gradient(90deg, rgba(2, 9, 19, 0.98) 0%, rgba(2, 9, 19, 0.78) 39%, rgba(2, 9, 19, 0.2) 67%, rgba(2, 9, 19, 0.66) 100%),
-          radial-gradient(circle at 48% 54%, rgba(231, 189, 94, 0.12), transparent 24rem),
-          #020913;
-      }
-
-      .hero::before,
-      .hero::after {
-        content: "";
-        position: absolute;
-        inset: auto 0 0;
-        height: 34%;
-        z-index: -1;
-        pointer-events: none;
-      }
-
-      .hero::before {
-        background: linear-gradient(180deg, transparent, rgba(1, 7, 15, 0.94));
-      }
-
-      .hero::after {
-        top: 0;
-        height: 100%;
-        background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 20%),
-          linear-gradient(90deg, rgba(231, 189, 94, 0.16), transparent 18%, transparent 82%, rgba(231, 189, 94, 0.08));
-        mix-blend-mode: screen;
-        opacity: 0.55;
-      }
-
-      .hero-photo {
-        position: absolute;
-        inset: 0 0 0 auto;
-        width: min(64vw, 760px);
-        height: 100%;
-        object-fit: cover;
-        object-position: 58% 50%;
-        z-index: -2;
-      }
-
-      .hero-inner {
-        display: grid;
-        align-content: center;
-        min-height: calc(100svh - 120px);
-      }
-
-      .audience-badge {
-        position: relative;
-        width: fit-content;
-        min-width: 310px;
-        margin-bottom: 38px;
-        padding: 13px 32px 15px;
-        border: 3px solid var(--gold);
-        color: var(--gold-bright);
-        font-size: 2.25rem;
-        font-weight: 700;
-        line-height: 1;
-        text-shadow: 0 2px 12px rgba(231, 189, 94, 0.36);
-        background: rgba(6, 21, 38, 0.34);
-      }
-
-      .audience-badge::before,
-      .audience-badge::after {
-        content: "";
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        border: 3px solid var(--gold);
-        background: var(--navy);
-      }
-
-      .audience-badge::before {
-        left: -8px;
-        top: -8px;
-        border-right: 0;
-        border-bottom: 0;
-      }
-
-      .audience-badge::after {
-        right: -8px;
-        bottom: -8px;
-        border-left: 0;
-        border-top: 0;
-      }
-
-      .hero-copy {
-        max-width: 650px;
-      }
-
-      .hero h1 {
-        margin: 0;
-        font-size: 4.05rem;
-        font-weight: 900;
-        line-height: 1.28;
-      }
-
-      .hero h1 span {
-        display: inline-block;
-      }
-
-      .hero h1 .white {
-        color: var(--white);
-        text-shadow: 0 3px 20px rgba(0, 0, 0, 0.6);
-      }
-
-      .hero-line {
-        position: relative;
-        width: min(660px, 100%);
-        height: 1px;
-        margin: 24px 0 32px;
-        background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      }
-
-      .hero-line::after {
-        content: "";
-        position: absolute;
-        left: 46%;
-        top: -4px;
-        width: 88px;
-        height: 9px;
-        border-radius: 999px;
-        background: radial-gradient(circle, #fff8d8 0 12%, var(--gold) 13% 24%, transparent 25%);
-        filter: drop-shadow(0 0 12px rgba(247, 221, 160, 0.85));
-      }
-
-      .offer-kicker {
-        margin: 0 0 12px;
-        color: var(--gold-bright);
-        font-size: 1.6rem;
-        font-weight: 700;
-        line-height: 1.4;
-      }
-
-      .offer-title {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        gap: 16px 22px;
-        margin: 0 0 18px;
-        font-size: 3.08rem;
-        font-weight: 900;
-        line-height: 1.16;
-      }
-
-      .free-badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 8px 16px 10px;
-        color: #071526;
-        background: linear-gradient(135deg, #f9e8ae 0%, #d8a746 48%, #f9e8ae 100%);
-        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.48), 0 10px 28px rgba(0, 0, 0, 0.34);
-      }
-
-      .ornament {
-        display: flex;
-        align-items: center;
-        width: min(640px, 100%);
-        margin: 10px 0 22px;
-        color: var(--gold);
-      }
-
-      .ornament::before,
-      .ornament::after {
-        content: "";
-        flex: 1;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, var(--gold));
-      }
-
-      .ornament::after {
-        background: linear-gradient(90deg, var(--gold), transparent);
-      }
-
-      .ornament span {
-        padding: 0 14px;
-        font-size: 1.4rem;
-      }
-
-      .lead {
-        max-width: 620px;
-        margin: 0;
-        color: var(--white);
-        font-size: 1.38rem;
-        font-weight: 500;
-        line-height: 1.72;
-        text-shadow: 0 3px 18px rgba(0, 0, 0, 0.72);
-      }
-
-      .cta-stack {
-        width: min(900px, 100%);
-        margin-top: 28px;
-      }
-
-      .primary-cta {
-        position: relative;
-        display: grid;
-        grid-template-columns: 64px minmax(0, 1fr) 64px;
-        align-items: center;
-        gap: 18px;
-        min-height: 88px;
-        padding: 20px 44px;
-        color: #061526;
-        font-size: 2.05rem;
-        font-weight: 900;
-        line-height: 1.2;
-        white-space: nowrap;
-        background:
-          linear-gradient(135deg, rgba(255, 255, 255, 0.44), transparent 18%, rgba(255, 255, 255, 0.22) 42%, transparent 68%),
-          linear-gradient(135deg, #b77825 0%, #f7dda0 28%, #ddb051 54%, #f4d37c 100%);
-        border: 4px solid #e7bd5e;
-        clip-path: polygon(3% 0, 97% 0, 100% 50%, 97% 100%, 3% 100%, 0 50%);
-        box-shadow:
-          inset 0 3px 0 rgba(255, 255, 255, 0.58),
-          inset 0 -7px 0 rgba(84, 61, 25, 0.34),
-          inset 0 0 0 3px rgba(6, 21, 38, 0.42),
-          0 18px 0 rgba(32, 25, 16, 0.34),
-          0 24px 38px rgba(0, 0, 0, 0.48);
-        overflow: hidden;
-        transform: translateY(0);
-        transition: transform 180ms ease, filter 180ms ease, box-shadow 180ms ease;
-      }
-
-      .primary-cta::before {
-        content: "";
-        position: absolute;
-        inset: 8px 8%;
-        background: linear-gradient(115deg, transparent 0 22%, rgba(255, 255, 255, 0.44) 34%, transparent 48% 100%);
-        transform: translateX(-105%);
-        transition: transform 520ms ease;
-        pointer-events: none;
-      }
-
-      .primary-cta:hover {
-        filter: brightness(1.05) saturate(1.05);
-        transform: translateY(-3px);
-        box-shadow:
-          inset 0 3px 0 rgba(255, 255, 255, 0.64),
-          inset 0 -7px 0 rgba(84, 61, 25, 0.34),
-          inset 0 0 0 3px rgba(6, 21, 38, 0.42),
-          0 21px 0 rgba(32, 25, 16, 0.34),
-          0 30px 44px rgba(0, 0, 0, 0.54);
-      }
-
-      .primary-cta:hover::before {
-        transform: translateX(105%);
-      }
-
-      .primary-cta:active {
-        transform: translateY(6px);
-        box-shadow:
-          inset 0 2px 0 rgba(255, 255, 255, 0.45),
-          inset 0 -3px 0 rgba(84, 61, 25, 0.38),
-          inset 0 0 0 3px rgba(6, 21, 38, 0.42),
-          0 8px 0 rgba(32, 25, 16, 0.32),
-          0 16px 26px rgba(0, 0, 0, 0.42);
-      }
-
-      .primary-cta:focus-visible {
-        outline: 3px solid var(--gold-bright);
-        outline-offset: 5px;
-      }
-
-      .primary-cta svg {
-        position: relative;
-        z-index: 1;
-        justify-self: center;
-        width: 52px;
-        height: 52px;
-        stroke-width: 1.8;
-      }
-
-      .primary-cta span {
-        position: relative;
-        z-index: 1;
-        min-width: 0;
-        text-align: center;
-      }
-
-      .primary-cta .arrow {
-        width: 36px;
-        height: 36px;
-      }
-
-      .hero .cta-stack {
-        width: min(900px, calc(100vw - 40px));
-      }
-
-      .trust-line {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 18px;
-        margin: 16px auto 0;
-        color: var(--white);
-        font-size: 1.22rem;
-        font-weight: 700;
-        line-height: 1.4;
-      }
-
-      .trust-line::before,
-      .trust-line::after {
-        content: "";
-        width: 180px;
-        max-width: 23%;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, var(--gold));
-      }
-
-      .trust-line::after {
-        background: linear-gradient(90deg, var(--gold), transparent);
-      }
-
-      .trust-line svg {
-        width: 32px;
-        height: 32px;
-      }
-
-      .section {
-        position: relative;
-        padding: 100px 0;
-      }
-
-      .section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: min(940px, calc(100% - 40px));
-        height: 1px;
-        transform: translateX(-50%);
-        background: linear-gradient(90deg, transparent, var(--line), transparent);
-      }
-
-      .section-head {
-        max-width: 760px;
-        margin-bottom: 46px;
-      }
-
-      .section-label {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 18px;
-        color: var(--gold-bright);
-        font-size: 0.92rem;
-        font-weight: 800;
-        line-height: 1;
-      }
-
-      .section-label::before {
-        content: "";
-        width: 38px;
-        height: 1px;
-        background: var(--gold);
-      }
-
-      .section h2 {
-        margin: 0;
-        color: var(--white);
-        font-size: 2.6rem;
-        font-weight: 900;
-        line-height: 1.35;
-      }
-
-      .section h2 .gold-text {
-        display: inline-block;
-      }
-
-      .section-copy {
-        margin: 18px 0 0;
-        color: var(--muted);
-        font-size: 1.1rem;
-        line-height: 1.9;
-      }
-
-      .achievement-grid {
-        display: grid;
-        grid-template-columns: 1fr 1.05fr;
-        gap: 36px;
-        align-items: center;
-      }
-
-      .metrics {
-        display: grid;
-        gap: 16px;
-      }
-
-      .metric {
-        display: grid;
-        grid-template-columns: 116px 1fr;
-        gap: 22px;
-        align-items: center;
-        padding: 22px 0;
-        border-bottom: 1px solid rgba(231, 189, 94, 0.28);
-      }
-
-      .metric strong {
-        color: var(--gold-bright);
-        font-size: 3rem;
-        font-weight: 900;
-        line-height: 1;
-      }
-
-      .metric small {
-        display: block;
-        margin-bottom: 7px;
-        color: var(--gold);
-        font-size: 0.9rem;
-        font-weight: 800;
-      }
-
-      .metric span {
-        color: var(--muted);
-        font-size: 1rem;
-        line-height: 1.75;
-      }
-
-      .image-frame {
-        position: relative;
-        overflow: hidden;
-        border: 1px solid rgba(231, 189, 94, 0.46);
-        box-shadow: 0 22px 60px rgba(0, 0, 0, 0.42);
-        background: var(--panel);
-      }
-
-      .image-frame::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, transparent 38%, rgba(2, 9, 19, 0.78));
-        pointer-events: none;
-      }
-
-      .image-frame img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .image-frame figcaption {
-        position: absolute;
-        left: 24px;
-        right: 24px;
-        bottom: 22px;
-        z-index: 1;
-        color: var(--white);
-        font-size: 1.12rem;
-        font-weight: 700;
-        line-height: 1.65;
-        text-shadow: 0 3px 16px rgba(0, 0, 0, 0.8);
-      }
-
-      .problem {
-        background:
-          linear-gradient(180deg, rgba(8, 25, 43, 0.72), rgba(2, 9, 19, 0.84)),
-          radial-gradient(circle at 50% 0%, rgba(231, 189, 94, 0.16), transparent 28rem);
-      }
-
-      .problem-list {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-      }
-
-      .problem-card {
-        min-height: 250px;
-        padding: 28px;
-        border: 1px solid rgba(231, 189, 94, 0.32);
-        background:
-          linear-gradient(180deg, rgba(16, 38, 63, 0.7), rgba(4, 15, 28, 0.86)),
-          var(--panel);
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
-      }
-
-      .problem-card .num {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-        margin-bottom: 28px;
-        color: #061526;
-        font-weight: 900;
-        background: linear-gradient(135deg, #f7dda0, #c38d33);
-      }
-
-      .problem-card h3 {
-        margin: 0 0 16px;
-        font-size: 1.35rem;
-        line-height: 1.45;
-      }
-
-      .problem-card p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 0.98rem;
-        line-height: 1.85;
-      }
-
-      .solution-grid {
-        display: grid;
-        grid-template-columns: 1fr 0.95fr;
-        gap: 42px;
-        align-items: center;
-      }
-
-      .steps {
-        display: grid;
-        gap: 18px;
-      }
-
-      .step {
-        display: grid;
-        grid-template-columns: 58px 1fr;
-        gap: 18px;
-        padding: 20px 0;
-        border-bottom: 1px solid rgba(231, 189, 94, 0.25);
-      }
-
-      .step .index {
-        color: var(--gold-bright);
-        font-size: 1.75rem;
-        font-weight: 900;
-        line-height: 1;
-      }
-
-      .step h3 {
-        margin: 0 0 8px;
-        font-size: 1.3rem;
-        line-height: 1.5;
-      }
-
-      .step p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 0.98rem;
-        line-height: 1.85;
-      }
-
-      .pricing {
-        background:
-          linear-gradient(180deg, rgba(2, 9, 19, 0.7), rgba(8, 25, 43, 0.9)),
-          radial-gradient(circle at 20% 30%, rgba(231, 189, 94, 0.13), transparent 22rem);
-      }
-
-      .price-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 720px);
-        justify-content: center;
-        gap: 22px;
-      }
-
-      .price-card {
-        position: relative;
-        padding: 34px;
-        border: 1px solid rgba(231, 189, 94, 0.42);
-        background: rgba(4, 15, 28, 0.78);
-        box-shadow: 0 22px 58px rgba(0, 0, 0, 0.3);
-      }
-
-      .price-card.featured {
-        border-width: 2px;
-        background:
-          linear-gradient(135deg, rgba(231, 189, 94, 0.16), transparent 38%),
-          rgba(4, 15, 28, 0.84);
-      }
-
-      .plan-label {
-        display: inline-flex;
-        padding: 8px 14px;
-        color: #071526;
-        font-size: 0.88rem;
-        font-weight: 900;
-        background: linear-gradient(135deg, #f7dda0, #c38d33);
-      }
-
-      .price-card h3 {
-        margin: 22px 0 12px;
-        font-size: 1.8rem;
-        line-height: 1.35;
-      }
-
-      .price {
-        display: flex;
-        align-items: baseline;
-        gap: 12px;
-        margin: 0 0 18px;
-        color: var(--gold-bright);
-      }
-
-      .price strong {
-        font-size: 4rem;
-        font-weight: 900;
-        line-height: 1;
-      }
-
-      .price span {
-        font-size: 1.1rem;
-        font-weight: 800;
-      }
-
-      .feature-list {
-        display: grid;
-        gap: 12px;
-        margin: 24px 0 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      .feature-list li {
-        position: relative;
-        padding-left: 26px;
-        color: var(--muted);
-        line-height: 1.7;
-      }
-
-      .feature-list li::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0.78em;
-        width: 10px;
-        height: 10px;
-        transform: translateY(-50%) rotate(45deg);
-        border: 2px solid var(--gold);
-      }
-
-      .faq-list {
-        display: grid;
-        gap: 14px;
-      }
-
-      .faq-item {
-        border: 1px solid rgba(231, 189, 94, 0.35);
-        background: rgba(4, 15, 28, 0.72);
-      }
-
-      .faq-question {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        width: 100%;
-        padding: 22px 24px;
-        color: var(--white);
-        text-align: left;
-        background: transparent;
-        border: 0;
-        cursor: pointer;
-      }
-
-      .faq-question span {
-        font-size: 1.1rem;
-        font-weight: 800;
-        line-height: 1.5;
-      }
-
-      .faq-question svg {
-        flex: 0 0 auto;
-        width: 24px;
-        height: 24px;
-        color: var(--gold-bright);
-        transition: transform 180ms ease;
-      }
-
-      .faq-item[open] .faq-question svg {
-        transform: rotate(45deg);
-      }
-
-      .faq-answer {
-        margin: 0;
-        padding: 0 24px 24px;
-        color: var(--muted);
-        line-height: 1.9;
-      }
-
-      .final-cta {
-        padding-bottom: 120px;
-        text-align: center;
-        background:
-          linear-gradient(180deg, rgba(2, 9, 19, 0.18), rgba(2, 9, 19, 0.9)),
-          radial-gradient(circle at 50% 50%, rgba(231, 189, 94, 0.19), transparent 24rem);
-      }
-
-      .final-cta .section-head {
-        margin: 0 auto 40px;
-      }
-
-      .final-cta .section-label {
-        justify-content: center;
-      }
-
-      .final-cta .section-label::before {
-        width: 64px;
-      }
-
-      .final-cta .section-label::after {
-        content: "";
-        width: 64px;
-        height: 1px;
-        background: var(--gold);
-      }
-
-      .final-cta .cta-stack {
-        margin: 0 auto;
-      }
-
-      @media (max-width: 980px) {
-        .container {
-          width: min(100% - 30px, 720px);
-        }
-
-        .hero {
-          min-height: calc(100svh - 36px);
-          padding: 30px 0 28px;
-          background:
-            linear-gradient(90deg, rgba(2, 9, 19, 0.98) 0%, rgba(2, 9, 19, 0.72) 48%, rgba(2, 9, 19, 0.18) 100%),
-            #020913;
-        }
-
-        .hero-photo {
-          width: 100%;
-          object-position: 43% 50%;
-          opacity: 0.92;
-        }
-
-        .hero-inner {
-          min-height: auto;
-        }
-
-        .audience-badge {
-          min-width: 0;
-          margin-bottom: 36px;
-          padding: 10px 20px 12px;
-          font-size: 1.55rem;
-          border-width: 2px;
-        }
-
-        .hero-copy {
-          max-width: 540px;
-        }
-
-        .hero h1 {
-          font-size: 3.85rem;
-          line-height: 1.26;
-        }
-
-        .hero-line {
-          margin: 28px 0 42px;
-        }
-
-        .offer-kicker {
-          font-size: 1.55rem;
-        }
-
-        .offer-title {
-          gap: 10px 14px;
-          font-size: 2.9rem;
-        }
-
-        .lead {
-          max-width: 500px;
-          font-size: 1.32rem;
-        }
-
-        .cta-stack {
-          margin-top: 38px;
-        }
-
-        .primary-cta {
-          min-height: 84px;
-          gap: 14px;
-          padding: 16px 28px;
-          font-size: 1.7rem;
-          border-width: 3px;
-        }
-
-        .primary-cta svg {
-          width: 44px;
-          height: 44px;
-        }
-
-        .primary-cta .arrow {
-          width: 28px;
-          height: 28px;
-        }
-
-        .trust-line {
-          font-size: 1.18rem;
-        }
-
-        .section {
-          padding: 78px 0;
-        }
-
-        .section h2 {
-          font-size: 2.05rem;
-        }
-
-        .achievement-grid,
-        .solution-grid,
-        .price-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .problem-list {
-          grid-template-columns: 1fr;
-        }
-
-        .problem-card {
-          min-height: auto;
-        }
-      }
-
-      @media (max-width: 560px) {
-        .container {
-          width: min(100% - 24px, 440px);
-        }
-
-        .hero {
-          padding-top: 24px;
-        }
-
-        .hero-photo {
-          object-position: 39% 50%;
-        }
-
-        .audience-badge {
-          font-size: 1.23rem;
-        }
-
-        .hero h1 {
-          font-size: 3.1rem;
-        }
-
-        .offer-kicker {
-          font-size: 1.25rem;
-        }
-
-        .offer-title {
-          font-size: 2.25rem;
-        }
-
-        .free-badge {
-          padding: 6px 10px 8px;
-        }
-
-        .lead {
-          font-size: 1.06rem;
-          line-height: 1.85;
-        }
-
-        .primary-cta {
-          grid-template-columns: 42px minmax(0, 1fr) 42px;
-          min-height: 76px;
-          gap: 10px;
-          padding: 14px 20px;
-          font-size: 1.1rem;
-          clip-path: polygon(5% 0, 95% 0, 100% 50%, 95% 100%, 5% 100%, 0 50%);
-        }
-
-        .primary-cta svg {
-          width: 38px;
-          height: 38px;
-        }
-
-        .primary-cta .arrow {
-          width: 22px;
-          height: 22px;
-        }
-
-        .trust-line {
-          gap: 10px;
-          font-size: 0.98rem;
-        }
-
-        .trust-line svg {
-          width: 26px;
-          height: 26px;
-        }
-
-        .section {
-          padding: 64px 0;
-        }
-
-        .section h2 {
-          font-size: 1.72rem;
-        }
-
-        .section-copy {
-          font-size: 1rem;
-        }
-
-        .metric {
-          grid-template-columns: 86px 1fr;
-          gap: 16px;
-        }
-
-        .metric strong {
-          font-size: 2.25rem;
-        }
-
-        .image-frame figcaption {
-          left: 18px;
-          right: 18px;
-          bottom: 16px;
-          font-size: 1rem;
-        }
-
-        .problem-card,
-        .price-card {
-          padding: 24px;
-        }
-
-        .step {
-          grid-template-columns: 46px 1fr;
-        }
-
-        .price strong {
-          font-size: 3rem;
-        }
-
-        .faq-question {
-          padding: 18px;
-        }
-
-        .faq-answer {
-          padding: 0 18px 20px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main class="page">
-      <section class="hero" id="fv" aria-label="ファーストビュー">
-        <img class="hero-photo" src="assets/hero-portrait.png" alt="" />
-        <div class="container hero-inner">
-          <div class="hero-copy">
-            <div class="audience-badge">30〜40代男性向け</div>
-            <h1>
-              <span class="gold-text">似合う</span><span class="white">を</span><br />
-              <span class="white">知れば、</span><br />
-              <span class="white">男の</span><span class="gold-text">印象</span><span class="white">は</span><br />
-              <span class="gold-text">変わる。</span>
-            </h1>
-            <div class="hero-line" aria-hidden="true"></div>
-            <p class="offer-kicker">外見レベルを最大化する</p>
-            <p class="offer-title"><span class="free-badge">無料</span><span>顔タイプ診断</span></p>
-            <div class="ornament" aria-hidden="true"><span>◇◇◇</span></div>
-            <p class="lead">
-              顔立ちをもとに、似合う服・髪型・<br />
-              印象設計を無料で診断。<br />
-              外見に自信がなくても、恋愛で損しない<br />
-              判断軸が手に入る。
-            </p>
-            <div class="cta-stack">
-              <a class="primary-cta" href="#cta" aria-label="30秒で無料診断をはじめる">
-                <svg viewBox="0 0 64 64" aria-hidden="true">
-                  <circle cx="32" cy="34" r="22" fill="none" stroke="currentColor" />
-                  <path d="M26 8h12M32 8v8M46 18l5-5M32 22v14l10 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M12 34a20 20 0 0 1 32-16" fill="none" stroke="currentColor" stroke-linecap="round" />
-                </svg>
-                <span>30秒で無料診断をはじめる</span>
-                <svg class="arrow" viewBox="0 0 32 32" aria-hidden="true">
-                  <path d="M11 5l10 11-10 11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </a>
-              <div class="trust-line">
-                <svg viewBox="0 0 32 32" aria-hidden="true">
-                  <rect x="7" y="14" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
-                  <path d="M11 14v-4a5 5 0 0 1 10 0v4M16 20v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                </svg>
-                <span>登録無料・スマホで完結</span>
-              </div>
+<html lang="ja" class=""><head>
+<meta charset="utf-8">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5MTXWNRM');</script>
+<!-- End Google Tag Manager -->
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>『モテ』と『金』完全コンプリート個別相談会</title>
+<link rel="preload" as="image" href="fv-consulting.jpg" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=Shippori+Mincho:wght@400;500;600;700;800&amp;family=Noto+Sans+JP:wght@300;400;500;600;700&amp;family=Cinzel:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0807;
+    --bg-2:#120e0b;
+    --bg-3:#1a1410;
+    --line:#2a221c;
+    --gold:#d4af7a;
+    --gold-2:#b8945a;
+    --gold-3:#e8c98a;
+    --gold-soft:#7a6244;
+    --ink:#f5f1e8;
+    --ink-2:#c9bfae;
+    --ink-3:#8a8074;
+    --danger:#c04a3a;
+    --urgent:#e35a4f;
+    --urgent-2:#a72f28;
+    --urgent-soft:rgba(227,90,79,.38);
+    --grad-gold:linear-gradient(135deg,#e8c98a 0%,#d4af7a 35%,#a07a44 70%,#d4af7a 100%);
+    --grad-urgent:linear-gradient(135deg,#ff8a7d 0%,#e35a4f 36%,#a72f28 72%,#f0a08f 100%);
+    --grad-gold-line:linear-gradient(90deg,transparent 0%,#d4af7a 30%,#e8c98a 50%,#d4af7a 70%,transparent 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.8;letter-spacing:.04em}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--gold);color:#000}
+
+  /* ---------- helpers ---------- */
+  .wrap{width:min(1140px,92vw);margin-inline:auto}
+  .narrow{width:min(880px,92vw);margin-inline:auto}
+  .serif{font-family:"Shippori Mincho",serif;font-weight:600;letter-spacing:.06em}
+  .latin{font-family:"Cormorant Garamond",serif;letter-spacing:.08em}
+  .cinzel{font-family:"Cinzel",serif;letter-spacing:.18em}
+  .gold-text{background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .pc-br{display:inline}
+  .sp-br{display:inline}
+  @media (min-width:721px){
+    .pc-br + .sp-br{display:none}
+  }
+  @media (max-width:720px){
+    .pc-br{display:none}
+    .sp-br{display:inline}
+  }
+
+  /* 主要テキスト要素内の改行（\n）を全デバイスで <br> として描画 */
+  .hero .lead,
+  .product .copy,
+  .product .pain-list li,
+  .feat p,
+  .feat h3,
+  .voice .voice-card .body,
+  .voice .voice-card .name,
+  .offer .copy,
+  .offer .price-note,
+  .sec-head h2,
+  .sec-head .sub,
+  .product .intro .title,
+  .narrow p,
+  .countdown .cd-headline{
+    white-space: pre-line;
+  }
+  /* force-mobile（?mobile=1）モード時にも同じく */
+  html.force-mobile .hero .lead,
+  html.force-mobile .product .copy,
+  html.force-mobile .product .pain-list li,
+  html.force-mobile .feat .feat-card p,
+  html.force-mobile .feat .feat-card h3,
+  html.force-mobile .voice .voice-card .body,
+  html.force-mobile .voice .voice-card .name,
+  html.force-mobile .offer .copy,
+  html.force-mobile .offer .price-note,
+  html.force-mobile .sec-head h2,
+  html.force-mobile .sec-head .sub,
+  html.force-mobile .product .intro .title,
+  html.force-mobile .narrow p,
+  html.force-mobile .countdown .cd-headline{
+    white-space: pre-line;
+  }
+
+  /* ---------- ornament ---------- */
+  .ornament{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--gold);margin:0 auto}
+  .ornament .line{width:60px;height:1px;background:var(--grad-gold-line)}
+  .ornament .diamond{width:6px;height:6px;background:var(--gold);transform:rotate(45deg)}
+  .eyebrow{font-family:"Cinzel",serif;font-size:11px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase}
+
+  /* ---------- nav ---------- */
+  nav.top{position:fixed;inset:0 0 auto 0;z-index:60;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,8,7,.55);border-bottom:1px solid rgba(212,175,122,.12);transform:translateY(-100%);transition:transform .5s ease}
+  nav.top.show{transform:translateY(0)}
+  nav.top .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  nav.top .brand{font-family:"Cinzel",serif;font-size:13px;letter-spacing:.3em;color:var(--gold)}
+  nav.top .brand small{display:block;font-size:9px;letter-spacing:.4em;color:var(--ink-3);margin-top:2px}
+  nav.top .cta{font-size:12px;padding:10px 18px;border:1px solid var(--gold);color:var(--gold);transition:.3s}
+  nav.top .cta:hover{background:var(--gold);color:#000}
+  @media (max-width:720px){nav.top .cta{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:120px 0 80px}
+  .hero .bg-side{position:absolute;top:0;bottom:0;width:36vw;z-index:0;background-size:cover;background-position:center;filter:saturate(.95)}
+  .hero .bg-side.left{left:0;background-image:url('hero-couple.jpg');background-position:center right}
+  .hero .bg-side.right{right:0;background-image:url('hero-night2.jpg');background-position:center left}
+  .hero .bg-side::after{content:"";position:absolute;inset:0}
+  .hero .bg-side.left::after{background:linear-gradient(90deg,rgba(10,8,7,.15) 0%,rgba(10,8,7,.55) 70%,rgba(10,8,7,1) 100%)}
+  .hero .bg-side.right::after{background:linear-gradient(270deg,rgba(10,8,7,.15) 0%,rgba(10,8,7,.55) 70%,rgba(10,8,7,1) 100%)}
+  @media (max-width:880px){
+    .hero .bg-side{width:26vw}
+    .hero .bg-side.left::after{background:linear-gradient(90deg,rgba(10,8,7,.45) 0%,rgba(10,8,7,.78) 70%,rgba(10,8,7,1) 100%)}
+    .hero .bg-side.right::after{background:linear-gradient(270deg,rgba(10,8,7,.45) 0%,rgba(10,8,7,.78) 70%,rgba(10,8,7,1) 100%)}
+  }
+  @media (max-width:560px){
+    .hero{padding:90px 0 70px}
+    .hero .bg-side{width:50vw;opacity:.85}
+    .hero .bg-side.left{background-position:right center;background-size:cover}
+    .hero .bg-side.right{background-position:left center;background-size:cover}
+    .hero .bg-side.left::after{background:linear-gradient(90deg,rgba(10,8,7,.05) 0%,rgba(10,8,7,.55) 70%,rgba(10,8,7,.95) 100%)}
+    .hero .bg-side.right::after{background:linear-gradient(270deg,rgba(10,8,7,.05) 0%,rgba(10,8,7,.55) 70%,rgba(10,8,7,.95) 100%)}
+  }
+  .hero::before{
+    content:"";position:absolute;inset:-2px;z-index:1;pointer-events:none;
+    background:
+      radial-gradient(ellipse 50% 70% at 50% 50%,rgba(10,8,7,.92) 0%,rgba(10,8,7,.55) 55%,transparent 100%),
+      radial-gradient(ellipse 80% 50% at 50% 0%,rgba(212,175,122,.12),transparent 60%);
+  }
+  @media (max-width:560px){
+    .hero::before{background:radial-gradient(ellipse 80% 80% at 50% 50%,rgba(10,8,7,.9) 0%,rgba(10,8,7,.5) 80%,transparent 100%)}
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(212,175,122,.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(212,175,122,.04) 1px,transparent 1px);
+    background-size:60px 60px;
+    mask:radial-gradient(ellipse 70% 80% at 50% 50%,#000 30%,transparent 80%);
+    -webkit-mask:radial-gradient(ellipse 70% 80% at 50% 50%,#000 30%,transparent 80%);
+  }
+  .hero .frame{position:absolute;inset:24px;border:1px solid rgba(212,175,122,.18);pointer-events:none;z-index:3}
+  .hero .frame::before,.hero .frame::after{content:"";position:absolute;width:30px;height:30px;border:1px solid var(--gold)}
+  .hero .frame::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+  .hero .frame::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+  .hero .frame i{position:absolute;width:30px;height:30px;border:1px solid var(--gold)}
+  .hero .frame i:first-child{top:-1px;right:-1px;border-left:none;border-bottom:none}
+  .hero .frame i:last-child{bottom:-1px;left:-1px;border-right:none;border-top:none}
+  @media (max-width:720px){.hero .frame{inset:12px}}
+
+  .hero .inner{text-align:center;position:relative;z-index:2;width:min(1100px,92vw)}
+  .hero .crest{font-family:"Cinzel",serif;font-size:11px;letter-spacing:.5em;color:var(--gold);margin-bottom:28px}
+  .hero h1{
+    font-family:"Shippori Mincho",serif;
+    font-weight:700;
+    font-size:clamp(28px,6.4vw,76px);
+    line-height:1.35;
+    letter-spacing:.04em;
+    margin:18px 0 22px;
+  }
+  .hero h1 .quote{color:var(--gold);font-family:"Shippori Mincho",serif}
+  .hero h1 .big{display:inline-block;background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .05em}
+  .hero .lead{
+    font-size:clamp(13px,2.2vw,17px);
+    line-height:2.1;
+    color:var(--ink-2);
+    margin:30px auto 0;
+    max-width:680px;
+  }
+  .hero .desire-lines{
+    position:relative;
+    display:grid;
+    gap:10px;
+    width:min(760px,100%);
+    margin:0 auto 18px;
+    padding:18px clamp(18px,3vw,34px);
+    overflow:hidden;
+    isolation:isolate;
+    border:1px solid rgba(255,238,190,.72);
+    border-left:3px solid var(--gold);
+    border-right:3px solid var(--gold);
+    background:
+      radial-gradient(ellipse 90% 130% at 50% 0%,rgba(255,255,255,.58) 0%,rgba(255,255,255,0) 58%),
+      linear-gradient(180deg,rgba(255,251,238,.94) 0%,rgba(235,204,143,.9) 100%);
+    box-shadow:
+      0 24px 58px -28px rgba(212,175,122,.95),
+      0 0 0 1px rgba(10,8,7,.18),
+      inset 0 2px 0 rgba(255,255,255,.78),
+      inset 0 -10px 18px rgba(112,75,24,.16);
+  }
+  .hero .desire-lines::before{
+    content:"";
+    position:absolute;
+    inset:-40% -18%;
+    z-index:0;
+    background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.62) 48%,rgba(255,246,217,.4) 52%,transparent 62%);
+    transform:translateX(-70%) rotate(4deg);
+    animation:desire-sheen 5.8s ease-in-out infinite;
+  }
+  .hero .desire-lines::after{
+    content:"";
+    position:absolute;
+    inset:7px;
+    border:1px solid rgba(212,175,122,.14);
+    pointer-events:none;
+  }
+  .hero .desire-line{
+    display:block;
+    position:relative;
+    z-index:1;
+    font-family:"Shippori Mincho",serif;
+    font-size:clamp(18px,2.8vw,30px);
+    font-weight:700;
+    line-height:1.48;
+    letter-spacing:.05em;
+    color:#090706;
+    text-shadow:0 1px 0 rgba(255,255,255,.42);
+    white-space:normal;
+  }
+  .hero .desire-line::before{
+    content:"";
+    display:inline-block;
+    width:.48em;
+    height:.48em;
+    margin-right:.55em;
+    border:1px solid #8f601b;
+    background:rgba(143,96,27,.12);
+    box-shadow:0 0 10px rgba(143,96,27,.28);
+    transform:rotate(45deg) translateY(-.08em);
+    vertical-align:middle;
+  }
+  .hero .desire-line .gold-pop{
+    background:linear-gradient(135deg,#7a4f14 0%,#b77f29 48%,#6e4510 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:none;
+  }
+  .hero .lead-tail{
+    display:block;
+    white-space:normal;
+  }
+  @keyframes desire-sheen{
+    0%,28%{transform:translateX(-74%) rotate(4deg);opacity:0}
+    38%{opacity:1}
+    56%,100%{transform:translateX(74%) rotate(4deg);opacity:0}
+  }
+  @media (max-width:560px){
+    .hero .desire-lines{
+      gap:8px;
+      margin-bottom:16px;
+      padding:14px 12px;
+    }
+    .hero .desire-line{
+      font-size:clamp(14px,3.9vw,16px);
+      line-height:1.55;
+      letter-spacing:0;
+      white-space:nowrap;
+    }
+    .hero .desire-line::before{
+      width:.42em;
+      height:.42em;
+      margin-right:.36em;
+    }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .hero .desire-lines::before{
+      animation:none;
+      opacity:.4;
+      transform:translateX(0) rotate(4deg);
+    }
+  }
+  .hero .stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    margin:18px auto 0;max-width:680px;
+    border-top:1px solid rgba(212,175,122,.2);
+    border-bottom:1px solid rgba(212,175,122,.2);
+    padding:22px 0;
+  }
+  .hero .results-label{display:flex;align-items:center;justify-content:center;gap:14px;margin:42px auto 0;max-width:680px}
+  .hero .results-label-line{flex:1;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(212,175,122,.5) 50%,transparent 100%);max-width:120px}
+  .hero .results-label-text{font-family:"Shippori Mincho",serif;font-size:clamp(13px,1.8vw,15px);font-weight:600;letter-spacing:.18em;color:var(--gold)}
+  .hero .stats > div{text-align:center;border-right:1px solid rgba(212,175,122,.14);padding:0 12px}
+  .hero .stats > div:last-child{border-right:none}
+  .hero .stats .n{font-family:"Cormorant Garamond",serif;font-size:clamp(24px,4.5vw,42px);font-weight:600;color:var(--gold);line-height:1}
+  .hero .stats .l{font-size:10px;letter-spacing:.18em;color:var(--ink-3);margin-top:8px;line-height:1.5;word-break:keep-all;overflow-wrap:break-word}
+  @media (max-width:560px){
+    .hero .stats{grid-template-columns:repeat(3,1fr);max-width:100%}
+    .hero .stats > div{padding:6px 4px}
+    .hero .stats .l{font-size:9px;letter-spacing:.1em}
+  }
+  .hero .cta-row{margin-top:44px;display:flex;flex-direction:column;align-items:center;gap:14px}
+  .hero .scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);writing-mode:vertical-rl;font-size:10px;letter-spacing:.4em;color:var(--ink-3);font-family:"Cinzel",serif}
+  .hero .scroll-hint::after{content:"";display:block;width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);margin:14px auto 0}
+
+  /* ---------- shared CTA button ---------- */
+  .btn-cta{
+    position:relative;display:inline-flex;align-items:center;justify-content:center;gap:14px;
+    padding:22px 44px;min-width:min(420px,90vw);
+    background:
+      radial-gradient(ellipse 80% 120% at 50% 0%,rgba(255,250,222,.62) 0%,rgba(255,250,222,0) 52%),
+      linear-gradient(180deg,#f1d899 0%,#d9b871 44%,#bd914a 100%);
+    color:#0a0807;font-weight:800;font-size:clamp(14px,2.4vw,17px);letter-spacing:.08em;
+    border:1px solid rgba(255,238,190,.78);border-bottom-color:rgba(106,73,28,.7);
+    border-radius:18px;cursor:pointer;overflow:hidden;
+    text-shadow:0 1px 0 rgba(255,255,255,.28);
+    box-shadow:
+      0 28px 58px -24px rgba(212,175,122,.9),
+      0 12px 0 -8px rgba(92,61,21,.66),
+      inset 0 2px 0 rgba(255,255,255,.72),
+      inset 0 -10px 18px rgba(95,62,20,.24);
+    transition:transform .24s ease,box-shadow .24s ease,filter .24s ease;
+    font-family:"Noto Sans JP",sans-serif;
+  }
+  .btn-cta > span{position:relative;z-index:1}
+  .btn-cta::before{
+    content:"";position:absolute;inset:0;
+    z-index:2;
+    background:linear-gradient(120deg,transparent 28%,rgba(255,255,255,.64) 50%,transparent 72%);
+    transform:translateX(-100%);transition:transform .8s ease;
+  }
+  .btn-cta::after{
+    content:"";position:absolute;left:16px;right:16px;top:7px;height:42%;
+    border-radius:14px;
+    background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,0));
+    pointer-events:none;
+  }
+  .btn-cta:hover{
+    transform:translateY(-3px);
+    filter:saturate(1.06) brightness(1.03);
+    box-shadow:
+      0 34px 68px -22px rgba(212,175,122,1),
+      0 15px 0 -8px rgba(92,61,21,.7),
+      inset 0 2px 0 rgba(255,255,255,.82),
+      inset 0 -10px 18px rgba(95,62,20,.22);
+  }
+  .btn-cta:hover::before{transform:translateX(100%)}
+  .btn-cta:active{
+    transform:translateY(1px);
+    box-shadow:
+      0 16px 36px -20px rgba(212,175,122,.8),
+      0 6px 0 -6px rgba(92,61,21,.7),
+      inset 0 2px 5px rgba(83,53,16,.25),
+      inset 0 -6px 14px rgba(95,62,20,.18);
+  }
+  .btn-cta .arrow{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:1.4em}
+  @media (max-width:560px){
+    .btn-cta{
+      width:calc(100% - 32px);
+      max-width:340px;
+      min-width:0;
+      padding:18px 16px;
+      border-radius:18px;
+    }
+  }
+  .btn-line-mark{display:inline-flex;align-items:center;gap:8px;font-size:11px;color:var(--ink-3);letter-spacing:.2em}
+  .btn-line-mark .dot{width:6px;height:6px;background:#06c755;border-radius:50%;box-shadow:0 0 8px #06c755}
+
+  /* ---------- section base ---------- */
+  section{position:relative;padding:clamp(80px,10vw,140px) 0}
+  .sec-head{text-align:center;margin-bottom:64px}
+  .sec-head .eyebrow{display:block;margin-bottom:16px}
+  .sec-head h2{font-family:"Shippori Mincho",serif;font-size:clamp(24px,4.2vw,42px);line-height:1.5;letter-spacing:.06em;font-weight:600}
+  .sec-head h2 em{font-style:normal;color:var(--gold)}
+  .sec-head .sub{margin-top:18px;color:var(--ink-2);font-size:clamp(12px,1.8vw,14px);line-height:2}
+
+  /* ---------- visual story blocks ---------- */
+  .visual-panel{
+    margin:clamp(44px,7vw,76px) auto 0;
+    position:relative;overflow:hidden;
+    border:1px solid rgba(212,175,122,.22);
+    background:#090706;
+    isolation:isolate;
+  }
+  .visual-panel::before,.visual-panel::after{
+    content:"";position:absolute;width:24px;height:24px;border:1px solid var(--gold);z-index:3;pointer-events:none;
+  }
+  .visual-panel::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+  .visual-panel::after{right:-1px;bottom:-1px;border-left:none;border-top:none}
+  .visual-panel img{
+    width:100%;height:clamp(240px,38vw,430px);object-fit:cover;
+    filter:saturate(.92) contrast(1.03);opacity:.88;
+  }
+  .visual-panel .shade{
+    position:absolute;inset:0;z-index:1;
+    background:
+      linear-gradient(90deg,rgba(10,8,7,.86) 0%,rgba(10,8,7,.34) 44%,rgba(10,8,7,.72) 100%),
+      linear-gradient(180deg,rgba(10,8,7,.18) 0%,rgba(10,8,7,.55) 100%);
+    pointer-events:none;
+  }
+  .visual-panel figcaption{
+    position:absolute;left:clamp(20px,5vw,54px);bottom:clamp(22px,4vw,42px);z-index:2;
+    max-width:min(440px,78vw);
+    font-family:"Shippori Mincho",serif;color:var(--ink);
+    font-size:clamp(18px,3vw,28px);line-height:1.7;font-weight:600;letter-spacing:.06em;
+  }
+  .visual-panel figcaption small{
+    display:block;margin-bottom:8px;
+    font-family:"Cinzel",serif;font-size:10px;letter-spacing:.36em;color:var(--gold);
+  }
+  .visual-panel figcaption em{font-style:normal;color:var(--gold)}
+  .visual-panel--right figcaption{left:auto;right:clamp(20px,5vw,54px);text-align:right}
+  .visual-panel--future img{object-position:center center}
+  .visual-panel--woman img{object-position:34% center}
+  .visual-panel--woman .shade{
+    background:
+      linear-gradient(90deg,rgba(10,8,7,.18) 0%,rgba(10,8,7,.26) 38%,rgba(10,8,7,.9) 100%),
+      linear-gradient(180deg,rgba(10,8,7,.1) 0%,rgba(10,8,7,.6) 100%);
+  }
+  .proof-panel{
+    position:relative;z-index:2;overflow:hidden;isolation:isolate;
+    margin:0 auto clamp(56px,7vw,86px);
+    border:1px solid rgba(212,175,122,.22);
+    background:#090706;
+  }
+  .proof-panel::before,.proof-panel::after{
+    content:"";position:absolute;width:24px;height:24px;border:1px solid var(--gold);z-index:3;pointer-events:none;
+  }
+  .proof-panel::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+  .proof-panel::after{right:-1px;bottom:-1px;border-left:none;border-top:none}
+  .proof-panel img{
+    width:100%;height:auto;object-fit:contain;object-position:center center;
+    filter:none;opacity:1;
+  }
+  .proof-panel .proof-shade{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    background:
+      linear-gradient(180deg,rgba(10,8,7,.42) 0%,rgba(10,8,7,.18) 42%,rgba(10,8,7,.34) 100%),
+      radial-gradient(ellipse 70% 55% at 50% 20%,rgba(10,8,7,.08),rgba(10,8,7,.38) 100%);
+  }
+  .proof-headline{
+    position:relative;z-index:2;
+    margin:0 auto clamp(14px,2.4vw,24px);
+    text-align:center;
+    font-family:"Shippori Mincho",serif;
+    font-size:clamp(22px,3.6vw,38px);
+    line-height:1.55;
+    font-weight:600;
+    letter-spacing:.06em;
+    color:var(--ink);
+    text-shadow:0 2px 12px rgba(0,0,0,.85),0 0 1px rgba(255,255,255,.45);
+  }
+  .proof-headline-inner{
+    display:inline;
+  }
+  .proof-headline em{font-style:normal;color:var(--gold-3)}
+  .proof-headline--overlay{
+    position:absolute;
+    left:50%;
+    top:clamp(28px,5vw,66px);
+    z-index:2;
+    width:min(860px,90%);
+    margin:0;
+    transform:translateX(-50%);
+    pointer-events:none;
+  }
+  .proof-panel--about img{
+    filter:brightness(.92) saturate(.95) contrast(.98);
+  }
+  .proof-panel--offer{margin-bottom:clamp(54px,7vw,88px)}
+  .proof-panel--offer img{height:auto;filter:none;opacity:1}
+  @media (max-width:560px){
+    .visual-panel{margin-top:42px}
+    .visual-panel img{height:250px}
+    .visual-panel figcaption{max-width:72vw;font-size:18px}
+    .visual-panel--right figcaption{left:20px;right:auto;text-align:left}
+    .visual-panel--woman figcaption{left:auto;right:20px;text-align:right;max-width:62vw}
+    .proof-headline{font-size:clamp(15px,4.15vw,17px);line-height:1.5;letter-spacing:.02em;margin-bottom:14px}
+    .proof-headline--overlay{
+      top:50%;
+      width:88%;
+      margin:0;
+      transform:translate(-50%,-50%);
+      font-size:clamp(17px,5.2vw,22px);
+      line-height:1.55;
+      letter-spacing:.03em;
+    }
+    .proof-panel{margin-bottom:46px}
+    .proof-panel img{height:auto}
+    .proof-panel--offer img{height:auto}
+  }
+
+  /* ---------- product intro ---------- */
+  .product{position:relative;background:#0a0807;isolation:isolate}
+  .product::before{
+    content:"";position:absolute;inset:0;z-index:-2;
+    background-image:url('consult-visual.jpg');
+    background-size:cover;background-position:center;
+    opacity:.28;
+  }
+  .product::after{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(180deg,rgba(10,8,7,.92) 0%,rgba(10,8,7,.78) 50%,rgba(10,8,7,.95) 100%);
+  }
+  .product .intro{
+    border:1px solid rgba(212,175,122,.18);
+    padding:clamp(36px,5vw,72px);
+    background:linear-gradient(180deg,rgba(26,20,16,.5) 0%,rgba(18,14,11,.5) 100%);
+    position:relative;
+  }
+  .product .intro::before,.product .intro::after{
+    content:"";position:absolute;width:24px;height:24px;border:1px solid var(--gold);
+  }
+  .product .intro::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+  .product .intro::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+  .product h3.title{
+    font-family:"Shippori Mincho",serif;font-weight:700;
+    font-size:clamp(20px,3.2vw,32px);line-height:1.7;letter-spacing:.06em;text-align:center;
+    margin-bottom:36px;
+  }
+  .product h3.title .accent{color:var(--gold)}
+  .product .copy{font-size:clamp(13px,1.8vw,15px);line-height:2.2;color:var(--ink-2);max-width:680px;margin:0 auto;text-align:center}
+  .product .copy + .copy{margin-top:1.4em}
+  .product .pain-list{
+    margin:48px auto 0;max-width:560px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .product .pain-list--top{margin:32px auto 36px}
+  .product .pain-list li{
+    list-style:none;padding:14px 18px;position:relative;
+    border:1px solid rgba(212,175,122,.38);
+    border-left:3px solid var(--gold);
+    color:#090706;font-size:clamp(13px,1.8vw,15px);
+    background:linear-gradient(180deg,#fffdf7 0%,#f4ead8 100%);
+    text-align:center;
+    box-shadow:0 16px 34px -26px rgba(212,175,122,.7),inset 0 1px 0 rgba(255,255,255,.9);
+  }
+  .product .pain-list li::before{
+    content:"✕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#7a4f14;font-family:"Cormorant Garamond",serif;font-weight:700;
+  }
+  .product .arrow-down{text-align:center;margin-top:48px;color:var(--gold);font-family:"Cormorant Garamond",serif}
+  .product .arrow-down .label{font-family:"Cinzel",serif;font-size:11px;letter-spacing:.4em;display:block;margin-bottom:10px}
+  .product .arrow-down .v{font-size:28px}
+
+  /* ---------- features ---------- */
+  .features{background:var(--bg-2);position:relative}
+  .features::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(212,175,122,.08),transparent 70%);
+  }
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
+  @media (max-width:880px){.feat-grid{grid-template-columns:1fr;gap:20px}}
+  .feat{
+    border:1px solid rgba(212,175,122,.42);
+    background:linear-gradient(180deg,#fffdf7 0%,#f4ead8 100%);
+    padding:48px 32px 40px;text-align:center;position:relative;
+    box-shadow:0 24px 54px -34px rgba(212,175,122,.75),inset 0 1px 0 rgba(255,255,255,.9);
+    transition:transform .5s ease,border-color .5s ease,background .5s ease,box-shadow .5s ease;
+  }
+  .feat:hover{
+    transform:translateY(-6px);
+    border-color:var(--gold);
+    background:linear-gradient(180deg,#ffffff 0%,#f7edd9 100%);
+    box-shadow:0 30px 66px -34px rgba(212,175,122,.9),inset 0 1px 0 rgba(255,255,255,1);
+  }
+  .feat .num{
+    font-family:"Cormorant Garamond",serif;font-weight:300;
+    font-size:96px;line-height:1;color:transparent;
+    background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;
+    margin-bottom:8px;
+  }
+  .feat .num small{font-family:"Cinzel",serif;font-size:11px;letter-spacing:.3em;display:block;color:var(--gold);background:none;-webkit-background-clip:initial;background-clip:initial;margin-top:4px}
+  .feat .icon{margin:8px auto 24px;width:56px;height:56px;display:flex;align-items:center;justify-content:center;border:1px solid var(--gold);transform:rotate(45deg)}
+  .feat .icon svg{transform:rotate(-45deg);stroke:var(--gold);width:24px;height:24px;fill:none;stroke-width:1.4}
+  .feat h3{font-family:"Shippori Mincho",serif;font-size:clamp(18px,2.4vw,22px);font-weight:600;letter-spacing:.05em;line-height:1.6;margin-bottom:18px;color:#090706}
+  .feat h3 em{font-style:normal;color:#a06f22}
+  .feat p{font-size:13px;line-height:2;color:#221a14;text-align:center}
+  .feat .div{width:30px;height:1px;background:#b98533;margin:18px auto}
+
+  /* ---------- countdown ---------- */
+  .countdown{
+    margin:0 auto;max-width:720px;
+    padding:36px 28px;
+    border-top:1px solid rgba(212,175,122,.25);
+    border-bottom:1px solid rgba(212,175,122,.25);
+    text-align:center;
+    background:
+      radial-gradient(ellipse at center,rgba(212,175,122,.05),transparent 70%),
+      linear-gradient(180deg,rgba(212,175,122,.02),transparent);
+  }
+  .countdown .cd-label{
+    display:inline-block;
+    font-family:"Cinzel",serif;font-size:11px;letter-spacing:.4em;
+    color:var(--gold);
+    padding:8px 18px;border:1px solid rgba(212,175,122,.5);
+    margin-bottom:22px;
+  }
+  .countdown .cd-headline{
+    font-family:"Shippori Mincho",serif;
+    font-size:clamp(15px,2vw,18px);line-height:1.85;letter-spacing:.06em;
+    color:var(--ink-1);margin-bottom:26px;font-weight:500;
+  }
+  .countdown .cd-headline em{color:var(--urgent);font-style:normal;text-shadow:0 0 16px rgba(227,90,79,.28)}
+  .countdown .cd-clock{
+    display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  }
+  .countdown .cd-unit{
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    min-width:88px;
+  }
+  .countdown .cd-num{
+    font-family:"Cormorant Garamond",serif;font-weight:600;
+    font-size:clamp(40px,6vw,64px);line-height:1;
+    background:var(--grad-urgent);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+    padding:14px 18px;
+    border:1px solid rgba(227,90,79,.58);
+    min-width:88px;text-align:center;
+    letter-spacing:.02em;
+    font-variant-numeric:tabular-nums;
+    box-shadow:
+      0 0 0 1px rgba(212,175,122,.08) inset,
+      0 0 24px rgba(227,90,79,.12);
+  }
+  .countdown .cd-lbl{
+    font-family:"Cinzel",serif;font-size:10px;letter-spacing:.3em;
+    color:#d26a5d;
+  }
+  .countdown .cd-colon{
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(28px,4vw,40px);color:var(--urgent);
+    align-self:flex-start;margin-top:18px;opacity:.6;
+  }
+  .countdown .cd-foot{
+    margin-top:22px;font-family:"Shippori Mincho",serif;
+    font-size:clamp(12px,1.6vw,14px);letter-spacing:.08em;color:var(--ink-2);line-height:1.8;
+  }
+  @media (max-width:720px){
+    section{padding:64px 0}
+    .sec-head{margin-bottom:42px}
+    .product{padding:64px 0 52px}
+    .product .intro{padding:32px 18px 34px}
+    .product .pain-list--top{margin:30px auto 28px}
+    .product .copy + .copy{margin-top:1.1em}
+    .visual-panel{margin-top:36px}
+    .product .visual-panel--future{margin-top:36px}
+    .countdown-section{padding:52px 0 !important}
+    .countdown{padding:30px 16px 32px}
+    .countdown .cd-clock{gap:6px}
+    .countdown .cd-unit{min-width:0;flex:1}
+    .countdown .cd-num{padding:10px 6px;min-width:0;width:100%;font-size:clamp(32px,9vw,44px)}
+    .countdown .cd-colon{display:none}
+    .voice-list{margin-top:48px}
+    .voice .visual-panel--woman{margin-top:36px}
+  }
+
+  /* ---------- faq ---------- */
+  .faq{background:#0a0807;position:relative;overflow:hidden}
+  .faq::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:radial-gradient(circle at 50% 0%,rgba(212,175,122,.05),transparent 40%);
+  }
+  .faq .faq-list{
+    margin-top:56px;display:flex;flex-direction:column;gap:14px;
+  }
+  .faq .faq-item{
+    border:1px solid rgba(212,175,122,.32);
+    background:linear-gradient(180deg,rgba(212,175,122,.04),rgba(212,175,122,.015));
+  }
+  .faq .faq-q{
+    display:grid;grid-template-columns:auto 1fr;align-items:center;gap:18px;
+    padding:22px 26px 18px 26px;
+  }
+  .faq .q-mark{
+    font-family:"Cormorant Garamond",serif;font-size:28px;color:var(--gold);
+    line-height:1;letter-spacing:.05em;
+  }
+  .faq .q-text{
+    font-family:"Shippori Mincho",serif;font-size:clamp(15px,1.9vw,18px);
+    line-height:1.7;letter-spacing:.04em;color:var(--ink-1);font-weight:500;
+  }
+  .faq .faq-body{
+    display:grid;grid-template-columns:auto 1fr;gap:18px;
+    padding:18px 26px 24px 26px;
+    border-top:1px solid rgba(212,175,122,.15);
+  }
+  .faq .a-mark{
+    font-family:"Cormorant Garamond",serif;font-size:28px;color:var(--ink-3);
+    line-height:1;letter-spacing:.05em;
+  }
+  .faq .faq-body p{
+    font-size:clamp(13px,1.7vw,15px);line-height:2;letter-spacing:.04em;
+    color:var(--ink-2);
+  }
+  @media (max-width:720px){
+    .faq .faq-q{padding:18px 18px 14px 18px;gap:12px}
+    .faq .q-mark{font-size:22px}
+    .faq .faq-body{padding:14px 18px 20px 18px;gap:12px}
+    .faq .a-mark{font-size:22px}
+  }
+
+  /* ---------- voice / results ---------- */
+  .voice{background:linear-gradient(180deg,#0a0807 0%,#0d0a08 50%,#0a0807 100%);position:relative;overflow:hidden}
+  .voice::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:radial-gradient(circle at 10% 20%,rgba(212,175,122,.06),transparent 30%),radial-gradient(circle at 90% 80%,rgba(212,175,122,.06),transparent 30%);
+  }
+  .voice .results{
+    border-top:1px solid rgba(212,175,122,.2);
+    border-bottom:1px solid rgba(212,175,122,.2);
+    padding:8px 0;margin:0 auto;
+    max-width:1100px;
+  }
+  .results-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  }
+  @media (max-width:880px){.results-grid{grid-template-columns:repeat(2,1fr)}}
+  .result-card{
+    padding:36px 24px;text-align:center;position:relative;
+    border-right:1px solid rgba(212,175,122,.14);
+  }
+  .result-card:last-child{border-right:none}
+  @media (max-width:880px){
+    .result-card:nth-child(2){border-right:none}
+    .result-card:nth-child(1),.result-card:nth-child(2){border-bottom:1px solid rgba(212,175,122,.14)}
+  }
+  .result-card .period{font-family:"Cinzel",serif;font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:14px}
+  .result-card .achievement{
+    font-family:"Shippori Mincho",serif;font-size:clamp(15px,2vw,17px);
+    line-height:1.7;font-weight:600;color:var(--ink);
+    min-height:3em;display:flex;align-items:center;justify-content:center;
+  }
+  .result-card .big-num{font-family:"Cormorant Garamond",serif;font-size:clamp(28px,4vw,40px);color:var(--gold);font-weight:600;display:block;line-height:1;margin-bottom:6px}
+  .result-card .small-label{font-size:11px;color:var(--ink-3);letter-spacing:.15em;display:block;margin-top:6px}
+  .featured-result{
+    max-width:780px;
+    margin:clamp(30px,5vw,52px) auto 0;
+    text-align:left;
+  }
+  .featured-result-title{
+    font-family:"Shippori Mincho",serif;
+    text-align:center;
+    color:var(--ink);
+    font-size:clamp(18px,2.8vw,28px);
+    line-height:1.65;
+    letter-spacing:.04em;
+    font-weight:600;
+    margin-bottom:clamp(20px,3.4vw,30px);
+  }
+  .featured-result-title em{font-style:normal;color:var(--gold)}
+  .featured-video{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(212,175,122,.24);
+    background:#050403;
+    box-shadow:0 24px 70px -34px rgba(212,175,122,.55);
+  }
+  .featured-video::before,.featured-video::after{
+    content:"";position:absolute;width:24px;height:24px;border:1px solid var(--gold);z-index:2;pointer-events:none;
+  }
+  .featured-video::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+  .featured-video::after{right:-1px;bottom:-1px;border-left:none;border-top:none}
+  .featured-video video{
+    width:100%;
+    display:block;
+    background:#050403;
+  }
+  .featured-result-desc{
+    margin:clamp(20px,3.4vw,30px) auto 0;
+    padding:clamp(20px,3vw,28px);
+    border:1px solid rgba(212,175,122,.16);
+    background:linear-gradient(180deg,rgba(26,20,16,.52) 0%,rgba(10,8,7,.48) 100%);
+    color:var(--ink-2);
+    font-size:clamp(13px,1.75vw,15px);
+    line-height:2;
+  }
+  .featured-result-desc li{margin-left:1.2em}
+  .featured-result-desc li + li{margin-top:.65em}
+  .featured-result-desc li::marker{color:var(--gold)}
+  .featured-result-desc strong{color:var(--ink);font-weight:700}
+  .featured-result-desc + .featured-result-title{
+    margin-top:clamp(34px,5vw,54px);
+  }
+
+  .voice-list{margin-top:80px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  @media (max-width:880px){.voice-list{grid-template-columns:1fr;gap:20px}}
+  .voice-card{
+    border:1px solid rgba(212,175,122,.16);
+    background:linear-gradient(180deg,rgba(26,20,16,.5) 0%,rgba(10,8,7,.5) 100%);
+    padding:32px 28px;position:relative;
+  }
+  .voice-card .quote-mark{
+    position:absolute;top:14px;left:18px;
+    font-family:"Cormorant Garamond",serif;font-size:64px;line-height:1;color:var(--gold);opacity:.35;font-weight:300;
+  }
+  .voice-card .head{display:flex;align-items:center;gap:14px;padding-top:28px;margin-bottom:20px;border-bottom:1px solid rgba(212,175,122,.12);padding-bottom:18px}
+  .voice-card .ph{
+    width:48px;height:48px;border:1px solid var(--gold);border-radius:50%;
+    background:repeating-linear-gradient(45deg,#1a1410 0 6px,#221a14 6px 12px);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Cormorant Garamond",serif;color:var(--gold);font-size:18px;
+    flex-shrink:0;
+  }
+  .voice-card .meta .name{font-family:"Shippori Mincho",serif;font-weight:600;color:var(--ink);font-size:14px;letter-spacing:.05em}
+  .voice-card .meta .age{color:var(--ink-3);font-size:11px;letter-spacing:.15em;margin-top:4px;font-family:"Cinzel",serif}
+  .voice-card .body{font-size:13px;line-height:2;color:var(--ink-2)}
+  .voice-card .tag{display:inline-block;margin-top:18px;font-size:10px;letter-spacing:.2em;color:var(--gold);border:1px solid var(--gold-soft);padding:4px 10px;font-family:"Cinzel",serif}
+  @media (max-width:560px){
+    .featured-result{margin-top:28px}
+    .featured-result-title{font-size:17px;line-height:1.75;margin-bottom:18px}
+    .featured-result-desc{padding:18px 16px;font-size:13px;line-height:1.9}
+  }
+
+  /* ---------- price / offer ---------- */
+  .offer{position:relative;overflow:hidden;background:#0a0807;isolation:isolate}
+  .offer::before{
+    content:"";position:absolute;inset:0;z-index:-2;
+    background-image:url('line-letter-visual.jpg');
+    background-size:cover;background-position:center;
+    opacity:.32;
+  }
+  .offer::after{
+    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 50%,rgba(212,175,122,.10),transparent 70%),
+      linear-gradient(180deg,rgba(10,8,7,.85) 0%,rgba(10,8,7,.7) 50%,rgba(10,8,7,.92) 100%);
+  }
+  .offer .card{
+    position:relative;
+    border:1px solid var(--gold);
+    background:linear-gradient(180deg,rgba(26,20,16,.7) 0%,rgba(10,8,7,.7) 100%);
+    padding:clamp(36px,5vw,68px) clamp(24px,4vw,56px);
+    text-align:center;
+  }
+  .offer .card::before,.offer .card::after,.offer .card .c1,.offer .card .c2{
+    content:"";position:absolute;width:18px;height:18px;border:1px solid var(--gold);
+  }
+  .offer .card::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+  .offer .card::after{top:-1px;right:-1px;border-left:none;border-bottom:none}
+  .offer .card .c1{bottom:-1px;left:-1px;border-right:none;border-top:none}
+  .offer .card .c2{bottom:-1px;right:-1px;border-left:none;border-top:none}
+  .offer .badge{
+    display:inline-block;padding:8px 22px;border:1px solid var(--gold);
+    font-family:"Cinzel",serif;font-size:11px;letter-spacing:.4em;color:var(--gold);
+    margin-bottom:32px;
+  }
+  .offer .price-h{font-family:"Shippori Mincho",serif;font-size:clamp(20px,3vw,28px);line-height:1.7;letter-spacing:.05em;font-weight:600}
+  .offer .price-h em{color:var(--gold);font-style:normal}
+  .offer .price-row{
+    margin:36px auto;display:flex;align-items:baseline;justify-content:center;gap:18px;flex-wrap:wrap;
+    padding:24px 0;border-top:1px solid rgba(212,175,122,.18);border-bottom:1px solid rgba(212,175,122,.18);
+  }
+  .offer .price-row .was{font-family:"Cormorant Garamond",serif;color:var(--ink-3);font-size:clamp(16px,2.4vw,22px);text-decoration:line-through}
+  .offer .price-row .arrow{color:var(--gold);font-family:"Cormorant Garamond",serif;font-size:24px}
+  .offer .price-row .now{display:flex;align-items:baseline;gap:8px}
+  .offer .price-row .now .label{font-size:11px;letter-spacing:.3em;color:var(--gold);font-family:"Cinzel",serif}
+  .offer .price-row .now .val{font-family:"Cormorant Garamond",serif;font-size:clamp(40px,6vw,72px);font-weight:600;line-height:1;background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .offer .price-row .now .yen{font-family:"Shippori Mincho",serif;font-size:clamp(18px,2.4vw,22px);color:var(--gold)}
+  .offer .free-note{font-family:"Shippori Mincho",serif;color:var(--gold);font-size:clamp(14px,2.2vw,18px);letter-spacing:.1em}
+
+  .scarcity{
+    margin:36px auto 0;max-width:560px;
+    border:1px dashed rgba(212,175,122,.4);padding:22px;
+    background:rgba(192,74,58,.04);
+  }
+  .scarcity .label{font-family:"Cinzel",serif;font-size:11px;letter-spacing:.3em;color:var(--danger);margin-bottom:10px}
+  .scarcity .label .blink{display:inline-block;width:8px;height:8px;background:var(--danger);border-radius:50%;margin-right:8px;vertical-align:middle;animation:blink 1.4s infinite}
+  @keyframes blink{0%,60%{opacity:1}30%{opacity:.2}}
+  .scarcity .text{font-family:"Shippori Mincho",serif;font-size:clamp(14px,2vw,17px);font-weight:600;line-height:1.7}
+  .scarcity .text em{color:var(--gold);font-style:normal;font-size:1.3em}
+  .scarcity .meter{margin-top:14px;height:6px;background:rgba(212,175,122,.1);position:relative;overflow:hidden}
+  .scarcity .meter > i{display:block;height:100%;width:80%;background:linear-gradient(90deg,var(--gold-2),var(--danger));transition:width 1.4s ease}
+  .scarcity .meter-row{display:flex;justify-content:space-between;font-size:10px;color:var(--ink-3);margin-top:8px;letter-spacing:.15em;font-family:"Cinzel",serif}
+
+  .offer .bottom{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:14px}
+  .offer .guarantee{margin-top:24px;font-size:11px;color:var(--ink-3);letter-spacing:.1em}
+  .inline-offer{
+    margin:clamp(44px,6vw,68px) auto 0;
+    background:transparent;
+    overflow:visible;
+    isolation:auto;
+  }
+  .inline-offer::before,
+  .inline-offer::after{
+    display:none;
+  }
+  .inline-offer .sec-head{
+    margin-bottom:28px;
+  }
+  .consult-preview{
+    width:min(100%,588px);
+    margin:0 auto clamp(22px,4vw,34px);
+    background:#000;
+    border-radius:8px;
+    overflow:hidden;
+    line-height:0;
+    box-shadow:0 18px 48px rgba(0,0,0,.45),0 0 24px rgba(212,175,122,.12);
+  }
+  .consult-preview img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+  .inline-offer .card{
+    background:linear-gradient(180deg,rgba(26,20,16,.82) 0%,rgba(10,8,7,.82) 100%);
+  }
+  @media (max-width:560px){
+    .inline-offer{
+      margin-top:38px;
+    }
+    .inline-offer .sec-head{
+      margin-bottom:22px !important;
+    }
+    .consult-preview{
+      margin-bottom:22px;
+    }
+    .inline-offer .card{
+      padding:32px 18px 34px;
+    }
+  }
+
+  /* ---------- company ---------- */
+  .company{background:#06050494;border-top:1px solid rgba(212,175,122,.14)}
+  .company .grid{display:grid;grid-template-columns:140px 1fr;gap:14px 28px;max-width:760px;margin:0 auto}
+  @media (max-width:560px){.company .grid{grid-template-columns:1fr;gap:4px 0}}
+  .company .grid dt{font-family:"Cinzel",serif;font-size:11px;letter-spacing:.25em;color:var(--gold);padding:18px 0;border-bottom:1px solid rgba(212,175,122,.1)}
+  .company .grid dd{padding:18px 0;border-bottom:1px solid rgba(212,175,122,.1);color:var(--ink-2);font-size:14px;line-height:1.8}
+  @media (max-width:560px){
+    .company .grid dt{padding:14px 0 4px;border-bottom:none}
+    .company .grid dd{padding:0 0 14px}
+  }
+
+  /* ---------- founder card (small) ---------- */
+  .founder{
+    margin:64px auto 0;max-width:780px;
+    display:grid;grid-template-columns:160px 1fr;gap:32px;align-items:center;
+    border:1px solid rgba(212,175,122,.18);padding:28px;
+  }
+  @media (max-width:560px){.founder{grid-template-columns:1fr;text-align:center;padding:24px}}
+  .founder .ph{
+    aspect-ratio:1/1.15;
+    background:repeating-linear-gradient(45deg,#1a1410 0 8px,#221a14 8px 16px);
+    border:1px solid var(--gold);position:relative;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Cormorant Garamond",serif;color:var(--gold);font-size:14px;letter-spacing:.2em;
+    overflow:hidden;
+  }
+  .founder .ph img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:grayscale(1) contrast(1.05)}
+  .founder .ph small{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:.3em;color:var(--ink-3)}
+  .founder .role{font-family:"Cinzel",serif;font-size:10px;letter-spacing:.4em;color:var(--gold);margin-bottom:8px}
+  .founder .name{font-family:"Shippori Mincho",serif;font-size:22px;font-weight:600;letter-spacing:.08em;margin-bottom:14px}
+  .founder .name small{display:block;font-family:"Cormorant Garamond",serif;font-size:13px;color:var(--ink-3);margin-top:4px;letter-spacing:.18em}
+  .founder p{font-size:12px;line-height:1.9;color:var(--ink-2)}
+
+  /* ---------- footer ---------- */
+  footer{padding:40px 0 60px;text-align:center;background:#050403;border-top:1px solid rgba(212,175,122,.1)}
+  footer .brand{font-family:"Cinzel",serif;color:var(--gold);font-size:13px;letter-spacing:.4em}
+  footer .copy{margin-top:14px;font-size:10px;color:var(--ink-3);letter-spacing:.2em;font-family:"Cinzel",serif}
+  footer .links{margin-top:14px;font-size:11px;color:var(--ink-3);display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+
+  /* ---------- sticky cta (mobile) ---------- */
+  .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:55;padding:10px 14px;background:linear-gradient(180deg,rgba(10,8,7,0) 0%,rgba(10,8,7,.92) 30%);transform:translateY(110%);transition:transform .5s ease;pointer-events:none}
+  .sticky-cta.show{transform:translateY(0);pointer-events:auto}
+  .sticky-cta .btn-cta{width:100%;min-width:0;padding:18px;font-size:14px}
+  @media (min-width:721px){.sticky-cta{display:none}}
+
+  /* ---------- reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 1s ease,transform 1s ease}
+  .reveal.in{opacity:1;transform:none}
+  .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.22s}.reveal-d3{transition-delay:.34s}.reveal-d4{transition-delay:.46s}
+
+  /* ---------- conversion redesign overrides ---------- */
+  :root{
+    --bg:#020302;
+    --bg-2:#060706;
+    --bg-3:#0e0d0b;
+    --line:#4a3822;
+    --gold:#d8ad5c;
+    --gold-2:#9d7031;
+    --gold-3:#ffdf85;
+    --ink:#fffaf0;
+    --ink-2:#d6cbb8;
+    --ink-3:#9f927d;
+    --line-green:#06c755;
+    --line-green-2:#009d2f;
+    --grad-gold:linear-gradient(135deg,#fff0a8 0%,#d8ad5c 42%,#8d5f22 76%,#f3d17a 100%);
+  }
+  .sr-only{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+    clip:rect(0,0,0,0);white-space:nowrap;border:0;
+  }
+  body{
+    background:
+      linear-gradient(180deg,#020302 0%,#080806 48%,#020302 100%);
+  }
+  nav.top{
+    background:rgba(2,3,2,.8);
+    border-bottom:1px solid rgba(216,173,92,.28);
+  }
+  nav.top .brand{color:var(--gold-3);text-shadow:0 0 18px rgba(216,173,92,.22)}
+  nav.top .brand small{color:var(--gold)}
+  nav.top .cta{
+    border-color:rgba(6,199,85,.8);
+    color:#fff;
+    background:linear-gradient(180deg,var(--line-green) 0%,var(--line-green-2) 100%);
+    border-radius:8px;
+    box-shadow:0 0 18px rgba(6,199,85,.22),0 0 0 1px rgba(255,223,133,.22) inset;
+  }
+  nav.top .cta:hover{background:linear-gradient(180deg,#24df68 0%,#00a932 100%);color:#fff}
+
+  .hero.hero-poster{
+    min-height:auto;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:clamp(12px,3vw,34px) 0 32px;
+    background:
+      linear-gradient(90deg,rgba(216,173,92,.12) 0%,transparent 18%,transparent 82%,rgba(216,173,92,.1) 100%),
+      linear-gradient(180deg,#010201 0%,#070806 58%,#020302 100%);
+  }
+  .hero.hero-poster::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:
+      linear-gradient(180deg,rgba(255,223,133,.08) 0%,transparent 16%,transparent 78%,rgba(216,173,92,.06) 100%),
+      linear-gradient(90deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,0) 32%,rgba(0,0,0,0) 68%,rgba(0,0,0,.72) 100%);
+  }
+  .hero.hero-poster::after{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(rgba(216,173,92,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(216,173,92,.035) 1px,transparent 1px);
+    background-size:54px 54px;
+    mask:none;-webkit-mask:none;
+  }
+  .hero.hero-poster .frame,
+  .hero.hero-poster .bg-side,
+  .hero.hero-poster .scroll-hint{display:none}
+  .hero-poster-card{
+    position:relative;
+    z-index:2;
+    width:min(880px,92vw);
+    margin:0 auto;
+    border:1px solid rgba(255,223,133,.42);
+    border-radius:8px;
+    overflow:hidden;
+    background:#000;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,.85),
+      0 24px 70px rgba(0,0,0,.72),
+      0 0 42px rgba(216,173,92,.18);
+  }
+  .hero-poster-card img{
+    width:100%;
+    height:auto;
+    object-fit:cover;
+    object-position:center top;
+    background:#000;
+  }
+  .hero-hotspot{
+    position:absolute;
+    left:3.1%;
+    top:85.15%;
+    width:93.8%;
+    height:9.7%;
+    border-radius:8px;
+    z-index:3;
+  }
+  .hero-hotspot:focus-visible{
+    outline:3px solid #fff;
+    outline-offset:-8px;
+    box-shadow:0 0 0 4px rgba(6,199,85,.75);
+  }
+  @media (max-width:560px){
+    .hero.hero-poster{padding:0 0 28px}
+    .hero-poster-card{
+      width:100%;
+      border-left:none;
+      border-right:none;
+      border-top:none;
+      border-radius:0 0 8px 8px;
+      box-shadow:0 18px 42px rgba(0,0,0,.64),0 0 30px rgba(216,173,92,.16);
+    }
+  }
+
+  .btn-cta{
+    min-width:min(520px,92vw);
+    color:#fff;
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 38%),
+      linear-gradient(180deg,var(--line-green) 0%,var(--line-green-2) 100%);
+    border:1px solid rgba(255,223,133,.84);
+    border-radius:18px;
+    text-shadow:0 2px 0 rgba(0,0,0,.22);
+    box-shadow:
+      0 18px 42px rgba(6,199,85,.28),
+      0 0 28px rgba(216,173,92,.38),
+      inset 0 2px 0 rgba(255,255,255,.38),
+      inset 0 -10px 20px rgba(0,79,28,.28);
+  }
+  .btn-cta::after{
+    background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,0));
+  }
+  .btn-cta:hover{
+    filter:saturate(1.08) brightness(1.04);
+    box-shadow:
+      0 22px 54px rgba(6,199,85,.36),
+      0 0 36px rgba(216,173,92,.5),
+      inset 0 2px 0 rgba(255,255,255,.44),
+      inset 0 -10px 20px rgba(0,79,28,.26);
+  }
+  .btn-line-mark{
+    color:var(--gold-3);
+    text-shadow:0 0 16px rgba(216,173,92,.18);
+  }
+  .sticky-cta{
+    background:linear-gradient(180deg,rgba(2,3,2,0) 0%,rgba(2,3,2,.96) 34%);
+  }
+
+  section{
+    background:
+      linear-gradient(180deg,rgba(255,223,133,.03) 0%,transparent 22%,transparent 78%,rgba(255,223,133,.025) 100%),
+      #020302;
+  }
+  .product,
+  .features,
+  .voice,
+  .faq,
+  .offer{
+    background-color:#020302;
+  }
+  .product::before,
+  .offer::before{opacity:.16;filter:saturate(.75) contrast(1.06) brightness(.72)}
+  .product::after,
+  .offer::after{
+    background:linear-gradient(180deg,rgba(2,3,2,.94) 0%,rgba(2,3,2,.82) 50%,rgba(2,3,2,.96) 100%);
+  }
+  .sec-head{
+    margin-bottom:clamp(42px,7vw,72px);
+  }
+  .sec-head .eyebrow{
+    color:var(--gold-3);
+    text-shadow:0 0 16px rgba(216,173,92,.18);
+  }
+  .sec-head h2{
+    text-shadow:0 2px 18px rgba(0,0,0,.82);
+  }
+  .sec-head h2 em,
+  .product h3.title .accent,
+  .featured-result-title em,
+  .proof-headline em{
+    color:var(--gold-3);
+  }
+  .product .intro,
+  .offer .card,
+  .faq .faq-item,
+  .voice-card,
+  .featured-result-desc,
+  .countdown,
+  .scarcity,
+  .founder{
+    border:1px solid rgba(216,173,92,.36);
+    border-radius:8px;
+    background:
+      linear-gradient(180deg,rgba(17,18,16,.9) 0%,rgba(5,6,5,.9) 100%);
+    box-shadow:0 18px 54px rgba(0,0,0,.48),0 0 0 1px rgba(255,223,133,.05) inset;
+  }
+  .proof-panel,
+  .visual-panel,
+  .featured-video{
+    border-color:rgba(216,173,92,.42);
+    border-radius:8px;
+    box-shadow:0 18px 58px rgba(0,0,0,.58),0 0 34px rgba(216,173,92,.12);
+  }
+  .product .pain-list li{
+    color:var(--ink);
+    text-align:left;
+    padding:16px 18px 16px 42px;
+    border:1px solid rgba(216,173,92,.32);
+    border-radius:8px;
+    background:linear-gradient(180deg,rgba(12,13,11,.96) 0%,rgba(4,5,4,.96) 100%);
+    box-shadow:0 14px 34px rgba(0,0,0,.34),0 0 0 1px rgba(255,223,133,.04) inset;
+  }
+  .product .pain-list li::before{
+    content:"•";
+    left:20px;
+    top:14px;
+    transform:none;
+    color:var(--gold-3);
+    font-size:22px;
+    line-height:1;
+    background:none;
+    border:0;
+    box-shadow:none;
+  }
+  .feat{
+    color:var(--ink);
+    border-color:rgba(216,173,92,.42);
+    border-radius:8px;
+    background:linear-gradient(180deg,rgba(13,14,12,.96) 0%,rgba(4,5,4,.98) 100%);
+    box-shadow:0 18px 48px rgba(0,0,0,.45),0 0 0 1px rgba(255,223,133,.05) inset;
+  }
+  .feat:hover{
+    background:linear-gradient(180deg,rgba(18,19,16,.98) 0%,rgba(5,6,5,.98) 100%);
+    box-shadow:0 22px 58px rgba(0,0,0,.54),0 0 28px rgba(216,173,92,.16);
+  }
+  .feat h3{color:var(--ink)}
+  .feat h3 em{color:var(--gold-3)}
+  .feat p{color:var(--ink-2)}
+  .feat .icon{
+    border-color:rgba(216,173,92,.72);
+    border-radius:8px;
+    transform:none;
+    background:rgba(216,173,92,.06);
+  }
+  .feat .icon svg{transform:none}
+  .countdown .cd-label{
+    border-color:rgba(216,173,92,.64);
+    color:var(--gold-3);
+    border-radius:8px;
+  }
+  .countdown .cd-headline em{
+    color:var(--gold-3);
+  }
+  .countdown .cd-num{
+    border-color:rgba(216,173,92,.52);
+    background:var(--grad-gold);
+    -webkit-background-clip:text;
+    background-clip:text;
+  }
+  .results-grid{gap:12px}
+  .voice .results{border:0;padding:0}
+  .result-card{
+    border:1px solid rgba(216,173,92,.32);
+    border-radius:8px;
+    background:linear-gradient(180deg,rgba(12,13,11,.92) 0%,rgba(4,5,4,.94) 100%);
+  }
+  .result-card:last-child{border-right:1px solid rgba(216,173,92,.32)}
+  .result-card .big-num{
+    color:var(--gold-3);
+    text-shadow:0 0 18px rgba(216,173,92,.2);
+  }
+  .scarcity{
+    border-style:solid;
+    background:linear-gradient(180deg,rgba(255,223,133,.06),rgba(255,223,133,.02));
+  }
+  .scarcity .label{color:var(--gold-3)}
+  .scarcity .label .blink{
+    background:var(--gold-3);
+    box-shadow:0 0 10px rgba(255,223,133,.75);
+  }
+
+</style>
+
+<style id="mobile-force-mode">
+  /* ?mobile=1 のときだけ有効：本体を390px幅に縛り、CSSのメディアクエリをスマホ表示で評価させる */
+  html.force-mobile{
+    width:390px !important;
+    margin:0 auto !important;
+    border-left:1px solid rgba(212,175,122,.3);
+    border-right:1px solid rgba(212,175,122,.3);
+    box-shadow:0 0 60px rgba(0,0,0,.6);
+  }
+  html.force-mobile body{
+    overflow-x:hidden;
+  }
+  /* 外側を黒く */
+  html.force-mobile{background:#0a0807}
+
+  /* 強制モバイルモード時の左寄せ表示（プレビュー枠が広い時にも違和感がないように） */
+  html.force-mobile body{position:relative}
+
+  /* force-mobile時：vw基準の幅は親(390px)を超えるのでpx/%で再指定 */
+  html.force-mobile{overflow-x:hidden}
+  html.force-mobile .wrap{width:calc(100% - 32px) !important;max-width:none !important}
+  html.force-mobile .narrow{width:calc(100% - 32px) !important;max-width:none !important}
+  html.force-mobile .container{width:calc(100% - 32px) !important;max-width:none !important}
+  html.force-mobile section,
+  html.force-mobile .hero,
+  html.force-mobile nav.top{max-width:390px !important;overflow-x:hidden}
+  html.force-mobile *{max-width:100%}
+  html.force-mobile img,
+  html.force-mobile video,
+  html.force-mobile svg{max-width:100% !important;height:auto}
+
+  /* force-mobile時：vwベースのフォントサイズを390pxビューポート相当に強制 */
+  /* hero */
+  html.force-mobile .hero h1{font-size:32px !important;line-height:1.4 !important}
+  html.force-mobile .hero .lead{font-size:13px !important}
+  html.force-mobile .hero .results-label-text{font-size:12px !important}
+  html.force-mobile .hero .stats .n{font-size:26px !important}
+  html.force-mobile .hero .inner{width:calc(100% - 32px) !important}
+  html.force-mobile .hero .bg-side{width:35% !important}
+  html.force-mobile .hero .frame{inset:12px !important}
+
+  /* CTA */
+  html.force-mobile .cta-primary{font-size:14px !important;min-width:0 !important;width:calc(100% - 32px) !important;padding:18px 20px !important}
+  html.force-mobile .btn-cta{min-width:0 !important;width:calc(100% - 32px) !important;max-width:340px !important;padding:18px 18px !important;font-size:14px !important;line-height:1.5 !important;gap:8px !important}
+  html.force-mobile .btn-cta .arrow{font-size:1.2em !important}
+  html.force-mobile .sticky-cta .btn-cta{width:100% !important;max-width:none !important}
+
+  /* sec-head */
+  html.force-mobile .sec-head h2{font-size:22px !important;line-height:1.55 !important}
+  html.force-mobile .sec-head .sub{font-size:12px !important}
+
+  /* product */
+  html.force-mobile .product h3.title{font-size:18px !important;line-height:1.7 !important}
+  html.force-mobile .product .copy,
+  html.force-mobile .product .pain-list li{font-size:13px !important}
+  html.force-mobile section{padding:64px 0 !important}
+  html.force-mobile .sec-head{margin-bottom:42px !important}
+  html.force-mobile .product{padding:64px 0 52px !important}
+  html.force-mobile .product .intro{padding:32px 18px 34px !important}
+  html.force-mobile .product .pain-list--top{margin:30px auto 28px !important}
+  html.force-mobile .product .copy + .copy{margin-top:1.1em !important}
+  html.force-mobile .product .visual-panel--future{margin-top:36px !important}
+
+  /* feat */
+  html.force-mobile .feat h3{font-size:16px !important}
+
+  /* countdown */
+  html.force-mobile .countdown-section{padding:52px 0 !important}
+  html.force-mobile .countdown{padding:30px 16px 32px !important}
+  html.force-mobile .countdown .cd-headline{font-size:14px !important}
+  html.force-mobile .countdown .cd-num{font-size:32px !important;padding:10px 4px !important;min-width:0 !important;width:100% !important}
+  html.force-mobile .countdown .cd-colon{display:none !important}
+  html.force-mobile .countdown .cd-clock{gap:6px !important}
+  html.force-mobile .countdown .cd-unit{min-width:0 !important;flex:1 !important}
+  html.force-mobile .countdown .cd-foot{font-size:12px !important}
+
+  /* faq */
+  html.force-mobile .faq .q-text{font-size:14px !important}
+  html.force-mobile .faq .faq-body p{font-size:13px !important}
+
+  /* result */
+  html.force-mobile .result-card .achievement{font-size:14px !important}
+  html.force-mobile .result-card .big-num{font-size:28px !important}
+
+  /* offer */
+  html.force-mobile .offer .price-h{font-size:18px !important}
+  html.force-mobile .offer .price-row .was{font-size:15px !important}
+  html.force-mobile .offer .price-row .now .val{font-size:42px !important}
+  html.force-mobile .offer .price-row .now .yen{font-size:17px !important}
+  html.force-mobile .offer .free-note{font-size:14px !important}
+
+  /* scarcity */
+  html.force-mobile .scarcity .text{font-size:13px !important}
+
+  /* force-mobile時：グリッドを1カラム化（560px以下相当のレイアウトを強制） */
+  html.force-mobile .feat-grid{grid-template-columns:1fr !important;gap:20px !important}
+  html.force-mobile .voice-list{grid-template-columns:1fr !important;gap:20px !important}
+  html.force-mobile .results-grid{grid-template-columns:repeat(2,1fr) !important}
+  html.force-mobile .results-grid .result-card:nth-child(2){border-right:none !important}
+  html.force-mobile .results-grid .result-card:nth-child(1),
+  html.force-mobile .results-grid .result-card:nth-child(2){border-bottom:1px solid rgba(212,175,122,.14) !important}
+  html.force-mobile .company .grid{grid-template-columns:1fr !important;gap:4px 0 !important}
+  html.force-mobile .company .grid dt{padding:14px 0 4px !important;border-bottom:none !important}
+  html.force-mobile .company .grid dd{padding:0 0 14px !important}
+  html.force-mobile .founder{grid-template-columns:1fr !important;text-align:center !important;padding:24px !important;gap:20px !important}
+
+  /* force-mobile時：spあり改行を有効化（pc-br非表示, sp-br表示） */
+  html.force-mobile .pc-br{display:none !important}
+  html.force-mobile .sp-br{display:inline !important}
+
+  /* force-mobile時：\n を <br> として描画する */
+  html.force-mobile .hero .lead,
+  html.force-mobile .product .copy,
+  html.force-mobile .product .pain-list li,
+  html.force-mobile .feat .feat-card p,
+  html.force-mobile .feat p,
+  html.force-mobile .voice .voice-card .body,
+  html.force-mobile .voice-card .body,
+  html.force-mobile .offer .copy,
+  html.force-mobile .offer .price-note,
+  html.force-mobile .sec-head h2,
+  html.force-mobile .sec-head .sub,
+  html.force-mobile .product .intro .title,
+  html.force-mobile .narrow p,
+  html.force-mobile .countdown .cd-headline{
+    white-space: pre-line !important;
+  }
+
+  /* feat-card本文の中央寄せ修正 */
+  html.force-mobile .feat{padding:32px 24px !important}
+  html.force-mobile .feat p{font-size:13px !important;line-height:2 !important;text-align:center !important}
+
+  /* voice-card */
+  html.force-mobile .voice-card{padding:28px 24px !important}
+  html.force-mobile .voice-card .body{font-size:13px !important;line-height:1.95 !important}
+
+  /* nav cta */
+  html.force-mobile nav.top .cta{display:none !important}
+
+  /* hero portrait visibility fix */
+  @media (max-width:560px){
+    .hero .bg-side.left{
+      width:48vw;
+      background-image:url('hero-woman-mobile.jpg');
+      background-size:auto 100%;
+      background-position:center center;
+    }
+    .hero .bg-side.right{
+      width:34vw;
+      background-position:left center;
+    }
+    .hero .bg-side.left::after{
+      background:linear-gradient(90deg,rgba(10,8,7,.05) 0%,rgba(10,8,7,.58) 62%,rgba(10,8,7,.96) 100%);
+    }
+  }
+  html.force-mobile .hero .bg-side.left{
+    width:48% !important;
+    background-image:url('hero-woman-mobile.jpg') !important;
+    background-size:auto 100% !important;
+    background-position:center center !important;
+  }
+  html.force-mobile .hero .bg-side.right{
+    width:34% !important;
+    background-position:left center !important;
+  }
+  html.force-mobile .hero .bg-side.left::after{
+    background:linear-gradient(90deg,rgba(10,8,7,.05) 0%,rgba(10,8,7,.58) 62%,rgba(10,8,7,.96) 100%) !important;
+  }
+  @media (max-width:560px){
+    .hero .reveal{
+      opacity:1;
+      transform:none;
+      transition:none;
+    }
+  }
+  html.force-mobile .hero .reveal{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+  }
+
+  /* mobile results alignment + CTA arrow cleanup */
+  @media (max-width:560px){
+    .voice .results{
+      width:100%;
+      max-width:100%;
+      overflow:hidden;
+    }
+    .results-grid{
+      width:100%;
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    }
+    .result-card{
+      min-width:0;
+      padding:34px 10px;
+      overflow:hidden;
+    }
+    .result-card .period{
+      font-size:10px;
+      letter-spacing:.2em;
+      line-height:1.6;
+      white-space:normal;
+      overflow-wrap:anywhere;
+    }
+  }
+  html.force-mobile .voice .results{
+    width:100% !important;
+    max-width:100% !important;
+    overflow:hidden !important;
+  }
+  html.force-mobile .results-grid{
+    width:100% !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  }
+  html.force-mobile .result-card{
+    min-width:0 !important;
+    padding:34px 10px !important;
+    overflow:hidden !important;
+  }
+  html.force-mobile .result-card .period{
+    font-size:10px !important;
+    letter-spacing:.2em !important;
+    line-height:1.6 !important;
+    white-space:normal !important;
+    overflow-wrap:anywhere !important;
+  }
+  .btn-cta{
+    gap:0 !important;
+  }
+  .btn-cta .arrow{
+    display:none !important;
+  }
+  .product .arrow-down{
+    display:none !important;
+  }
+  html.force-mobile .visual-panel{
+    margin-top:36px !important;
+  }
+  html.force-mobile .visual-panel img{
+    height:250px !important;
+  }
+  html.force-mobile .visual-panel figcaption{
+    left:20px !important;
+    right:auto !important;
+    text-align:left !important;
+    max-width:72vw !important;
+    font-size:18px !important;
+  }
+  html.force-mobile .visual-panel--woman figcaption{
+    left:auto !important;
+    right:20px !important;
+    text-align:right !important;
+    max-width:62vw !important;
+  }
+  html.force-mobile .proof-panel{
+    margin-bottom:46px !important;
+  }
+  html.force-mobile .proof-panel img{
+    height:auto !important;
+  }
+  html.force-mobile .proof-headline{
+    font-size:16px !important;
+    line-height:1.5 !important;
+    letter-spacing:.02em !important;
+    margin-bottom:14px !important;
+  }
+  html.force-mobile .proof-headline--overlay{
+    top:50% !important;
+    width:88% !important;
+    margin:0 !important;
+    transform:translate(-50%,-50%) !important;
+    font-size:20px !important;
+    line-height:1.55 !important;
+    letter-spacing:.03em !important;
+  }
+  html.force-mobile .proof-panel--offer img{
+    height:auto !important;
+  }
+</style>
+<script>
+  // ?mobile or ?mobile=1 で強制モバイル表示
+  (function(){
+    try{
+      var qs = new URLSearchParams(location.search);
+      if (qs.has('mobile')) {
+        document.documentElement.classList.add('force-mobile');
+      }
+    }catch(e){}
+  })();
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MTXWNRM"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- ============ NAV ============ -->
+<nav class="top" id="topnav">
+  <div class="wrap">
+    <div class="brand">K&nbsp;CONSULTING<small>個別相談会</small></div>
+    <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="cta">LINE相談</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero hero-poster" data-screen-label="01 Hero">
+  <div class="hero-poster-card reveal">
+    <img src="fv-consulting.jpg" alt="なぜ、頑張っても『モテない』『稼げない』のか。女性に選ばれない理由も、稼げない理由も、実は同じ。LINEで無料相談の詳細を見る。" fetchpriority="high" decoding="async">
+    <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="hero-hotspot" aria-label="LINEで無料相談の詳細を見る"></a>
+  </div>
+  <div class="sr-only">
+    <h1>なぜ、頑張っても『モテない』『稼げない』のか？</h1>
+    <p>女性に選ばれない理由も、稼げない理由も、実は同じ。自己流のまま遠回りする前に、あなたのズレを1対1で言語化します。</p>
+  </div>
+</header>
+
+<!-- ============ PRODUCT ============ -->
+<section class="product" id="about" data-screen-label="02 About">
+  <div class="wrap">
+    <figure class="proof-panel proof-panel--about">
+      <img src="about-program-proof.jpg" alt="1000名以上の指導実績を象徴する集合写真" loading="lazy" decoding="async">
+      <span class="proof-shade"></span>
+      <figcaption class="proof-headline proof-headline--overlay"><span class="proof-headline-inner">1000名以上の指導で得た、<br><em>全ての知識</em>をあなたへ</span></figcaption>
+    </figure>
+
+    <div class="sec-head reveal">
+      <span class="eyebrow">— About&nbsp;the&nbsp;Program —</span>
+      <h2>「金」と「女」を<em>全獲り</em>する<br>男のためのプログラム</h2>
+      <p class="sub">これは情報商材でも、よくある自己啓発でもない。<br>あなたの人生を作り変えるための、対話の場です。</p>
+    </div>
+
+  </div>
+  <div class="narrow">
+    <div class="intro reveal">
+      <h3 class="title">なぜ、頑張っても<br>
+『モテ』も『収入』も<br>伸びないのか？
+
+</h3>
+
+      <ul class="pain-list pain-list--top">
+        <li>女性の前で自信が持てない</li>
+        <li>頑張っても収入が伸びない</li>
+        <li>何から変えればいいか分からない</li>
+        <li>自己流のまま遠回りしている</li>
+      </ul>
+
+      <p class="copy">
+        鏡の前で「どうせ自分なんて」と<br>ため息を吐いた朝。<br>
+        預金通帳を見て虚無感を感じた夜。<br>
+        それでも「自分はこんなもんじゃない」と、<br>心のどこかで思い続けている。
+      </p>
+      <p class="copy">
+        その悩みの原因は、才能がないからでも、<br>努力が足りないからでもありません。<br>
+        <strong style="color:var(--gold)">『金』と『女』を手に入れるための順番</strong>と、<br>今のあなたに必要な行動が<br>整理されていないだけです。
+      </p>
+      <p class="copy">
+        この個別相談会では、<br>あなたの現状と理想を聞いたうえで<br>
+        <strong style="color:var(--gold)">『金』と『女』を攻略するために<br>「何から手をつけるべきか」</strong>を明確にします。
+      </p>
+      <p class="copy">
+        3ヶ月後・半年後・1年後に<br>見たい景色を叶えるために、<br>
+        思考、習慣、選ぶ環境、毎日の行動まで、<br>今日から動けるレベルに落とし込みます。
+      </p>
+
+      <div class="offer inline-offer">
+        <div class="sec-head">
+          <span class="eyebrow">— Special&nbsp;Offer —</span>
+          <h2>一歩踏み出すあなたへ。</h2>
+        </div>
+
+        <figure class="consult-preview">
+          <img src="consult-preview-black.jpg" alt="無料個別相談でわかること。外見で損している原因、女性とモテを遠ざけている原因、収入につながる見せ方と伝え方、最短で結果を出す改善プランを整理。" loading="lazy" decoding="async">
+        </figure>
+
+        <div class="card">
+          <span class="c1"></span><span class="c2"></span>
+          <div class="badge">LIMITED&nbsp;OFFER</div>
+
+          <div class="price-h">
+            個別相談会、<br>
+            <em>初回限定&nbsp;完全無料</em>でご招待。
+          </div>
+
+          <div class="price-row">
+            <span class="was">通常&nbsp;¥30,000</span>
+            <span class="arrow">→</span>
+            <span class="now">
+              <span class="val" data-count="0" data-target="0">0</span>
+              <span class="yen">円</span>
+              <span class="label" style="margin-left:14px">(税込)</span>
+            </span>
+          </div>
+
+          <div class="free-note">— 60分・オンライン —</div>
+
+          <div class="scarcity">
+            <div class="label"><span class="blink"></span>STRICTLY&nbsp;LIMITED</div>
+            <div class="text">
+              毎月<em>5</em>名様&nbsp;限定<br>
+              <span style="font-size:.85em;color:var(--ink-2);font-weight:400">今月の残り枠&nbsp;<em>2</em>&nbsp;名</span>
             </div>
+            <div class="meter"><i style="width: 60%;"></i></div>
+            <div class="meter-row"><span>SLOT&nbsp;1</span><span>SLOT&nbsp;5</span></div>
           </div>
-        </div>
-      </section>
 
-      <section class="section achievements" id="results">
-        <div class="container">
-          <div class="section-head">
-            <div class="section-label">実績</div>
-            <h2><span class="gold-text">顔立ちに合う外見戦略</span>で、第一印象の迷いを減らす。</h2>
-            <p class="section-copy">
-              服装や髪型を感覚で選ぶのではなく、顔の印象・輪郭・雰囲気をもとに判断軸を作ります。
-              恋愛、仕事、紹介の場で「なんとなく損している」を減らすための無料診断です。
-            </p>
-          </div>
-          <div class="achievement-grid">
-            <div class="metrics">
-              <div class="metric">
-                <strong>12k</strong>
-                <span><small>累計診断</small>30〜40代男性を中心に、顔タイプ別の印象設計を提案。</span>
-              </div>
-              <div class="metric">
-                <strong>96%</strong>
-                <span><small>納得度</small>「自分に似合う方向性が言語化できた」と回答。</span>
-              </div>
-              <div class="metric">
-                <strong>30秒</strong>
-                <span><small>診断時間</small>スマホだけで完了。回答後すぐに方向性がわかります。</span>
-              </div>
-            </div>
-            <figure class="image-frame">
-              <img src="assets/transformation.png" alt="印象が洗練される男性のビフォーアフターイメージ" />
-              <figcaption>自分の顔立ちに合う服・髪型を知るだけで、清潔感と余裕の見え方は変わります。</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <section class="section problem" id="problem">
-        <div class="container">
-          <div class="section-head">
-            <div class="section-label">課題提起</div>
-            <h2>努力しているのに、<span class="gold-text">外見で損をする理由</span>があります。</h2>
-            <p class="section-copy">
-              高い服や流行の髪型が、そのままあなたの魅力になるとは限りません。
-              必要なのは、顔立ちと印象に合う選び方です。
-            </p>
-          </div>
-          <div class="problem-list">
-            <article class="problem-card">
-              <span class="num">01</span>
-              <h3>似合う服の基準が曖昧</h3>
-              <p>店員のおすすめや流行で選んでも、顔の印象とズレると無理をしているように見えます。</p>
-            </article>
-            <article class="problem-card">
-              <span class="num">02</span>
-              <h3>髪型だけ浮いて見える</h3>
-              <p>輪郭や目鼻立ちに合わないセットは、清潔感よりも違和感が先に伝わります。</p>
-            </article>
-            <article class="problem-card">
-              <span class="num">03</span>
-              <h3>恋愛で印象が残らない</h3>
-              <p>悪くないのに選ばれない。原因は魅力不足ではなく、伝わり方の設計不足かもしれません。</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section solution" id="solution">
-        <div class="container">
-          <div class="solution-grid">
-            <figure class="image-frame">
-              <img src="assets/diagnosis-session.png" alt="男性がスタイリストから印象診断を受ける様子" />
-              <figcaption>顔のパーツ、輪郭、雰囲気を読み取り、似合う方向性を具体化します。</figcaption>
-            </figure>
-            <div>
-              <div class="section-head">
-                <div class="section-label">解決策</div>
-                <h2><span class="gold-text">顔タイプ診断</span>で、選ぶべき外見を絞り込む。</h2>
-                <p class="section-copy">
-                  診断結果では、あなたの印象を引き上げる服・髪型・色・見せ方を整理。
-                  今日から変えられる優先順位までわかります。
-                </p>
-              </div>
-              <div class="steps">
-                <div class="step">
-                  <span class="index">01</span>
-                  <div>
-                    <h3>顔立ちと印象をチェック</h3>
-                    <p>輪郭、目鼻立ち、雰囲気の強さをもとにタイプを判定します。</p>
-                  </div>
-                </div>
-                <div class="step">
-                  <span class="index">02</span>
-                  <div>
-                    <h3>似合う服・髪型を提案</h3>
-                    <p>清潔感、落ち着き、色気など、伸ばすべき印象を明確にします。</p>
-                  </div>
-                </div>
-                <div class="step">
-                  <span class="index">03</span>
-                  <div>
-                    <h3>恋愛で損しない判断軸へ</h3>
-                    <p>買い物や美容室で迷わない、再現しやすい基準が手に入ります。</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section pricing" id="pricing">
-        <div class="container">
-          <div class="section-head">
-            <div class="section-label">料金</div>
-            <h2>まずは<span class="gold-text">無料診断</span>で、自分の方向性を知る。</h2>
-            <p class="section-copy">
-              登録も診断も無料。スマホだけで、あなたに似合う服・髪型の方向性を確認できます。
-            </p>
-          </div>
-          <div class="price-grid">
-            <article class="price-card featured">
-              <span class="plan-label">おすすめ</span>
-              <h3>無料 顔タイプ診断</h3>
-              <p class="price"><strong>0</strong><span>円</span></p>
-              <ul class="feature-list">
-                <li>30秒で診断完了</li>
-                <li>似合う服・髪型の方向性を提示</li>
-                <li>スマホだけで完結</li>
-                <li>登録無料</li>
-              </ul>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section faq" id="faq">
-        <div class="container">
-          <div class="section-head">
-            <div class="section-label">FAQ</div>
-            <h2>診断前に、よくある質問。</h2>
-          </div>
-          <div class="faq-list">
-            <details class="faq-item" open>
-              <summary class="faq-question">
-                <span>本当に無料で診断できますか？</span>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
-              </summary>
-              <p class="faq-answer">はい。顔タイプ診断は無料で確認できます。スマホで回答後、そのまま診断結果まで確認できます。</p>
-            </details>
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span>ファッションに詳しくなくても大丈夫ですか？</span>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
-              </summary>
-              <p class="faq-answer">大丈夫です。専門用語ではなく、買い物や美容室で使いやすい言葉にして提案します。</p>
-            </details>
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span>診断に写真は必要ですか？</span>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
-              </summary>
-              <p class="faq-answer">簡易診断は質問回答だけで進められます。より精度を上げたい場合のみ、任意で写真を使います。</p>
-            </details>
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span>診断結果はすぐ見られますか？</span>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
-              </summary>
-              <p class="faq-answer">回答後すぐに確認できます。通勤中や休憩時間でも完了する短い診断です。</p>
-            </details>
-          </div>
-        </div>
-      </section>
-
-      <section class="section final-cta" id="cta">
-        <div class="container">
-          <div class="section-head">
-            <div class="section-label">CTA</div>
-            <h2><span class="gold-text">似合うを知る30秒</span>が、次の印象を変える。</h2>
-            <p class="section-copy">
-              外見に自信がなくても、選び方がわかれば印象は整えられます。
-              まずは無料で、あなたに似合う方向性を確認してください。
-            </p>
-          </div>
-          <div class="cta-stack">
-            <a class="primary-cta" href="#fv" aria-label="30秒で無料診断をはじめる">
-              <svg viewBox="0 0 64 64" aria-hidden="true">
-                <circle cx="32" cy="34" r="22" fill="none" stroke="currentColor" />
-                <path d="M26 8h12M32 8v8M46 18l5-5M32 22v14l10 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M12 34a20 20 0 0 1 32-16" fill="none" stroke="currentColor" stroke-linecap="round" />
-              </svg>
-              <span>30秒で無料診断をはじめる</span>
-              <svg class="arrow" viewBox="0 0 32 32" aria-hidden="true">
-                <path d="M11 5l10 11-10 11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
+          <div class="bottom">
+            <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="btn-cta">
+              <span>LINEで無料相談の<br>詳細を見る</span>
+              <span class="arrow">→</span>
             </a>
-            <div class="trust-line">
-              <svg viewBox="0 0 32 32" aria-hidden="true">
-                <rect x="7" y="14" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
-                <path d="M11 14v-4a5 5 0 0 1 10 0v4M16 20v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-              </svg>
-              <span>登録無料・スマホで完結</span>
+            <span class="btn-line-mark"><span class="dot"></span>LINE登録&nbsp;→&nbsp;30秒で申込完了</span>
+            <div class="guarantee">※ 強引な勧誘・販売は一切ございません。<br>安心してご参加ください。</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <figure class="visual-panel visual-panel--future reveal">
+      <img src="luxury-villa-pool.jpg" alt="3ヶ月後・半年後・1年後に見たい高級ヴィラとプール夜景のイメージ" loading="lazy" decoding="async">
+      <span class="shade"></span>
+      <figcaption>
+        <small>FUTURE IMAGE</small>
+        3ヶ月後・半年後・1年後に、<br><em>見たい景色</em>を先に決める。
+      </figcaption>
+    </figure>
+
+    <div class="arrow-down reveal">
+      <span class="label">3&nbsp;PILLARS</span>
+      <span class="v">▽</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COUNTDOWN 1 ============ -->
+<section class="countdown-section" data-screen-label="02b Countdown" style="padding:80px 0;background:#0a0807">
+  <div class="wrap">
+    <div class="countdown reveal" data-cd="">
+      <span class="cd-label">LIMITED&nbsp;OFFER</span>
+      <p class="cd-headline">この募集の<em>受付終了</em>まで、<br class="sp-br">残りわずか。</p>
+      <div class="cd-clock">
+        <div class="cd-unit"><div class="cd-num" data-h="">00</div><div class="cd-lbl">HOURS</div></div>
+        <div class="cd-colon">:</div>
+        <div class="cd-unit"><div class="cd-num" data-m="">51</div><div class="cd-lbl">MINUTES</div></div>
+        <div class="cd-colon">:</div>
+        <div class="cd-unit"><div class="cd-num" data-s="">33</div><div class="cd-lbl">SECONDS</div></div>
+      </div>
+      <p class="cd-foot">※すぐに埋まってしまうため、<br class="sp-br">申し込みに制限時間がございます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="features" id="features" data-screen-label="03 Features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">— Three&nbsp;Pillars —</span>
+      <h2>個別相談会で話す<br><em>3つのこと<br></em></h2>
+      <p class="sub">小手先のテクニックではなく、<br>思考、習慣、マインドの土台から作り変える。<br>だから一度身につければ、生涯の自信に変わる。</p>
+    </div>
+
+    <div class="feat-grid">
+      <article class="feat reveal">
+        <div class="num">01<small>MINDSET</small></div>
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l3 6 6 .9-4.5 4.4 1 6.2L12 17.8 6.5 20.5l1-6.2L3 9.9 9 9z"></path></svg></div>
+        <h3>勝てる<em>マインド</em>の<br>再インストール</h3>
+        <div class="div"></div>
+        <p>「自分には無理」が口癖の脳を、 
+入れ替える。モテる男は何を考え、 
+稼ぐ男は何を見ているのか。
+ 表面的な自信ではなく、
+ 根っこから自分を変える思考のOSを <br>インストールしてもらいます。
+</p>
+      </article>
+
+      <article class="feat reveal reveal-d2">
+        <div class="num">02<small>HABIT</small></div>
+        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></div>
+        <h3>結果が出る<br><em>習慣</em>の設計</h3>
+        <div class="div"></div>
+        <p>朝起きて何をするか。 
+誰と会い、何に金と時間を使うか。
+ 意志ではなく仕組みで、 
+勝手に成長するルーティンを 
+あなたの生活に合わせて設計。
+ 3ヶ月で「別人」と言われる習慣を
+ 一緒に作ります。
+</p>
+      </article>
+
+      <article class="feat reveal reveal-d3">
+        <div class="num">03<small>STRATEGY</small></div>
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 20l6-6 4 4 8-9"></path><path d="M14 9h7v7"></path></svg></div>
+        <h3>『モテ』と『金』を<br><em>同時</em>に手に入れる戦略</h3>
+        <div class="div"></div>
+        <p>女性に選ばれる男と、
+ 金が集まる男の本質は同じ。
+ あなたの現状・年齢・職業に合わせ、<br>女性関係と収入を最短最速で伸ばす 
+個別戦略を、その場で一緒に
+ 組み立てます。
+</p>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ VOICE / RESULTS ============ -->
+<section class="voice" id="voice" data-screen-label="04 Voice">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">— Real&nbsp;Results —</span>
+      <h2>『講習生実績』&nbsp; <br>金と女を&nbsp;&nbsp;<br>全獲りした男たち
+</h2>
+      <div class="featured-result">
+        <h3 class="featured-result-title">経験人数0から300人超<br>＋<br>月収270万円を叩き出すまで成長。<br><em>『金』と『モテ』の全獲りをした講習生</em></h3>
+        <div class="featured-video">
+          <video controls playsinline preload="metadata" poster="student-result-270man-poster.jpg" src="student-result-270man.mp4"></video>
+        </div>
+        <ul class="featured-result-desc">
+          <li>かつては女性経験0。そこから<br>マッチングアプリとナンパを極め、<br>経験人数300人を突破。</li>
+          <li>恋愛だけでなく<br><strong>「会社経営」まで同時並行で伝授。<br></strong>その結果、月収270万円という<br>驚異的な成果を達成。</li>
+          <li>「他社の恋愛コンサルとは物が違う」<br>——小手先のテクニックではなく、<br>身なりから向き合い方まで「本質」を変えた。</li>
+          <li>周囲から<strong>「めちゃくちゃカッコよくなった」</strong>と<br>絶賛される、圧倒的なセルフプロデュース力を<br>手に入れる。</li>
+        </ul>
+        <h3 class="featured-result-title">「非モテの芋男」が<br>元モデル美女を魅了し結婚</h3>
+        <div class="featured-video">
+          <video controls playsinline preload="metadata" poster="student-result-marriage-poster.jpg" src="student-result-marriage.mp4"></video>
+        </div>
+        <ul class="featured-result-desc">
+          <li>彼女いない歴＝年齢の状態から、<br>わずか数ヶ月でモデルと交際。後に結婚</li>
+          <li>「女性経験ゼロ」だった受講生が、<br>今では街中で逆ナンされる回数が急増。</li>
+          <li><strong>「恋愛の8割は見た目で決まる」</strong>という<br>本質を突き詰め、圧倒的な外見の変え方を伝授。</li>
+          <li>トーク術やマインド論といった<br>「綺麗事」を一切排除し、<br>結果にコミットした究極の自分磨き。</li>
+        </ul>
+        <h3 class="featured-result-title">「ブスいじり」に泣いた過去から半年。<br>本質の外見改善で手に入れた<br><em>「圧倒的清潔感」と「自分への自信」<br></em></h3>
+        <div class="featured-video">
+          <video controls playsinline preload="metadata" poster="student-result-clean-confidence-poster.jpg" src="student-result-clean-confidence.mp4"></video>
+        </div>
+        <ul class="featured-result-desc">
+          <li>学生時代、周囲からの「ブスいじり」に<br>自信を失っていた受講生が、<br>勇気を出して踏み出した一歩。</li>
+          <li>徹底的な外見改善プランを実施。<br>わずか半年で、親や友人が驚くほどの<br>劇的変化を遂げる。</li>
+          <li>スキンケア、食事、睡眠の質、そして姿勢まで。表面的な着飾りではない「本質的な美」の追求。</li>
+          <li>ネットに溢れる正解不明な情報に<br>迷うのは終わり。<br>「1対1の正解」を知ることで、<br>肌も人生もここまで綺麗になる。</li>
+        </ul>
+      </div>
+      <p class="sub">数字は嘘をつかない。<br>下記はすべて、私の元で学んだ受講生の実話です。</p>
+    </div>
+
+    <div class="results reveal">
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="period">CASE&nbsp;01&nbsp;/&nbsp;3&nbsp;MONTHS</div>
+          <div class="achievement">
+            <div>
+              <span class="big-num">3<span style="font-size:.5em">ヶ月</span></span>
+              でモデルを<br>彼女にした
             </div>
           </div>
         </div>
-      </section>
-    </main>
-  </body>
-</html>
+        <div class="result-card">
+          <div class="period">CASE&nbsp;02&nbsp;/&nbsp;2&nbsp;MONTHS</div>
+          <div class="achievement">
+            <div>
+              <span class="big-num">¥320<span style="font-size:.5em">万</span></span>
+              学生が<br>2ヶ月で達成
+            </div>
+          </div>
+        </div>
+        <div class="result-card">
+          <div class="period">CASE&nbsp;03&nbsp;/&nbsp;DATING</div>
+          <div class="achievement">
+            <div>
+              <span class="big-num">No.1</span>
+              マッチングアプリ<br>いいね数&nbsp;県内1位獲得
+            </div>
+          </div>
+        </div>
+        <div class="result-card">
+          <div class="period">CASE&nbsp;04&nbsp;/&nbsp;4&nbsp;MONTHS</div>
+          <div class="achievement">
+            <div>
+              <span class="big-num">4<span style="font-size:.5em">ヶ月</span></span>
+              で芸能事務所<br>からスカウト
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="voice-list">
+      <article class="voice-card reveal">
+        <div class="quote-mark">“</div>
+        <div class="head">
+          <div class="ph">T.K</div>
+          <div class="meta">
+            <div class="name">T.K&nbsp;様</div>
+            <div class="age">30代 /&nbsp;会社員</div>
+          </div>
+        </div>
+        <p class="body">「正直、最初は半信半疑でした。
+でも初回の相談で、<br>自分の何がズレていたのかが<br>30分で言語化された瞬間に震えました。<br>3ヶ月後、
+本当に憧れだった元モデルの彼女と
+付き合えています。」
+</p>
+        <span class="tag">非モテ会社員→モデルを彼女に</span>
+      </article>
+
+      <article class="voice-card reveal reveal-d2">
+        <div class="quote-mark">“</div>
+        <div class="head">
+          <div class="ph">R.S</div>
+          <div class="meta">
+            <div class="name">R.S&nbsp;様</div>
+            <div class="age">20代 / 学生</div>
+          </div>
+        </div>
+        <p class="body">「やってきたことが全部
+間違ってました。
+お客様への向き合い方を
+根本から変えて、
+月収が2ヶ月で320万に。
+自分の人生を自分で<br>コントロールしてる感覚が手に入りました。」
+</p>
+        <span class="tag">学生→¥3,200,000</span>
+      </article>
+
+      <article class="voice-card reveal reveal-d3">
+        <div class="quote-mark">“</div>
+        <div class="head">
+          <div class="ph">Y.M</div>
+          <div class="meta">
+            <div class="name">Y.M&nbsp;様</div>
+            <div class="age">40代 /&nbsp;個人事業主</div>
+          </div>
+        </div>
+        <p class="body">「40過ぎて何かを変えるなんて
+遅いと思ってました。でも違った。
+半年後、女性にも仕事相手にも
+『かっこいいね』と言われる
+男になっていた。
+Kさんの元で学んで、本当に
+良かった。」
+</p>
+        <span class="tag">会社員→起業し月収100万&amp;理想の彼女
+</span>
+      </article>
+    </div>
+
+    <figure class="visual-panel visual-panel--right visual-panel--woman reveal">
+      <img src="luxury-woman-pool.jpg" alt="女性に選ばれる男になった後の理想の世界観" loading="lazy" decoding="async">
+      <span class="shade"></span>
+      <figcaption>
+        <small>AFTER IMAGE</small>
+        追う側ではなく、<br><em>追われる側</em>へ。
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ COUNTDOWN 2 ============ -->
+<section class="countdown-section" data-screen-label="04a Countdown" style="padding:80px 0;background:#0a0807">
+  <div class="wrap">
+    <div class="countdown reveal" data-cd="">
+      <span class="cd-label">FINAL&nbsp;CALL</span>
+      <p class="cd-headline">次は、<em>あなた</em>の番です。<br class="sp-br">受付終了まで、あとこれだけ。</p>
+      <div class="cd-clock">
+        <div class="cd-unit"><div class="cd-num" data-h="">00</div><div class="cd-lbl">HOURS</div></div>
+        <div class="cd-colon">:</div>
+        <div class="cd-unit"><div class="cd-num" data-m="">51</div><div class="cd-lbl">MINUTES</div></div>
+        <div class="cd-colon">:</div>
+        <div class="cd-unit"><div class="cd-num" data-s="">33</div><div class="cd-lbl">SECONDS</div></div>
+      </div>
+      <p class="cd-foot">※すぐに埋まってしまうため、<br class="sp-br">申し込みに制限時間がございます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq" data-screen-label="04b FAQ">
+  <div class="narrow">
+    <div class="sec-head reveal">
+      <span class="eyebrow">— Q&nbsp;&amp;&nbsp;A —</span>
+      <h2>Q&nbsp;&amp;&nbsp;A</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="q-mark">Q</span>
+          <span class="q-text">何歳からでも遅くないですか？</span>
+        </div>
+        <div class="faq-body">
+          <span class="a-mark">A</span>
+          <p>遅くありません。<br>私の受講生は30〜40代の方が多いです。<br>40代までであれば恋愛もビジネスも<br>決して遅い事はありません。<br>何より、今日が1番人生で若い日なので<br>今スグ行動しましょう。</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="q-mark">Q</span>
+          <span class="q-text">なんの才能もないのですが<br>成功できますか？</span>
+        </div>
+        <div class="faq-body">
+          <span class="a-mark">A</span>
+          <p>できます。<br>最初から才能のある人なんていません。<br>みんなゼロから始め<br>だんだん成長していくものです。<br>今才能がないからといって<br>成功できないなんてことは<br>決してございません。</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="q-mark">Q</span>
+          <span class="q-text">仕事で忙しくてもできる<br>行動や習慣を教えてもらえますか？</span>
+        </div>
+        <div class="faq-body">
+          <span class="a-mark">A</span>
+          <p>もちろんです。<br>私の受講生もお仕事をしながら<br>ビジネスや恋愛に取り組まれています。<br>個別相談では『金』と『女』を手にするためのオーダーメイドのロードマップを<br>提案させていただきます。</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="q-mark">Q</span>
+          <span class="q-text">本当に無料ですか？<br>後から請求されませんか？</span>
+        </div>
+        <div class="faq-body">
+          <span class="a-mark">A</span>
+          <p>完全無料です。請求料金は一切ありません。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COUNTDOWN 3 ============ -->
+<section class="countdown-section" data-screen-label="04c Countdown" style="padding:80px 0;background:#0a0807">
+  <div class="wrap">
+    <div class="countdown reveal" data-cd="">
+      <span class="cd-label">LAST&nbsp;CHANCE</span>
+      <p class="cd-headline">この画面を閉じたら、<br class="sp-br"><em>今のままの人生</em>が続く。</p>
+      <div class="cd-clock">
+        <div class="cd-unit"><div class="cd-num" data-h="">00</div><div class="cd-lbl">HOURS</div></div>
+        <div class="cd-colon">:</div>
+        <div class="cd-unit"><div class="cd-num" data-m="">51</div><div class="cd-lbl">MINUTES</div></div>
+        <div class="cd-colon">:</div>
+        <div class="cd-unit"><div class="cd-num" data-s="">33</div><div class="cd-lbl">SECONDS</div></div>
+      </div>
+      <p class="cd-foot">※受付終了後は、<br>予告なく送信を閉じさせていただきます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OFFER / PRICE ============ -->
+<section class="offer" id="offer" data-screen-label="05 Offer">
+  <div class="narrow">
+    <figure class="proof-panel proof-panel--offer">
+      <img src="offer-proof-collage.jpg" alt="個別相談会の実績を象徴する集合写真" loading="lazy" decoding="async">
+    </figure>
+
+    <div class="sec-head reveal">
+      <span class="eyebrow">— Special&nbsp;Offer —</span>
+      <h2>今、一歩踏み出すあなたへ。</h2>
+    </div>
+
+    <figure class="consult-preview reveal">
+      <img src="consult-preview-black.jpg" alt="無料個別相談でわかること。外見で損している原因、女性とモテを遠ざけている原因、収入につながる見せ方と伝え方、最短で結果を出す改善プランを整理。" loading="lazy" decoding="async">
+    </figure>
+
+    <div class="card reveal">
+      <span class="c1"></span><span class="c2"></span>
+      <div class="badge">LIMITED&nbsp;OFFER</div>
+
+      <div class="price-h">
+        個別相談会、<br>
+        <em>初回限定&nbsp;完全無料</em>でご招待。
+      </div>
+
+      <div class="price-row">
+        <span class="was">通常&nbsp;¥30,000</span>
+        <span class="arrow">→</span>
+        <span class="now">
+          <span class="val" data-count="0" data-target="0">0</span>
+          <span class="yen">円</span>
+          <span class="label" style="margin-left:14px">(税込)</span>
+        </span>
+      </div>
+
+      <div class="free-note">— 60分・オンライン —</div>
+
+      <div class="scarcity">
+        <div class="label"><span class="blink"></span>STRICTLY&nbsp;LIMITED</div>
+        <div class="text">
+          毎月<em>5</em>名様&nbsp;限定<br>
+          <span style="font-size:.85em;color:var(--ink-2);font-weight:400">今月の残り枠&nbsp;<em id="slotsLeft">2</em>&nbsp;名</span>
+        </div>
+        <div class="meter"><i id="slotMeter" style="width: 60%;"></i></div>
+        <div class="meter-row"><span>SLOT&nbsp;1</span><span>SLOT&nbsp;5</span></div>
+      </div>
+
+      <div class="bottom">
+        <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="btn-cta" id="mainCta">
+          <span>LINEで無料相談の<br>詳細を見る</span>
+          <span class="arrow">→</span>
+        </a>
+        <span class="btn-line-mark"><span class="dot"></span>LINE登録&nbsp;→&nbsp;30秒で申込完了</span>
+        <div class="guarantee">※ 強引な勧誘・販売は一切ございません。<br>安心してご参加ください。</div>
+      </div>
+    </div>
+
+    <!-- founder card -->
+    <div class="founder reveal">
+      <div class="ph"><img src="founder-portrait.jpg" alt="主宰 K"></div>
+      <div>
+        <div class="role">FOUNDER&nbsp;/&nbsp;CONSULTANT</div>
+        <div class="name">主宰&nbsp;K<small>
+</small></div>
+        <p>「金」と「女」を全獲りする<br>思考、習慣、マインドを発信。<br>これまでに延べ1000名以上の男性を、<br>自分の人生を謳歌できる男へと導いてきた。<br>受講生からは月収320万到達、
+モデルとの交際、<br>芸能事務所スカウトなどの実績多数。
+</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="brand">K&nbsp;CONSULTING</div>
+  <div class="links">
+    <a href="#">特定商取引法に基づく表記</a>
+    <a href="#">プライバシーポリシー</a>
+  </div>
+  <div class="copy">© 2026 K Consulting. All Rights Reserved.</div>
+</footer>
+
+<!-- sticky cta (mobile) -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="btn-cta">
+    <span>LINEで無料相談の詳細を見る</span>
+    <span class="arrow">→</span>
+  </a>
+</div>
+
+<script>
+  // reveal on scroll
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // count up numbers
+  const cio = new IntersectionObserver((es)=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.getAttribute('data-count'),10) || 0;
+      const dur = 1400; const start = performance.now();
+      const tick = (now)=>{
+        const t = Math.min(1,(now-start)/dur);
+        const eased = 1 - Math.pow(1-t,3);
+        el.textContent = Math.round(target*eased).toLocaleString();
+        if(t<1) requestAnimationFrame(tick);
+        else el.textContent = target.toLocaleString();
+      };
+      requestAnimationFrame(tick);
+      cio.unobserve(el);
+    });
+  },{threshold:.5});
+  document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+  // nav + sticky cta show/hide on scroll
+  const nav = document.getElementById('topnav');
+  const sticky = document.getElementById('stickyCta');
+  let lastY = 0;
+  window.addEventListener('scroll',()=>{
+    const y = window.scrollY;
+    if(y > 600){ nav.classList.add('show'); sticky.classList.add('show'); }
+    else { nav.classList.remove('show'); sticky.classList.remove('show'); }
+    lastY = y;
+  },{passive:true});
+
+  // smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const id = a.getAttribute('href');
+      if(id.length<2) return;
+      const t = document.querySelector(id);
+      if(!t) return;
+      e.preventDefault();
+      window.scrollTo({top:t.getBoundingClientRect().top + window.scrollY - 40, behavior:'smooth'});
+    });
+  });
+
+  // dynamic slot counter (visual only)
+  const slot = document.getElementById('slotsLeft');
+  const meter = document.getElementById('slotMeter');
+  if(slot && meter){
+    // start at "5/5 used = 80% bar" then decrement to feel urgent
+    setTimeout(()=>{ meter.style.width = '60%'; },400);
+  }
+
+  // ------- countdown timers -------
+  // すべての .countdown は同じ「次の月曜0時」をターゲットにする（毎週リセット）
+  (function(){
+    const cds = document.querySelectorAll('.countdown[data-cd]');
+    if(!cds.length) return;
+    function getTarget(){
+      // localStorage に保存して、リロードしても同じターゲットを使う
+      const KEY = 'lp_cd_target_v2';
+      let t = parseInt(localStorage.getItem(KEY)||'0',10);
+      const now = Date.now();
+      if(!t || t < now){
+        // 60分後をターゲットに（カウントが0になったら次の60分にリセット）
+        t = now + (60*60*1000);
+        localStorage.setItem(KEY, String(t));
+      }
+      return t;
+    }
+    let target = getTarget();
+    function pad(n){return String(n).padStart(2,'0')}
+    function tick(){
+      let diff = target - Date.now();
+      if(diff <= 0){
+        // 0になったら次の60分にリセット
+        localStorage.removeItem('lp_cd_target_v2');
+        target = getTarget();
+        diff = target - Date.now();
+      }
+      const hours = Math.floor(diff/(3600*1000));  diff -= hours*3600*1000;
+      const mins  = Math.floor(diff/(60*1000));    diff -= mins*60*1000;
+      const secs  = Math.floor(diff/1000);
+      cds.forEach(cd=>{
+        const h = cd.querySelector('[data-h]');
+        const m = cd.querySelector('[data-m]');
+        const s = cd.querySelector('[data-s]');
+        if(h) h.textContent = pad(hours);
+        if(m) m.textContent = pad(mins);
+        if(s) s.textContent = pad(secs);
+      });
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
+
+<style id="__om-edit-overrides">
+  /* エディットで変更した内容はここに自動保存されます。私はこのブロックには触りません。 */
+</style>
+
+</body></html>
