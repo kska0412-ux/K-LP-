@@ -21,6 +21,7 @@
         --line: rgba(231, 189, 94, 0.56);
         --panel: rgba(4, 15, 28, 0.76);
         --shadow: rgba(0, 0, 0, 0.45);
+        --jp-serif: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
       }
 
       * {
@@ -34,11 +35,12 @@
       body {
         margin: 0;
         color: var(--white);
-        font-family: "Noto Sans JP", system-ui, sans-serif;
+        font-family: var(--jp-serif);
         background:
           radial-gradient(circle at 70% 0%, rgba(36, 64, 103, 0.5), transparent 36rem),
           linear-gradient(180deg, #020913 0%, #07182a 45%, #020913 100%);
         letter-spacing: 0;
+        font-feature-settings: "palt" 1;
       }
 
       img,
