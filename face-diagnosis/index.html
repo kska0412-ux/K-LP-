@@ -408,19 +408,22 @@
       }
 
       .student-results {
-        --result-bg: #0a0807;
-        --result-panel: #1a1410;
-        --result-gold: #d4af7a;
-        --result-gold-2: #e8c98a;
-        --result-gold-soft: #7a6244;
+        --result-bg: #020913;
+        --result-panel: #07182b;
+        --result-gold: #e7bd5e;
+        --result-gold-2: #f7dda0;
+        --result-gold-soft: #8d7042;
         --result-ink: #f5f1e8;
-        --result-ink-2: #c9bfae;
-        --result-ink-3: #8a8074;
-        --result-grad-gold: linear-gradient(135deg, #e8c98a 0%, #d4af7a 35%, #a07a44 70%, #d4af7a 100%);
+        --result-ink-2: #d6dceb;
+        --result-ink-3: #8fa0b8;
+        --result-grad-gold: linear-gradient(135deg, #fff2be 0%, #e7bd5e 42%, #a97521 76%, #f7dda0 100%);
         position: relative;
         overflow: hidden;
         padding: 100px 0;
-        background: linear-gradient(180deg, #0a0807 0%, #0d0a08 50%, #0a0807 100%);
+        background:
+          linear-gradient(180deg, rgba(2, 9, 19, 0.98) 0%, rgba(7, 24, 43, 0.96) 48%, rgba(2, 9, 19, 0.98) 100%),
+          radial-gradient(circle at 50% 0%, rgba(231, 189, 94, 0.12), transparent 28rem),
+          #020913;
       }
 
       .student-results::before {
@@ -429,8 +432,10 @@
         inset: 0;
         pointer-events: none;
         background-image:
-          radial-gradient(circle at 10% 20%, rgba(212, 175, 122, 0.06), transparent 30%),
-          radial-gradient(circle at 90% 80%, rgba(212, 175, 122, 0.06), transparent 30%);
+          linear-gradient(90deg, rgba(247, 221, 160, 0.07) 0 1px, transparent 1px 100%),
+          radial-gradient(circle at 10% 20%, rgba(231, 189, 94, 0.12), transparent 30%),
+          radial-gradient(circle at 90% 80%, rgba(54, 95, 143, 0.24), transparent 32%);
+        background-size: 7.5rem 100%, auto, auto;
       }
 
       .student-results .wrap {
@@ -478,8 +483,8 @@
         max-width: 1100px;
         margin: 0 auto;
         padding: 8px 0;
-        border-top: 1px solid rgba(212, 175, 122, 0.2);
-        border-bottom: 1px solid rgba(212, 175, 122, 0.2);
+        border-top: 1px solid rgba(231, 189, 94, 0.28);
+        border-bottom: 1px solid rgba(231, 189, 94, 0.28);
       }
 
       .student-results .results-grid {
@@ -492,7 +497,7 @@
         position: relative;
         padding: 36px 24px;
         text-align: center;
-        border-right: 1px solid rgba(212, 175, 122, 0.14);
+        border-right: 1px solid rgba(231, 189, 94, 0.18);
       }
 
       .student-results .result-card:last-child {
@@ -554,10 +559,10 @@
       .student-results .featured-video {
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(216, 173, 92, 0.42);
+        border: 1px solid rgba(231, 189, 94, 0.46);
         border-radius: 8px;
-        background: #050403;
-        box-shadow: 0 24px 70px -34px rgba(212, 175, 122, 0.55);
+        background: #020913;
+        box-shadow: 0 24px 70px -34px rgba(231, 189, 94, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
       }
 
       .student-results .featured-video::before,
@@ -588,7 +593,7 @@
       .student-results .featured-video video {
         display: block;
         width: 100%;
-        background: #050403;
+        background: #020913;
       }
 
       .student-results .featured-result-desc {
@@ -597,9 +602,10 @@
         color: var(--result-ink-2);
         font-size: clamp(13px, 1.75vw, 15px);
         line-height: 2;
-        border: 1px solid rgba(216, 173, 92, 0.36);
+        border: 1px solid rgba(231, 189, 94, 0.34);
         border-radius: 8px;
-        background: linear-gradient(180deg, rgba(17, 18, 16, 0.9) 0%, rgba(5, 6, 5, 0.9) 100%);
+        background:
+          linear-gradient(180deg, rgba(12, 35, 59, 0.9) 0%, rgba(3, 15, 29, 0.92) 100%);
         box-shadow: 0 18px 54px rgba(0, 0, 0, 0.48), 0 0 0 1px rgba(255, 223, 133, 0.05) inset;
       }
 
@@ -634,9 +640,9 @@
       .student-results .voice-card {
         position: relative;
         padding: 32px 28px;
-        border: 1px solid rgba(216, 173, 92, 0.36);
+        border: 1px solid rgba(231, 189, 94, 0.34);
         border-radius: 8px;
-        background: linear-gradient(180deg, rgba(17, 18, 16, 0.9) 0%, rgba(5, 6, 5, 0.9) 100%);
+        background: linear-gradient(180deg, rgba(12, 35, 59, 0.9) 0%, rgba(3, 15, 29, 0.92) 100%);
         box-shadow: 0 18px 54px rgba(0, 0, 0, 0.48), 0 0 0 1px rgba(255, 223, 133, 0.05) inset;
       }
 
@@ -659,7 +665,7 @@
         margin-bottom: 20px;
         padding-top: 28px;
         padding-bottom: 18px;
-        border-bottom: 1px solid rgba(212, 175, 122, 0.12);
+        border-bottom: 1px solid rgba(231, 189, 94, 0.16);
       }
 
       .student-results .voice-card .ph {
@@ -674,7 +680,7 @@
         font-size: 18px;
         border: 1px solid var(--result-gold);
         border-radius: 50%;
-        background: repeating-linear-gradient(45deg, #1a1410 0 6px, #221a14 6px 12px);
+        background: repeating-linear-gradient(45deg, #07182b 0 6px, #0f2744 6px 12px);
       }
 
       .student-results .voice-card .meta .name {
@@ -715,9 +721,9 @@
         position: relative;
         overflow: hidden;
         margin-top: 36px;
-        border: 1px solid rgba(216, 173, 92, 0.42);
+        border: 1px solid rgba(231, 189, 94, 0.46);
         border-radius: 8px;
-        box-shadow: 0 28px 70px -36px rgba(212, 175, 122, 0.55);
+        box-shadow: 0 28px 70px -36px rgba(231, 189, 94, 0.5);
       }
 
       .student-results .visual-panel::before,
@@ -755,7 +761,7 @@
       .student-results .visual-panel .shade {
         position: absolute;
         inset: 0;
-        background: linear-gradient(90deg, rgba(10, 8, 7, 0.15), rgba(10, 8, 7, 0.76));
+        background: linear-gradient(90deg, rgba(2, 9, 19, 0.1), rgba(2, 9, 19, 0.78));
       }
 
       .student-results .visual-panel figcaption {
@@ -798,7 +804,7 @@
 
         .student-results .result-card:nth-child(1),
         .student-results .result-card:nth-child(2) {
-          border-bottom: 1px solid rgba(212, 175, 122, 0.14);
+          border-bottom: 1px solid rgba(231, 189, 94, 0.18);
         }
 
         .student-results .voice-list {
