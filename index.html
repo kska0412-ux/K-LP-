@@ -897,19 +897,107 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .inline-offer .sec-head{
     margin-bottom:28px;
   }
+  .pre-about-offer{
+    padding:clamp(72px,8vw,112px) 0 clamp(70px,8vw,104px);
+    background:#020302;
+    overflow:visible;
+    isolation:auto;
+  }
+  .pre-about-offer::before,
+  .pre-about-offer::after{
+    display:none;
+  }
   .consult-preview{
-    width:min(100%,588px);
+    width:min(100%,760px);
     margin:0 auto clamp(22px,4vw,34px);
-    background:#000;
+    padding:clamp(22px,4vw,40px) clamp(18px,4vw,48px) clamp(24px,4vw,44px);
+    background:
+      radial-gradient(ellipse at 50% 0%,rgba(216,173,92,.12),transparent 46%),
+      linear-gradient(180deg,#020302 0%,#000 100%);
+    border:1px solid rgba(216,173,92,.5);
     border-radius:8px;
     overflow:hidden;
-    line-height:0;
     box-shadow:0 18px 48px rgba(0,0,0,.45),0 0 24px rgba(212,175,122,.12);
+    text-align:center;
+    position:relative;
   }
-  .consult-preview img{
-    display:block;
-    width:100%;
-    height:auto;
+  .consult-preview::before,
+  .consult-preview::after{
+    content:"";position:absolute;top:-1px;width:24px;height:24px;border-top:1px solid var(--gold);pointer-events:none;
+  }
+  .consult-preview::before{left:-1px;border-left:1px solid var(--gold);border-top-left-radius:8px}
+  .consult-preview::after{right:-1px;border-right:1px solid var(--gold);border-top-right-radius:8px}
+  .consult-preview .preview-kicker{
+    font-family:"Shippori Mincho",serif;
+    color:var(--ink);
+    font-size:clamp(15px,2.1vw,22px);
+    letter-spacing:.12em;
+    line-height:1.5;
+    margin-bottom:clamp(8px,1.4vw,12px);
+  }
+  .consult-preview .preview-title{
+    font-family:"Shippori Mincho",serif;
+    color:var(--ink);
+    font-size:clamp(23px,4.2vw,44px);
+    font-weight:700;
+    letter-spacing:.03em;
+    line-height:1.35;
+    text-shadow:0 2px 16px rgba(0,0,0,.86);
+  }
+  .consult-preview .preview-title em,
+  .consult-preview .preview-list em{
+    color:var(--gold-3);
+    font-style:normal;
+  }
+  .consult-preview .preview-divider{
+    display:flex;align-items:center;gap:18px;
+    width:min(100%,520px);
+    margin:clamp(10px,2vw,18px) auto clamp(18px,3vw,26px);
+    color:var(--gold-3);
+    font-family:"Shippori Mincho",serif;
+    font-size:clamp(14px,2vw,22px);
+    letter-spacing:.1em;
+    line-height:1.45;
+  }
+  .consult-preview .preview-divider::before,
+  .consult-preview .preview-divider::after{
+    content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(216,173,92,.7),transparent);
+  }
+  .consult-preview .preview-list{
+    width:min(100%,620px);
+    margin:0 auto;
+    padding:0;
+    display:grid;
+    gap:clamp(8px,1.4vw,12px);
+    text-align:left;
+  }
+  .consult-preview .preview-list li{
+    list-style:none;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    align-items:start;
+    gap:12px;
+    color:var(--ink-1);
+    font-family:"Shippori Mincho",serif;
+    font-size:clamp(14px,2vw,20px);
+    line-height:1.55;
+    letter-spacing:.02em;
+    text-shadow:0 1px 12px rgba(0,0,0,.8);
+  }
+  .consult-preview .preview-check{
+    width:clamp(20px,2.8vw,28px);
+    height:clamp(20px,2.8vw,28px);
+    border-radius:50%;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:.1em;
+    background:linear-gradient(180deg,#ffd76a 0%,#d49828 100%);
+    color:#020302;
+    font-family:Arial,sans-serif;
+    font-size:clamp(13px,1.8vw,18px);
+    font-weight:700;
+    box-shadow:0 0 14px rgba(216,173,92,.28);
   }
   .inline-offer .card{
     background:linear-gradient(180deg,rgba(26,20,16,.82) 0%,rgba(10,8,7,.82) 100%);
@@ -923,6 +1011,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .consult-preview{
       margin-bottom:22px;
+      padding:22px 14px 24px;
+    }
+    .consult-preview .preview-title{
+      font-size:clamp(20px,5.6vw,28px);
+      letter-spacing:.01em;
+    }
+    .consult-preview .preview-divider{
+      gap:10px;
+      font-size:clamp(14px,4vw,17px);
+    }
+    .consult-preview .preview-list li{
+      gap:9px;
+      font-size:clamp(12px,3.65vw,15px);
+      line-height:1.62;
     }
     .inline-offer .card{
       padding:32px 18px 34px;
@@ -1740,6 +1842,69 @@ Kさんの元で学んで、本当に
   </div>
 </section>
 
+<!-- ============ PRE-ABOUT OFFER ============ -->
+<section class="offer pre-about-offer" data-screen-label="02c Limited Offer">
+  <div class="narrow">
+    <div class="sec-head reveal">
+      <span class="eyebrow">— Limited&nbsp;Offer —</span>
+      <h2>一歩踏み出すあなたへ。</h2>
+    </div>
+
+    <figure class="consult-preview reveal">
+      <div class="preview-kicker">1軍男だけが知っている</div>
+      <div class="preview-title"><em>金とモテ</em>を引き寄せる方法を大公開</div>
+      <div class="preview-divider"><span>無料個別相談でわかること</span></div>
+      <ul class="preview-list">
+        <li><span class="preview-check">✓</span><span>外見で損している原因を整理</span></li>
+        <li><span class="preview-check">✓</span><span>女とモテを遠ざけている<em>致命的な原因</em></span></li>
+        <li><span class="preview-check">✓</span><span>収入につながる見せ方・伝え方を整理</span></li>
+        <li><span class="preview-check">✓</span><span>最短で結果を出すための<em>具体的な改善プラン</em>を提示</span></li>
+      </ul>
+    </figure>
+
+    <div class="card reveal">
+      <span class="c1"></span><span class="c2"></span>
+      <div class="badge">LIMITED&nbsp;OFFER</div>
+
+      <div class="price-h">
+        個別相談会、<br>
+        <em>初回限定&nbsp;完全無料</em>でご招待。
+      </div>
+
+      <div class="price-row">
+        <span class="was">通常&nbsp;¥30,000</span>
+        <span class="arrow">→</span>
+        <span class="now">
+          <span class="val" data-count="0" data-target="0">0</span>
+          <span class="yen">円</span>
+          <span class="label" style="margin-left:14px">(税込)</span>
+        </span>
+      </div>
+
+      <div class="free-note">— 60分・オンライン —</div>
+
+      <div class="scarcity">
+        <div class="label"><span class="blink"></span>STRICTLY&nbsp;LIMITED</div>
+        <div class="text">
+          毎月<em>5</em>名様&nbsp;限定<br>
+          <span style="font-size:.85em;color:var(--ink-2);font-weight:400">今月の残り枠&nbsp;<em>2</em>&nbsp;名</span>
+        </div>
+        <div class="meter"><i style="width: 60%;"></i></div>
+        <div class="meter-row"><span>SLOT&nbsp;1</span><span>SLOT&nbsp;5</span></div>
+      </div>
+
+      <div class="bottom">
+        <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="btn-cta">
+          <span>LINEで無料相談の<br>詳細を見る</span>
+          <span class="arrow">→</span>
+        </a>
+        <span class="btn-line-mark"><span class="dot"></span>LINE登録&nbsp;→&nbsp;30秒で申込完了</span>
+        <div class="guarantee">※ 強引な勧誘・販売は一切ございません。<br>安心してご参加ください。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ PRODUCT ============ -->
 <section class="product product--program" data-screen-label="02 About">
   <div class="wrap">
@@ -1782,58 +1947,6 @@ Kさんの元で学んで、本当に
         3ヶ月後・半年後・1年後に<br>見たい景色を叶えるために、<br>
         思考、習慣、選ぶ環境、毎日の行動まで、<br>今日から動けるレベルに落とし込みます。
       </p>
-
-      <div class="offer inline-offer">
-        <div class="sec-head">
-          <span class="eyebrow">— Special&nbsp;Offer —</span>
-          <h2>一歩踏み出すあなたへ。</h2>
-        </div>
-
-        <figure class="consult-preview">
-          <img src="consult-preview-black.jpg" alt="無料個別相談でわかること。外見で損している原因、女性とモテを遠ざけている原因、収入につながる見せ方と伝え方、最短で結果を出す改善プランを整理。" loading="lazy" decoding="async">
-        </figure>
-
-        <div class="card">
-          <span class="c1"></span><span class="c2"></span>
-          <div class="badge">LIMITED&nbsp;OFFER</div>
-
-          <div class="price-h">
-            個別相談会、<br>
-            <em>初回限定&nbsp;完全無料</em>でご招待。
-          </div>
-
-          <div class="price-row">
-            <span class="was">通常&nbsp;¥30,000</span>
-            <span class="arrow">→</span>
-            <span class="now">
-              <span class="val" data-count="0" data-target="0">0</span>
-              <span class="yen">円</span>
-              <span class="label" style="margin-left:14px">(税込)</span>
-            </span>
-          </div>
-
-          <div class="free-note">— 60分・オンライン —</div>
-
-          <div class="scarcity">
-            <div class="label"><span class="blink"></span>STRICTLY&nbsp;LIMITED</div>
-            <div class="text">
-              毎月<em>5</em>名様&nbsp;限定<br>
-              <span style="font-size:.85em;color:var(--ink-2);font-weight:400">今月の残り枠&nbsp;<em>2</em>&nbsp;名</span>
-            </div>
-            <div class="meter"><i style="width: 60%;"></i></div>
-            <div class="meter-row"><span>SLOT&nbsp;1</span><span>SLOT&nbsp;5</span></div>
-          </div>
-
-          <div class="bottom">
-            <a href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" class="btn-cta">
-              <span>LINEで無料相談の<br>詳細を見る</span>
-              <span class="arrow">→</span>
-            </a>
-            <span class="btn-line-mark"><span class="dot"></span>LINE登録&nbsp;→&nbsp;30秒で申込完了</span>
-            <div class="guarantee">※ 強引な勧誘・販売は一切ございません。<br>安心してご参加ください。</div>
-          </div>
-        </div>
-      </div>
 
     </div>
 
@@ -2031,7 +2144,15 @@ Kさんの元で学んで、本当に
     </div>
 
     <figure class="consult-preview reveal">
-      <img src="consult-preview-black.jpg" alt="無料個別相談でわかること。外見で損している原因、女性とモテを遠ざけている原因、収入につながる見せ方と伝え方、最短で結果を出す改善プランを整理。" loading="lazy" decoding="async">
+      <div class="preview-kicker">1軍男だけが知っている</div>
+      <div class="preview-title"><em>金とモテ</em>を引き寄せる方法を大公開</div>
+      <div class="preview-divider"><span>無料個別相談でわかること</span></div>
+      <ul class="preview-list">
+        <li><span class="preview-check">✓</span><span>外見で損している原因を整理</span></li>
+        <li><span class="preview-check">✓</span><span>女とモテを遠ざけている<em>致命的な原因</em></span></li>
+        <li><span class="preview-check">✓</span><span>収入につながる見せ方・伝え方を整理</span></li>
+        <li><span class="preview-check">✓</span><span>最短で結果を出すための<em>具体的な改善プラン</em>を提示</span></li>
+      </ul>
     </figure>
 
     <div class="card reveal">
