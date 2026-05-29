@@ -482,7 +482,7 @@
 
       .student-results .results-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 0;
       }
 
@@ -788,16 +788,7 @@
 
       @media (max-width: 880px) {
         .student-results .results-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .student-results .result-card:nth-child(2) {
-          border-right: none;
-        }
-
-        .student-results .result-card:nth-child(1),
-        .student-results .result-card:nth-child(2) {
-          border-bottom: 1px solid rgba(231, 189, 94, 0.18);
+          grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
         .student-results .voice-list {
@@ -832,13 +823,19 @@
 
         .student-results .results-grid {
           width: 100%;
-          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+          grid-template-columns: minmax(0, 1fr);
         }
 
         .student-results .result-card {
           min-width: 0;
           padding: 34px 10px;
+          border-right: none;
+          border-bottom: 1px solid rgba(231, 189, 94, 0.18);
           overflow: hidden;
+        }
+
+        .student-results .result-card:last-child {
+          border-bottom: none;
         }
 
         .student-results .result-card .period {
@@ -899,6 +896,28 @@
       .section-head {
         max-width: 760px;
         margin-bottom: 46px;
+      }
+
+      .section-pre-cta {
+        width: min(720px, 100%);
+        margin: 0 0 34px;
+      }
+
+      .section-pre-cta .primary-cta {
+        grid-template-columns: 52px minmax(0, 1fr) 48px;
+        min-height: 76px;
+        padding: 16px 34px;
+        font-size: clamp(1.1rem, 2.6vw, 1.55rem);
+      }
+
+      .section-pre-cta .primary-cta svg {
+        width: 42px;
+        height: 42px;
+      }
+
+      .section-pre-cta .primary-cta .arrow {
+        width: 28px;
+        height: 28px;
       }
 
       .section-label {
@@ -1456,6 +1475,27 @@
           font-size: 1rem;
         }
 
+        .section-pre-cta {
+          margin-bottom: 28px;
+        }
+
+        .section-pre-cta .primary-cta {
+          grid-template-columns: 38px minmax(0, 1fr) 34px;
+          min-height: 70px;
+          padding: 12px 18px;
+          font-size: 1rem;
+        }
+
+        .section-pre-cta .primary-cta svg {
+          width: 34px;
+          height: 34px;
+        }
+
+        .section-pre-cta .primary-cta .arrow {
+          width: 20px;
+          height: 20px;
+        }
+
         .metric {
           grid-template-columns: 86px 1fr;
           gap: 16px;
@@ -1554,7 +1594,6 @@
               </div>
               <ul class="featured-result-desc">
                 <li>かつては女性経験0。そこから<br>マッチングアプリとナンパを極め、<br>経験人数300人を突破。</li>
-                <li><br></li>
                 <li>「他社の恋愛コンサルとは物が違う」<br>——小手先のテクニックではなく、<br>身なりから向き合い方まで「本質」を変えた。</li>
                 <li>周囲から<strong>「めちゃくちゃカッコよくなった」</strong>と<br>絶賛される、圧倒的なセルフプロデュース力を<br>手に入れる。</li>
               </ul>
@@ -1594,16 +1633,7 @@
                 </div>
               </div>
               <div class="result-card">
-                <div class="period">CASE&nbsp;02&nbsp;/&nbsp;2&nbsp;MONTHS</div>
-                <div class="achievement">
-                  <div>
-                    <span class="big-num">¥320<span style="font-size: 0.5em">万</span></span>
-                    学生が<br>2ヶ月で達成
-                  </div>
-                </div>
-              </div>
-              <div class="result-card">
-                <div class="period">CASE&nbsp;03&nbsp;/&nbsp;DATING</div>
+                <div class="period">CASE&nbsp;02&nbsp;/&nbsp;DATING</div>
                 <div class="achievement">
                   <div>
                     <span class="big-num">No.1</span>
@@ -1612,7 +1642,7 @@
                 </div>
               </div>
               <div class="result-card">
-                <div class="period">CASE&nbsp;04&nbsp;/&nbsp;4&nbsp;MONTHS</div>
+                <div class="period">CASE&nbsp;03&nbsp;/&nbsp;4&nbsp;MONTHS</div>
                 <div class="achievement">
                   <div>
                     <span class="big-num">4<span style="font-size: 0.5em">ヶ月</span></span>
@@ -1692,7 +1722,19 @@ Kさんの元で学んで、本当に
       <section class="section problem" id="problem">
         <div class="container">
           <div class="section-head">
-            <div class="section-label">課題提起</div>
+            <div class="cta-stack section-pre-cta">
+              <a class="primary-cta" href="#cta" aria-label="30秒で無料診断をはじめる">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <circle cx="32" cy="34" r="22" fill="none" stroke="currentColor"></circle>
+                  <path d="M26 8h12M32 8v8M46 18l5-5M32 22v14l10 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M12 34a20 20 0 0 1 32-16" fill="none" stroke="currentColor" stroke-linecap="round"></path>
+                </svg>
+                <span>30秒で無料診断をはじめる</span>
+                <svg class="arrow" viewBox="0 0 32 32" aria-hidden="true">
+                  <path d="M11 5l10 11-10 11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </a>
+            </div>
             <h2>努力しているのに、<span class="gold-text">外見で損をする理由</span>が<br>あります。</h2>
             <p class="section-copy">
               高い服や流行の髪型が、そのままあなたの魅力に<br>なるとは限りません。
