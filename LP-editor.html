@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LP 改行編集モード</title>
+<title>K-LP 編集サイト</title>
 <style>
   :root{
     --bg:#11100f;
@@ -28,11 +28,12 @@
   .brand b{font-size:14px;letter-spacing:.04em}
   .brand span{font-size:11px;color:var(--muted)}
   .controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-  button,.select{
+  button,.select,input[type="url"],input[type="text"]{
     appearance:none;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);
     font:inherit;font-size:13px;height:38px;padding:0 12px;cursor:pointer;
     box-shadow:0 1px 0 rgba(0,0,0,.03);
   }
+  input[type="url"],input[type="text"]{width:100%;cursor:text}
   button:hover{border-color:#c8b89f}
   button.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
   button.accent{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -84,6 +85,8 @@
   .switch input{width:18px;height:18px;accent-color:var(--accent)}
   .mini-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
   .mini-actions button{height:34px;font-size:12px}
+  .form-row{display:grid;gap:8px;margin-top:10px}
+  .form-row label{font-size:12px;color:var(--muted)}
   .hint-note{font-size:12px;color:var(--muted);line-height:1.7;margin-top:10px}
   @media (max-width:900px){
     .topbar{align-items:flex-start;flex-direction:column}
@@ -97,17 +100,19 @@
 <body>
   <header class="topbar">
     <div class="brand">
-      <b>LP 改行編集モード</b>
-      <span>スマホ幅の表示を見ながら、テキストを直接クリックして編集</span>
+      <b>K-LP 編集サイト</b>
+      <span>スマホ幅の表示を見ながら、テキスト・CTAリンク・余白を編集</span>
     </div>
     <div class="controls">
       <button type="button" data-width="390">390px</button>
       <button type="button" data-width="430">430px</button>
       <button type="button" class="ghost" id="toggleGuides">編集枠 OFF</button>
       <button type="button" class="ghost" id="toggleSpacing">間隔モード OFF</button>
+      <button type="button" class="ghost" id="openLocalHtml">HTMLを開く</button>
+      <button type="button" class="primary" id="saveLocalHtml">上書き保存</button>
       <button type="button" class="ghost" id="reloadPreview">リセット</button>
       <button type="button" class="accent" id="copyHtml">HTMLをコピー</button>
-      <button type="button" class="primary" id="downloadHtml">保存HTMLをダウンロード</button>
+      <button type="button" class="primary" id="downloadHtml">ダウンロード</button>
       <div class="status" id="status">読み込み中...</div>
     </div>
   </header>
@@ -124,6 +129,19 @@
     <aside class="side">
       <h1>画面上の文字をそのまま編集できます</h1>
       <p>紫の点線が編集できるテキストです。改行したい位置をクリックして、Enterを押してください。</p>
+
+      <div class="card">
+        <h2>CTAリンク</h2>
+        <p>LINEボタンやFVのクリック先をまとめて変更します。</p>
+        <div class="form-row">
+          <label for="ctaUrl">遷移先URL</label>
+          <input id="ctaUrl" type="url" inputmode="url" placeholder="https://liff.line.me/...">
+        </div>
+        <div class="mini-actions">
+          <button type="button" id="refreshCtaUrl">現在のURLを取得</button>
+          <button type="button" class="accent" id="applyCtaUrl">全CTAに反映</button>
+        </div>
+      </div>
 
       <div class="card">
         <h2>使い方</h2>
@@ -156,7 +174,7 @@
 
       <div class="card">
         <h2>メモ</h2>
-        <p>この編集ページは元の <code>index.html</code> を自動上書きしません。保存ボタンで編集済みHTMLを書き出します。</p>
+        <p>Chromeで「HTMLを開く」から手元の <code>index.html</code> を選ぶと、「上書き保存」でそのファイルへ保存できます。使えない環境ではダウンロード保存になります。</p>
         <p>貼り付け時は装飾を外して、プレーンテキストと改行だけを入れます。</p>
         <div class="toggle-row">
           <label for="plainBreak">Enterは通常の &lt;br&gt; を挿入</label>
@@ -178,6 +196,8 @@
   var activeBlock = null;
   var changeCount = 0;
   var spacingStep = 12;
+  var fileHandle = null;
+  var ctaUrlInput = document.getElementById("ctaUrl");
 
   var editableSelectors = [
     ".hero h1",
@@ -198,14 +218,25 @@
     ".result-card .achievement",
     ".featured-result-title",
     ".featured-result-desc li",
+    ".proof-headline-inner",
+    ".visual-panel figcaption",
+    ".cd-label",
     ".voice-card .meta .name",
     ".voice-card .body",
     ".voice-card .tag",
     ".faq .q-text",
     ".faq-body p",
+    ".consult-preview .preview-kicker",
+    ".consult-preview .preview-title",
+    ".consult-preview .preview-divider span",
+    ".consult-preview .preview-list li span:last-child",
+    ".offer .badge",
     ".offer .price-h",
+    ".offer .price-row .was",
     ".offer .free-note",
     ".scarcity .text",
+    ".scarcity .label",
+    ".meter-row span",
     ".offer .guarantee",
     ".founder .role",
     ".founder .name",
@@ -235,6 +266,47 @@
 
   function setStatus(text){
     statusEl.textContent = text;
+  }
+
+  function getPreviewDoc(){
+    try {
+      return iframe.contentDocument;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function isCtaLink(link){
+    var href = link.getAttribute("href") || "";
+    return link.classList.contains("btn-cta") ||
+      link.classList.contains("hero-hotspot") ||
+      link.classList.contains("cta") ||
+      href.indexOf("line.me/") !== -1 ||
+      href.indexOf("liff.line.me/") !== -1 ||
+      href.indexOf("lin.ee/") !== -1;
+  }
+
+  function syncCtaInput(){
+    var doc = getPreviewDoc();
+    if (!doc || !ctaUrlInput) return;
+    var links = Array.prototype.filter.call(doc.querySelectorAll("a[href]"), isCtaLink);
+    if (links.length) ctaUrlInput.value = links[0].getAttribute("href");
+  }
+
+  function applyCtaUrl(){
+    var doc = getPreviewDoc();
+    if (!doc || !ctaUrlInput) return;
+    var url = ctaUrlInput.value.trim();
+    if (!/^https?:\/\/\S+$/i.test(url)) {
+      setStatus("URLは https:// から入力してください");
+      return;
+    }
+    var links = Array.prototype.filter.call(doc.querySelectorAll("a[href]"), isCtaLink);
+    links.forEach(function(link){
+      link.setAttribute("href", url);
+    });
+    markChanged();
+    setStatus("CTAリンク " + links.length + " 件を更新");
   }
 
   function cssPath(el){
@@ -510,6 +582,7 @@
     });
 
     applyEditorMode();
+    syncCtaInput();
     setStatus("編集できます");
   }
 
@@ -552,6 +625,55 @@
     setStatus("HTMLを書き出しました");
   }
 
+  async function openLocalHtml(){
+    if (!window.showOpenFilePicker) {
+      setStatus("このブラウザではHTMLを開けません。Chromeで開いてください");
+      return;
+    }
+    try {
+      var handles = await window.showOpenFilePicker({
+        multiple:false,
+        types:[{
+          description:"HTML",
+          accept:{"text/html":[".html",".htm"]}
+        }]
+      });
+      fileHandle = handles[0];
+      var file = await fileHandle.getFile();
+      var html = await file.text();
+      changeCount = 0;
+      activeEl = null;
+      activeBlock = null;
+      selectedBox.textContent = "まだ選択されていません。";
+      iframe.removeAttribute("src");
+      iframe.srcdoc = html;
+      setStatus(file.name + " を開きました");
+    } catch (error) {
+      if (error && error.name === "AbortError") {
+        setStatus("ファイル選択をキャンセルしました");
+      } else {
+        setStatus("HTMLを開けませんでした");
+      }
+    }
+  }
+
+  async function saveLocalHtml(){
+    if (!fileHandle || !fileHandle.createWritable) {
+      downloadHtml();
+      return;
+    }
+    try {
+      var writable = await fileHandle.createWritable();
+      await writable.write(cleanExportHtml());
+      await writable.close();
+      setStatus("index.htmlへ上書き保存しました");
+      changeCount = 0;
+    } catch (error) {
+      setStatus("上書き保存できなかったためダウンロードします");
+      downloadHtml();
+    }
+  }
+
   function copyHtml(){
     var html = cleanExportHtml();
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -579,14 +701,23 @@
 
   iframe.addEventListener("load", setupEditor);
 
+  document.getElementById("openLocalHtml").addEventListener("click", openLocalHtml);
+  document.getElementById("saveLocalHtml").addEventListener("click", saveLocalHtml);
   document.getElementById("downloadHtml").addEventListener("click", downloadHtml);
   document.getElementById("copyHtml").addEventListener("click", copyHtml);
+  document.getElementById("refreshCtaUrl").addEventListener("click", function(){
+    syncCtaInput();
+    setStatus("現在のCTA URLを取得しました");
+  });
+  document.getElementById("applyCtaUrl").addEventListener("click", applyCtaUrl);
   document.getElementById("reloadPreview").addEventListener("click", function(){
     changeCount = 0;
     activeEl = null;
     activeBlock = null;
+    fileHandle = null;
     selectedBox.textContent = "まだ選択されていません。";
     setStatus("再読み込み中...");
+    iframe.removeAttribute("srcdoc");
     iframe.src = "index.html?mobile=1&ts=" + Date.now();
   });
   document.getElementById("toggleGuides").addEventListener("click", function(event){
@@ -610,6 +741,11 @@
     button.addEventListener("click", function(){
       deviceShell.dataset.width = button.dataset.width;
     });
+  });
+  window.addEventListener("beforeunload", function(event){
+    if (!changeCount) return;
+    event.preventDefault();
+    event.returnValue = "";
   });
 })();
 </script>
