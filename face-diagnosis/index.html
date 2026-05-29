@@ -1450,8 +1450,18 @@
           padding-top: 24px;
         }
 
+        .hero::after {
+          background:
+            linear-gradient(90deg, rgba(2, 9, 19, 0.34) 0%, rgba(2, 9, 19, 0.42) 52%, rgba(2, 9, 19, 0.72) 100%),
+            linear-gradient(180deg, rgba(2, 9, 19, 0.08) 0%, rgba(2, 9, 19, 0.18) 42%, rgba(2, 9, 19, 0.56) 100%);
+          mix-blend-mode: normal;
+          opacity: 1;
+        }
+
         .hero-photo {
           object-position: 39% 50%;
+          opacity: 0.78;
+          filter: brightness(0.66) contrast(1.06);
         }
 
         .audience-badge {
