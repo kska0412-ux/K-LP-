@@ -700,6 +700,9 @@
   }
 
   iframe.addEventListener("load", setupEditor);
+  if (iframe.contentDocument && iframe.contentDocument.readyState !== "loading") {
+    setTimeout(setupEditor, 0);
+  }
 
   document.getElementById("openLocalHtml").addEventListener("click", openLocalHtml);
   document.getElementById("saveLocalHtml").addEventListener("click", saveLocalHtml);
