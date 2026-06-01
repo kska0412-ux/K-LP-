@@ -322,6 +322,73 @@
         text-shadow: 0 3px 18px rgba(0, 0, 0, 0.72);
       }
 
+      .bonus-mockup {
+        width: min(720px, 100%);
+        margin: 24px 0 0;
+      }
+
+      .bonus-mockup--final {
+        margin: 0 auto 34px;
+      }
+
+      .bonus-mockup-frame {
+        display: grid;
+        grid-template-columns: minmax(112px, 168px) minmax(0, 1fr);
+        gap: 18px;
+        align-items: center;
+        padding: 14px;
+        border: 1px solid rgba(231, 189, 94, 0.52);
+        background:
+          linear-gradient(135deg, rgba(255, 242, 190, 0.1), transparent 32%),
+          linear-gradient(180deg, rgba(10, 27, 48, 0.88), rgba(2, 9, 19, 0.94));
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 248, 216, 0.08),
+          0 18px 42px rgba(0, 0, 0, 0.38);
+      }
+
+      .bonus-mockup img {
+        width: 100%;
+        aspect-ratio: 2 / 3;
+        object-fit: cover;
+        object-position: top;
+        border: 1px solid rgba(247, 221, 160, 0.42);
+        box-shadow: 0 14px 26px rgba(0, 0, 0, 0.42);
+      }
+
+      .bonus-copy {
+        min-width: 0;
+      }
+
+      .bonus-kicker {
+        display: inline-block;
+        margin-bottom: 8px;
+        padding: 4px 10px 5px;
+        color: #061526;
+        background: linear-gradient(135deg, #fff2be, #d8a746);
+        font-size: 0.86rem;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .bonus-copy strong {
+        display: block;
+        color: var(--white);
+        font-size: clamp(1.08rem, 2.5vw, 1.65rem);
+        font-weight: 800;
+        line-height: 1.55;
+        text-shadow: 0 3px 18px rgba(0, 0, 0, 0.72);
+      }
+
+      .bonus-copy em {
+        display: block;
+        margin-top: 8px;
+        color: var(--gold-bright);
+        font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+        font-style: normal;
+        font-weight: 800;
+        line-height: 1.35;
+      }
+
       .cta-stack {
         width: min(900px, 100%);
         margin-top: 28px;
@@ -1398,6 +1465,15 @@
           font-size: 1.32rem;
         }
 
+        .bonus-mockup {
+          width: min(640px, 100%);
+          margin-top: 26px;
+        }
+
+        .bonus-mockup--final {
+          margin: 0 auto 30px;
+        }
+
         .cta-stack {
           margin-top: 38px;
         }
@@ -1495,6 +1571,32 @@
         .lead {
           font-size: 1.06rem;
           line-height: 1.85;
+        }
+
+        .bonus-mockup {
+          margin-top: 22px;
+        }
+
+        .bonus-mockup-frame {
+          grid-template-columns: 92px minmax(0, 1fr);
+          gap: 12px;
+          padding: 12px;
+        }
+
+        .bonus-kicker {
+          margin-bottom: 7px;
+          padding: 4px 8px 5px;
+          font-size: 0.74rem;
+        }
+
+        .bonus-copy strong {
+          font-size: 0.98rem;
+          line-height: 1.55;
+        }
+
+        .bonus-copy em {
+          margin-top: 6px;
+          font-size: 1.04rem;
         }
 
         .primary-cta {
@@ -1626,6 +1728,14 @@
             <p class="lead">あなたの顔立ちをもとに、<br>似合う服・髪型・印象設計を無料で診断。<br>
               外見に自信がなくても、恋愛がうまくいく<br>外見が手に入る。
             </p>
+            <figure class="bonus-mockup bonus-mockup-frame">
+              <img src="assets/counseling-sheet-mockup.jpg" alt="外見レベルを上げるオーダーメイドカウンセリングシートのモックアップ" decoding="async">
+              <figcaption class="bonus-copy">
+                <span class="bonus-kicker">期間限定！</span>
+                <strong>「外見レベルを上げる<br>オーダーメイドカウンセリングシート」</strong>
+                <em>プレゼント中</em>
+              </figcaption>
+            </figure>
             <div class="cta-stack">
               <a class="primary-cta" href="https://s.lmes.jp/landing-qr/1656900754-dgRyyZA2?uLand=0SqXiJ" aria-label="30秒で無料診断をはじめる">
                 <svg viewBox="0 0 64 64" aria-hidden="true">
@@ -1945,6 +2055,14 @@ Kさんの元で学んで、本当に
               外見に自信がなくても、<br>『似合う』が分かれば、恋愛はうまくいきます。<br>&nbsp;まずは無料で、あなたのポテンシャルを<br>確認してください。
             </p>
           </div>
+          <figure class="bonus-mockup bonus-mockup-frame bonus-mockup--final">
+            <img src="assets/counseling-sheet-mockup.jpg" alt="外見レベルを上げるオーダーメイドカウンセリングシートのモックアップ" loading="lazy" decoding="async">
+            <figcaption class="bonus-copy">
+              <span class="bonus-kicker">期間限定！</span>
+              <strong>「外見レベルを上げる<br>オーダーメイドカウンセリングシート」</strong>
+              <em>プレゼント中</em>
+            </figcaption>
+          </figure>
           <div class="cta-stack">
             <a class="primary-cta" href="https://s.lmes.jp/landing-qr/1656900754-dgRyyZA2?uLand=0SqXiJ" aria-label="30秒で無料診断をはじめる">
               <svg viewBox="0 0 64 64" aria-hidden="true">
