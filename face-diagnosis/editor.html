@@ -185,6 +185,9 @@
     ".offer-kicker",
     ".offer-title",
     ".hero .lead",
+    ".bonus-kicker",
+    ".bonus-copy strong",
+    ".bonus-copy em",
     ".primary-cta span",
     ".trust-line span",
     ".section-label",
@@ -217,6 +220,7 @@
     "section",
     ".hero",
     ".cta-stack",
+    ".bonus-mockup",
     ".student-results .results",
     ".student-results .featured-result",
     ".student-results .featured-video",
@@ -300,6 +304,7 @@
     if (el.classList.contains("hero")) return "ヒーローブロック";
     if (el.classList.contains("student-results")) return "講習生実績セクション";
     if (el.classList.contains("cta-stack")) return "CTAボタン周辺";
+    if (el.classList.contains("bonus-mockup")) return "特典モックアップ";
     if (el.classList.contains("visual-panel")) return "画像ブロック";
     if (el.classList.contains("featured-result")) return "動画実績ブロック";
     if (el.classList.contains("featured-video")) return "実績動画";
@@ -317,7 +322,7 @@
 
   function getSpacingBlock(target){
     if (!target || !target.closest) return null;
-    var specific = target.closest(".cta-stack,.student-results .results,.student-results .featured-video,.student-results .featured-result-desc,.student-results .featured-result,.student-results .voice-list,.student-results .voice-card,.visual-panel,.problem-card,.image-frame,.step,.price-card,.faq-item");
+    var specific = target.closest(".cta-stack,.bonus-mockup,.student-results .results,.student-results .featured-video,.student-results .featured-result-desc,.student-results .featured-result,.student-results .voice-list,.student-results .voice-card,.visual-panel,.problem-card,.image-frame,.step,.price-card,.faq-item");
     if (specific) return specific;
     return target.closest("section,.hero");
   }
