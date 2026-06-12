@@ -83,6 +83,37 @@
       outline-offset: 3px;
     }
 
+    .countdown-num {
+      position: absolute;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20%;
+      height: .61%;
+      top: 94.69%;
+      background: linear-gradient(180deg, rgba(6, 7, 5, .98), rgba(7, 8, 6, .96));
+      color: #d8b15d;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: min(8.2vw, 74px);
+      font-weight: 700;
+      line-height: 1;
+      text-shadow: 0 0 16px rgba(216, 177, 93, .28), 0 1px 0 rgba(255, 238, 182, .18);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .countdown-num--hours {
+      left: 16.96%;
+    }
+
+    .countdown-num--minutes {
+      left: 39.35%;
+    }
+
+    .countdown-num--seconds {
+      left: 61.63%;
+    }
+
     .cta-hotspot--one {
       left: 7.826%;
       top: 14.227%;
@@ -135,8 +166,59 @@
       <video controls playsinline preload="metadata" poster="../student-result-clean-confidence-poster.jpg" src="../student-result-clean-confidence.mp4"></video>
     </div>
 
+    <span class="countdown-num countdown-num--hours" data-countdown-hours aria-hidden="true">00</span>
+    <span class="countdown-num countdown-num--minutes" data-countdown-minutes aria-hidden="true">00</span>
+    <span class="countdown-num countdown-num--seconds" data-countdown-seconds aria-hidden="true">00</span>
+
     <a class="cta-hotspot cta-hotspot--two" href="https://s.lmes.jp/landing-qr/1656900754-dgRyyZA2?uLand=lDiWQg" aria-label="LINEで詳細を受け取る"></a>
     <a class="cta-hotspot cta-hotspot--three" href="https://s.lmes.jp/landing-qr/1656900754-dgRyyZA2?uLand=lDiWQg" aria-label="LINEで詳細を受け取る"></a>
   </main>
+  <script>
+    (function () {
+      var key = "pdf_lp_countdown_target_v1";
+      var duration = 60 * 60 * 1000;
+      var hours = document.querySelector("[data-countdown-hours]");
+      var minutes = document.querySelector("[data-countdown-minutes]");
+      var seconds = document.querySelector("[data-countdown-seconds]");
+
+      function pad(value) {
+        return String(value).padStart(2, "0");
+      }
+
+      function getTarget() {
+        var target = Number(localStorage.getItem(key) || 0);
+        var now = Date.now();
+        if (!target || target <= now) {
+          target = now + duration;
+          localStorage.setItem(key, String(target));
+        }
+        return target;
+      }
+
+      var target = getTarget();
+
+      function render() {
+        var remaining = target - Date.now();
+        if (remaining <= 0) {
+          localStorage.removeItem(key);
+          target = getTarget();
+          remaining = target - Date.now();
+        }
+
+        var h = Math.floor(remaining / 3600000);
+        remaining -= h * 3600000;
+        var m = Math.floor(remaining / 60000);
+        remaining -= m * 60000;
+        var s = Math.floor(remaining / 1000);
+
+        hours.textContent = pad(h);
+        minutes.textContent = pad(m);
+        seconds.textContent = pad(s);
+      }
+
+      render();
+      setInterval(render, 1000);
+    })();
+  </script>
 </body>
 </html>
