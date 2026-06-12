@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>顔タイプ診断LP 動画入り</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      background: #050607;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .page {
+      width: min(100vw, 614px);
+      margin: 0 auto;
+      background: #050607;
+    }
+    .stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 614 / 7537;
+      overflow: hidden;
+    }
+    .stage > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .video-slot {
+      position: absolute;
+      left: 1.79153%;
+      width: 96.41694%;
+      z-index: 2;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #050403;
+      box-shadow: 0 18px 58px rgba(0, 0, 0, .5);
+    }
+    .video-slot video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: fill;
+      background: #050403;
+    }
+    .v1{top:44.77909%;height:4.35186%;} .v2{top:58.67056%;height:4.32533%;} .v3{top:73.38464%;height:5.29388%;}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="stage">
+      <img src="face-lp-video-bg.png" alt="顔タイプ診断LP">
+      <div class="video-slot v1" aria-label="経験人数0から300人超まで成長">
+        <video controls playsinline preload="metadata" poster="student-result-270man-poster.jpg" src="student-result-270man.mp4"></video>
+      </div>
+      <div class="video-slot v2" aria-label="元モデル美女を魅了し結婚">
+        <video controls playsinline preload="metadata" poster="student-result-marriage-poster.jpg" src="student-result-marriage.mp4"></video>
+      </div>
+      <div class="video-slot v3" aria-label="圧倒的清潔感と自分への自信">
+        <video controls playsinline preload="metadata" poster="student-result-clean-confidence-poster.jpg" src="student-result-clean-confidence.mp4"></video>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
