@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>LP制作データ 動画入り</title>
+  <meta name="description" content="LP制作データに既存LPの対談動画を差し込んだ確認用ページです。">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #07090a;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .lp-stage {
+      position: relative;
+      width: min(100vw, 920px);
+      aspect-ratio: 920 / 15105;
+      background: url("lp-page.png") top center / 100% 100% no-repeat;
+      box-shadow: 0 0 50px rgba(0, 0, 0, .45);
+    }
+
+    .video-slot,
+    .cta-hotspot {
+      position: absolute;
+      display: block;
+    }
+
+    .video-slot {
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border-radius: 2.4%;
+      background: #050403;
+      box-shadow: 0 0 0 1px rgba(212, 175, 122, .24);
+    }
+
+    .video-slot video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #050403;
+    }
+
+    .video-slot--one {
+      left: 2.174%;
+      top: 34.141%;
+      width: 95.109%;
+    }
+
+    .video-slot--two {
+      left: 5.870%;
+      top: 46.018%;
+      width: 87.717%;
+    }
+
+    .video-slot--three {
+      left: 6.739%;
+      top: 55.962%;
+      width: 85.217%;
+    }
+
+    .cta-hotspot {
+      border-radius: 999px;
+      color: transparent;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, .18);
+    }
+
+    .cta-hotspot:focus-visible {
+      outline: 3px solid rgba(255, 255, 255, .9);
+      outline-offset: 3px;
+    }
+
+    .cta-hotspot--one {
+      left: 7.826%;
+      top: 14.227%;
+      width: 84.348%;
+      height: .682%;
+    }
+
+    .cta-hotspot--two {
+      left: 11.739%;
+      top: 82.019%;
+      width: 75.761%;
+      height: .609%;
+    }
+
+    .cta-hotspot--three {
+      left: 11.739%;
+      top: 97.623%;
+      width: 75.761%;
+      height: .609%;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <main class="lp-stage" aria-label="LP制作データ 動画入り">
+    <h1 class="sr-only">LP制作データ 動画入り</h1>
+
+    <a class="cta-hotspot cta-hotspot--one" href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" aria-label="LINEで詳細を受け取る"></a>
+
+    <div class="video-slot video-slot--one">
+      <video controls playsinline preload="metadata" poster="../student-result-270man-poster.jpg" src="../student-result-270man.mp4"></video>
+    </div>
+
+    <div class="video-slot video-slot--two">
+      <video controls playsinline preload="metadata" poster="../student-result-marriage-poster.jpg" src="../student-result-marriage.mp4"></video>
+    </div>
+
+    <div class="video-slot video-slot--three">
+      <video controls playsinline preload="metadata" poster="../student-result-clean-confidence-poster.jpg" src="../student-result-clean-confidence.mp4"></video>
+    </div>
+
+    <a class="cta-hotspot cta-hotspot--two" href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" aria-label="LINEで詳細を受け取る"></a>
+    <a class="cta-hotspot cta-hotspot--three" href="https://liff.line.me/1656900754-NQBaa2k3?calendar_salon_id=19911&amp;ts=1778910739" aria-label="LINEで詳細を受け取る"></a>
+  </main>
+</body>
+</html>
